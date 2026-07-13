@@ -137,14 +137,14 @@
                         <label class="font-label-caps text-label-caps mb-2 block uppercase text-on-surface-variant">Buscar en el Programa</label>
                         <div class="relative group">
                             <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary" data-icon="search">search</span>
-                            <input type="text" placeholder="Escriba autor, título o palabra clave..." class="w-full pl-12 pr-4 py-4 rounded-lg border-2 border-outline focus:border-secondary focus:ring-0 font-body-lg text-body-lg bg-surface transition-all">
+                            <input id="search-input" type="text" placeholder="Escriba autor, título o palabra clave..." class="w-full pl-12 pr-4 py-4 rounded-lg border-2 border-outline focus:border-secondary focus:ring-0 font-body-lg text-body-lg bg-surface transition-all">
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-1">
-                        <button class="px-6 py-3 rounded-full bg-primary text-white font-label-caps text-label-caps hover:bg-primary-container transition-colors shadow-lg active:scale-95">
+                        <button id="btn-nombre" class="px-6 py-3 rounded-full bg-primary text-white font-label-caps text-label-caps hover:bg-primary-container transition-colors shadow-lg active:scale-95">
                             Buscar por Nombre
                         </button>
-                        <button class="px-6 py-3 rounded-full bg-surface border-2 border-primary text-primary font-label-caps text-label-caps hover:bg-primary-fixed transition-colors active:scale-95">
+                        <button id="btn-palabra" class="px-6 py-3 rounded-full bg-surface border-2 border-primary text-primary font-label-caps text-label-caps hover:bg-primary-fixed transition-colors active:scale-95">
                             Buscar por Palabra Clave
                         </button>
                     </div>
@@ -387,98 +387,3633 @@
         </div>
     </footer>
 
-    <script class="">
-        // Micro-interactions for search and cards
+    <script>
+        // Datos completos de la conferencia (JSON incrustado)
+        const conferenceData = {
+  "simposios": [
+    {
+      "numero": 1,
+      "titulo": "Estado, trabajadores y empresarios frente a las crisis",
+      "coordinacion": [
+        "Aiziczon, Fernando (IDH-CONICET / UNC)",
+        "Carini, Gabriel (ISTE-CONICET / UNRC / CIFFyH-UNC)",
+        "Gerbaldo, Juan (IDH-CONICET / UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 12 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Parentesco y agronegocios. Estrategias familiares e institucionales de CREA",
+              "autores": ["Ambroggio, Joaquín Pedro (CONFINES-CONICET / IAPCS-UNVM)"]
+            },
+            {
+              "titulo": "La asistencia social como forma de la dominación de clase a través del consenso",
+              "autores": ["Zeballos, Juan Manuel (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Enseñar en riesgo: violencia, deslaboralización y reproducción de la precariedad docente en México",
+              "autores": ["Ibarra Irra, Manuel Alejandro (Secretaría de Educación, Baja California)"]
+            },
+            {
+              "titulo": "Entre el software y la cooperación: institucionalización, trabajo digital y acción colectiva en las cooperativas tecnológicas argentinas",
+              "autores": ["Carini, Gabriel Fernando (UNRC / CONICET)"]
+            },
+            {
+              "titulo": "Municipio, empresas y sindicato ante el colapso en el sistema de transporte urbano de pasajeros. Córdoba a finales del siglo XX",
+              "autores": ["Gerbaldo, Juan (IDH-CONICET)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 12 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La pedagogía crítica del trabajo: experiencias de resistencia de lxs trabajadorxs del Subté",
+              "autores": ["Urricelqui, Patricio (UNLU)"]
+            },
+            {
+              "titulo": "Trayectorias militantes y liderazgo sindical femenino en Jujuy. El caso de Ramona Calzadilla y ATSA durante el ajuste neoliberal (1989-1998)",
+              "autores": ["Gimenez, Geovana (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Entre la resistencia y la negociación: el sindicalismo bancario de Córdoba ante la reforma de la banca estatal (1995- 2001)",
+              "autores": ["Roland, Ernesto (FCS-UNC / IDH-CONICET)"]
+            },
+            {
+              "titulo": "Mediadores jurídicos del neoliberalismo: abogados laboralistas, Estado y reformas del trabajo en Argentina (1989-2000)",
+              "autores": ["Gerbaldo, Gabriel (IDH-CONICET)"]
+            },
+            {
+              "titulo": "Desmovilización. Algunas reflexiones en torno al campo sindical argentino contemporáneo",
+              "autores": ["Aiziczon, Fernando (IDH-CONICET)"]
+            },
+            {
+              "titulo": "Las dirigencias de las regionales de la CGT de Rosario y Tucumán (1963-1965): entre la normalización y la violencia sindical",
+              "autores": ["Villalobos Galante, Joaquín (IDH-CONICET)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "titulo": "Soberanía digital y educación: lo público en disputa en tiempos de plataformas, datos e inteligencia artificial",
+      "coordinacion": [
+        "Roldán, Paola (CIFFyH-UNC)",
+        "Ferrante, Patricia (FLACSO-UNIPE)",
+        "Martínez, Cecilia (CIFFyH, IDH-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 4 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Ciencias de la Computación y justicia curricular: asimetrías federales ante el repliegue del Estado",
+              "autores": ["Ludueña, Cecilia Beatriz (FFyH-UNC)"]
+            },
+            {
+              "titulo": "IA y educación: los efectos del nuevo escenario y algunos aportes para el diseño de propuestas de formación docente",
+              "autores": ["Torres, Martín Ignacio (SECyT-CONICET-IDH / UNC)"]
+            },
+            {
+              "titulo": "Saberes y experiencias docentes en entornos sociotécnicos de alternancia: aportes para pensar el trabajo de enseñar en el nivel superior no universitario",
+              "autores": ["Allende, María Eugenia (UPC-UNC)"]
+            },
+            {
+              "titulo": "Exploraciones sobre el trabajo digital entre docentes de la Universidad Nacional de Entre Ríos",
+              "autores": ["Andrés, Gonzalo", "Gareis, María Florencia (IES-CONICET-UNER)"]
+            },
+            {
+              "titulo": "La consigna, en tanto decisión pedagógica, como mediación de habilidades socioemocionales en entornos virtuales de la Educación Superior",
+              "autores": ["Zancov, Tatiana", "Moreno, Luisa Inés (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Mediaciones pedagógicas y soberanía digital en la educación virtual: reflexiones desde una PPS en el Instituto Gulich (UNC-CONAE)",
+              "autores": ["Flores Mutigliengo, Jennifer Melisa (ECE-FFyH-UNC)"]
+            },
+            {
+              "titulo": "Un episodio para asomarnos a procesos de apropiación de la inteligencia artificial",
+              "autores": ["Rivero, Marcela Mariana (CEA-UNC)"]
+            },
+            {
+              "titulo": "Jóvenes de secundaria, sus experiencias en redes sociales y su influencia en la construcción de subjetividades",
+              "autores": ["Gómez, Mónica Alejandra", "López, Juan José (UNSL)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "titulo": "Migraciones y reproducción social. Trayectorias migratorias en contextos de interculturalidad",
+      "coordinacion": [
+        "Jiménez, Cecilia Inés (IDH-CONICET / CIFFyH-UNC)",
+        "Maggi, María Florencia (FA y FFyH-UNC / IAPCS-UNVM)",
+        "Rodríguez Rocha, Eduardo (FEys-UPC / CONICET)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 4 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Aproximaciones a la migración boliviana en Argentina: el caso de Olma y su habitar \"mitad y mitad\"",
+              "autores": ["Agüero, Julia", "Codoni, Carola", "Crivelli Buliubasich, Luca Nicolás (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Migración, ciudadanía sustantiva y reproducción social: el enclave transnacional brasileño en Ironbound (Newark, NJ) ante la teoría de la democracia",
+              "autores": ["Mateus, Gilson (Universidade Federal do Rio Grande do Norte)"]
+            },
+            {
+              "titulo": "Migraciones internas, reproducción social y estéticas de re-existencia: artesanía, colonialidad y racismo epistemológico en Argentina",
+              "autores": ["Herrero, Patricia (FA-UNC)"]
+            },
+            {
+              "titulo": "Migrar para estudiar: capitales, trayectorias y posiciones en el campo universitario colombiano",
+              "autores": ["Rincón-Báez, William Umar (Universidad Distrital Francisco José de Caldas)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 4 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La educación intercultural en tensión. Aportes desde los procesos identitarios de lxs jóvenes para la construcción de la escuela secundaria bonaerense",
+              "autores": ["Cuestas, Mara", "Chiaravalloti, Nadia (UNLu / AEIEA)"]
+            },
+            {
+              "titulo": "Migración rusa reciente y respuestas educativas en Córdoba (Argentina): desafíos para la integración lingüística de población no hispanohablante",
+              "autores": ["Mendoza, Camila", "Mendoza, Julián (CIFyH, FFyH-UNC)"]
+            },
+            {
+              "titulo": "Desplazarse, permanecer y proyectarse: trayectorias escolares y expectativas educativo-laborales de jóvenes migrantes en escuelas secundarias de Córdoba",
+              "autores": ["Torres, Mariel Denise", "Bertona, Franca (CONFINES-UNVM-CONICET; FFyH-UNC)"]
+            },
+            {
+              "titulo": "Discriminación a población migrante en escuelas secundarias de la ciudad de Córdoba (2023-2024)",
+              "autores": ["Maggi, M. Florencia (FA y FFyH-UNC; IAPCS-UNVM)"]
+            },
+            {
+              "titulo": "\"Match ideal\" en el programa Au Pair: regulación de la relación de trabajo-intercambio",
+              "autores": ["Macedo, Carmen (Universidade Federal do Rio de Janeiro)"]
+            },
+            {
+              "titulo": "Las migraciones Working Holiday en perspectiva regional: un análisis comparado entre Asia-Pacífico, Europa y América",
+              "autores": ["Valé Juriol, Diego Matías (CONICET-UNRC)"]
+            },
+            {
+              "titulo": "\"Allá yo ya trabajaba ambulante\". Condiciones de partida, motivaciones y trabajo en trayectorias migratorias de senegaleses",
+              "autores": ["Serafini, Sofía Yamila (ISTE-CONICET-UNRC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "titulo": "Deporte y Ciencias Sociales y Humanas en clave local",
+      "coordinacion": [
+        "Majul, Débora (FFyH-CIFFyH, área Ciencias Sociales)",
+        "Balaguer, Franco (FFyH-CIFFyH, área Educación)",
+        "Reyna, Franco (FFyH-CIFFyH, área Historia)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 12 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "El fútbol y su relato: la literatura como modelizadora de los imaginarios deportivos",
+              "autores": ["Mercado, Javier (FFyH-UNC)"]
+            },
+            {
+              "titulo": "La magia del barr(i)o: el estilo argentino en el fútbol masculino, ¿y femenino?",
+              "autores": ["Franco, Valentina (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Muestras de amor en los hombres: un recorrido sentimental del fútbol",
+              "autores": ["Tzouanakis, Aixa Belén (FFyH-UNC)"]
+            },
+            {
+              "titulo": "La invención de aficiones deportivas en los inicios del espectáculo de masas (Córdoba, Argentina, años de entreguerras)",
+              "autores": ["Reyna, Franco Damián (IEH-UNC-CONICET)"]
+            },
+            {
+              "titulo": "Narrar el deporte en femenino: representaciones sobre el cuerpo de las deportistas en los diarios locales (Córdoba, 1930-1939)",
+              "autores": ["Llobell Sotti, Agustina (FFyH-UNC)"]
+            },
+            {
+              "titulo": "\"Vamos y venimos\". Experiencia de acompañamiento en viajes deportivos con categorías femeninas de fútbol femenino",
+              "autores": ["Ceballos, María Ayelén (CAB)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 12 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Deporte e inclusión: más allá del discurso",
+              "autores": ["Berrondo, Ariel Maximiliano (UPC)"]
+            },
+            {
+              "titulo": "El fútbol y la producción de lo común en la experiencia territorial de Abriendo La Cancha",
+              "autores": ["Majul, Débora (CIFFyH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Miradas otras en el fútbol: análisis de las experiencias retomadas de militancias y su anclaje en el fútbol femenino",
+              "autores": ["Vázquez, Santiago (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Las mujeres y sus pelotas. Territorios y libertad",
+              "autores": ["González Quintana, Irene (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Cuerpos que comunican: hacia una cultura del deporte sostenible",
+              "autores": ["Romero, Karen Florencia (FCC-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "titulo": "Violencia de género en la universidad. Tensiones y desafíos",
+      "coordinacion": [
+        "López, Carlos Javier (IPSIS-FCS y Área Feminismos, Género y Sexualidades [FemGes]- CIFFyH)",
+        "Aquino Cabra, María Florencia (FCS y FemGes)",
+        "Espejo, María Fernanda (IECET-CONICET; IPSIS-FCS y FemGes-CIFFyH)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 11 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "¿A quién acudimos frente a las violencias heteroscipatriarcales en la universidad?",
+              "autores": ["Domínguez, Alejandra", "Fuentes, Silvia", "Soldevila, Alicia (IPSIS-FCS-UNC)"]
+            },
+            {
+              "titulo": "De los pactos de silencio a la intervención activa: la ESI universitaria como estrategia de prevención de las violencias de género",
+              "autores": ["Bard Wigdor, Gabriela", "Barea, Ana Florencia (CIECS-FCS-UNC)"]
+            },
+            {
+              "titulo": "Género, ciencia y trabajo: análisis de las asimetrías estructurales en el sistema científico- académico argentino",
+              "autores": ["Bonavitta, Paola", "Pinto, M. F. (CONICET-CIFFyH; Facultad de Psicología, UNC)"]
+            },
+            {
+              "titulo": "El feminismo no es una lucha ajena: reflexiones sobre militancia universitaria y construcción colectiva en tiempos antifeministas",
+              "autores": ["Bazán, Darlem Oriana", "Petro, Josefina", "Scoppa Vissio, Juana", "Tuyón, Agostina", "Vera Alarcón, Milagros (FCS-UNC)"]
+            },
+            {
+              "titulo": "Desafíos metodológicos en el estudio de masculinidades en la universidad",
+              "autores": ["Rodríguez Pardal, Brisa (FCS-UNC)"]
+            },
+            {
+              "titulo": "Línea de sensibilización. Plan de Acciones UNC",
+              "autores": ["Chinelatto, Rocío", "Garayo, Nadia", "Liascovitz, Olga Andrea", "Vignolo Saddi, Nazarena (Plan de Acción, línea de sensibilización, UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula CIFFyH, P.Tosco",
+          "ponencias": [
+            {
+              "titulo": "A diez años de la implementación del Plan de Acciones: debates y pistas para pensar acciones en el contexto actual",
+              "autores": ["Gil Lazzati, Romina", "López, Carlos Javier", "Espejo, María Fernanda (IECET-CONICET; IPSIS-FCS y FemGes-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Masculinidad normativa y consumo de pornografía en varones cis universitarios",
+              "autores": ["Gimenez, Alejandro (FCS-UNC)"]
+            },
+            {
+              "titulo": "Las fronteras de la violencia: respuestas y responsabilidades institucionales ante las violencias de género en el ámbito universitario",
+              "autores": ["Astrada, Lucía Victoria", "Aquino Cabral, María Florencia (FD-UNC, PGyD FCC-UNC; FCS-UNC, CIFFyH)"]
+            },
+            {
+              "titulo": "Las violencias por razones de género en la UNC: análisis de denuncias, sanciones y respuestas institucionales",
+              "autores": ["Pisani, Nerina", "Alonso, Nina", "Sargentoni, Oscar", "Aquino Cabral, María F. (FCEFyN- UNC; FCS-UNC; FCS-UNC; FCS-UNC, CIFFyH)"]
+            },
+            {
+              "titulo": "Violencias por motivos de género en la universidad desde las experiencias de trabajadorxs nodocentes",
+              "autores": ["Gaitán, Paula (FCS-IPSIS-UNC)"]
+            },
+            {
+              "titulo": "Contra- pedagogías de la crueldad: intervenciones en el ámbito universitario",
+              "autores": ["Mondino, Virginia", "Quargnenti, Camila", "Fioretti, Lorena (UPC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "titulo": "Usos del pasado: representaciones, conmemoraciones, memorias e historiografía desde escalas locales, regionales y provinciales",
+      "coordinacion": [
+        "Reyna Berrotarán, Denise (CIFFyH-FFyH)",
+        "Ortiz, María Laura (CIFFyH-FFyH)",
+        "Núñez Camelino, María (IH-FH-UNNE)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 5, Pab. España",
+          "ponencias": [
+            {
+              "titulo": "Usos del pasado e institucionalización de los estudios arqueológicos en la región del Nordeste argentino: la figura de Eldo S. Morresi en la Facultad de Humanidades (UNNE)",
+              "autores": ["Núñez Camelino, María (IH-FH-UNNE)"]
+            },
+            {
+              "titulo": "Homenajes que hablan: operaciones memoriales y usos del pasado en la historiografía cordobesa a través del Instituto de Estudios Americanistas",
+              "autores": ["Reyna Berrotarán, Denise (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Historias/memorias de la \"Libertadora\" en la Universidad Nacional de Córdoba en los años noventa del siglo XX",
+              "autores": ["Philp, Marta (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Derivas de una persecución: la historiografía cordobesa en el insilio",
+              "autores": ["Ortiz, María Laura (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Brochero a través de los homenajes del centenario de su nacimiento",
+              "autores": ["Bruchmann Tanodi, Agustina (FFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 5, Pab. España",
+          "ponencias": [
+            {
+              "titulo": "Imágenes, montaje e imaginación: i(nte)rrupciones en la matriz del tiempo histórico",
+              "autores": ["Magrin, Natalia Soledad (IAPCS-UNVM)"]
+            },
+            {
+              "titulo": "Sostener lo público como construcción de lo común: soberanía científica y futuro de las ciencias sociales y las humanidades",
+              "autores": ["Naselli Macera, Diego Gerardo (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Vengar a Maza: el acontecimiento como laboratorio de la historia regional. El caso de los falsos Montoneros de Laguna Larga (Córdoba, 1970)",
+              "autores": ["Guardatti-Fernández, Marcelo A. (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Narrar un pueblo, escribir la historia: la obra de Américo Tissera y el contexto de producción de memorias locales en Carrilobo",
+              "autores": ["Brusa, Ayelén María (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Los homenajes a María Eva Duarte de Perón como operaciones de memoria de la clase trabajadora y las mujeres en el espacio público de Perón (ex Leones), 1952-1955",
+              "autores": ["Celis, Cristian Walter (CIFFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "titulo": "El lazo social ante el cambio epocal: modos de dominación, resistencias y tensiones",
+      "coordinacion": [
+        "Saur, Daniel (CIFFyH-UNC)",
+        "Lorio, Natalia (CIFFyH, FFyH-UNC)",
+        "Alberione, Eva (CIFFyH-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 4, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Lenguaje, sociedad y nuevas derechas",
+              "autores": ["Saur, Daniel (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Fascismos contemporáneos: continuidades, intermitencias y rupturas del lazo social",
+              "autores": ["Lorio, Natalia (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Habermas, Joas y las bases premodernas del vínculo social en las democracias contemporáneas",
+              "autores": ["Fonti, Diego (CONICET-UCC)"]
+            },
+            {
+              "titulo": "Semiótica del rehén o \"lógicas de la sustitución\" en una indagación sobre el suicidio",
+              "autores": ["Levstein, Ana (FCC, FFyH-UNC)"]
+            },
+            {
+              "titulo": "El individualismo expresivo y la obturación de la salida de sí como forma de la religiosidad contemporánea",
+              "autores": ["Baudagna, Rodrigo (UCC-CONICET)"]
+            },
+            {
+              "titulo": "Lo heterogéneo. Entre el goce y la emancipación",
+              "autores": ["Bruno, Lucas (UNC)"]
+            },
+            {
+              "titulo": "Una cuestión preliminar a todo posible tratamiento del público",
+              "autores": ["Conforte, Juan (CIFFyH-CIEC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 4, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Acompañamiento estatal: nuevas prácticas estatales en el marco del abordaje de las violencias de género en Córdoba",
+              "autores": ["Scavino Treber, Marianela (CIFFyH)"]
+            },
+            {
+              "titulo": "La política y lo político en perspectiva situada. Reconstruyendo los procesos de organización socio-comunitaria en la actualidad de Río Cuarto",
+              "autores": ["Fernández, Lucía (UNRC)"]
+            },
+            {
+              "titulo": "La defensa de la universidad pública como construcción del lazo social: resignificaciones del ideario reformista en Córdoba (2018)",
+              "autores": ["Gaitieri, Esmeralda (IDEJUS-CONICET y FCC-UNC)"]
+            },
+            {
+              "titulo": "Luchas, resistencias y saberes colectivos de mujeres que transforman proyectos de vida. La narrativa autobiográfica como herramienta de investigación",
+              "autores": ["Albelo, Carolina", "Ekerman, Milagros Selene", "Nieva, María Eugenia", "Cervetto, Jimena", "Díaz, Claudia Ivana (UNRC; UNRC-CONICET; UNRC; UNRC; UNRC)"]
+            },
+            {
+              "titulo": "Vulnerables, desposeídxs y sociales. Indagación sobre la corrosión del lazo social desde el dispositivo de la propiedad",
+              "autores": ["Massano, Paula", "Audisio, Irene (SECyT, CIFFyH, UNLPam; SECyT, CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "La policialización del lazo social en la Córdoba contemporánea",
+              "autores": ["Spósito, Daniela (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Pornonativa: la necesidad de acuñar un término ante los límites del lenguaje en la época en que Eros agoniza",
+              "autores": ["Iglesias Carreño, Analía"]
+            },
+            {
+              "titulo": "Lo educativo más allá de la escuela: mutación epocal y reconfiguraciones del lazo social en la formación docente",
+              "autores": ["Domjan, Gabriela (CIFFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 4, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Esbozos de una conjetura situada. De lazos y asedios en torno a derechos humanos",
+              "autores": ["Antonelli, Mirta (Escuela de Letras, FFyH-UNC)"]
+            },
+            {
+              "titulo": "Por un realismo implicativo: militancias afectivas, teorías con cuerpo, sabiduría popular",
+              "autores": ["Farrán, Roque (CONICET, CIECS-UNC)"]
+            },
+            {
+              "titulo": "Memorias de infancia. Narrativas del exilio infantil como espacios de encuentro y subjetivación",
+              "autores": ["Alberione, Eva (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Prácticas, alianzas y transformaciones de lo cotidiano. Un diálogo entre Michel de Certeau y el pragmatismo",
+              "autores": ["Arroyo, Germán David (UCC-CONICET)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "titulo": "Múltiples desigualdades en tramas rurales. Desafíos de practicar la investigación y la extensión en la ruralidad",
+      "coordinacion": [
+        "Freyre, María Laura (CIFFyH–FFyH–UNC)",
+        "Pussetto, Mariano (CIFFyH–FFyH–UNC)",
+        "Montenegro, Guadalupe (IDEVEA–UTN–CONICET)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 6, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Los datos estadísticos en la investigación etnográfica. Desafíos y posibilidades para un conocimiento situado de lo rural a partir de la articulación de metodologías cualitativas y cuantitativas",
+              "autores": ["Cravero, Romina (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Cartografía participativa y construcción de lo común: una experiencia extensionista con comunidades campesinas de Salinas Grandes",
+              "autores": ["Páez, María Solange", "Bustamante, Marina", "Galfioni, María de los Ángeles", "Brandi, César Gustavo", "Pugliese, Agustín Matías", "Bellelli, Eduardo (Dpto. Geografía–UNRC–ISTE–CONICET; Paisaje Corredor Chaco Árido–APN)"]
+            },
+            {
+              "titulo": "¿Qué dicen en tu Facultad de nosotros? Interpelaciones al trabajo de campo en el campo",
+              "autores": ["Barri, Juan", "de Mendoza Quaranta, Marcia (FFyH–UNC; IDH–CONICET–UNC)"]
+            },
+            {
+              "titulo": "Reflexiones sobre los procesos de aprendizaje y participación de productores/as hortícolas en transición agroecológica en el periurbano de La Plata (Buenos Aires, Argentina)",
+              "autores": ["Castro, Andrea Soledad (IdIHCS–UNLP / CONICET)"]
+            },
+            {
+              "titulo": "Prácticas, relaciones y política alimentaria en la trama de escuelas rurales de Córdoba",
+              "autores": ["Bibiloni, Micaela", "Bergero, María", "Prida Monge Roffarello, Mayte (Escuela de Nutrición, UNC)"]
+            },
+            {
+              "titulo": "\"En el plurigrado existe un préstamo de conocimiento\". Una mirada a la enseñanza y el aprendizaje en escuelas rurales",
+              "autores": ["Pussetto, Mariano", "Bartolomé, Olga", "Córdoba, Agustín (CIFFyH)"]
+            },
+            {
+              "titulo": "\"Mi tarea es gestionar\". El entramado de instituciones públicas y privadas en la vida cotidiana de las escuelas primarias rurales",
+              "autores": ["Rapi, Ana", "Cortiglia, Agustina (CIFFyH–UNC)"]
+            },
+            {
+              "titulo": "\"Acá somos como una familia\". Las escuelas para la familia en contextos rurales",
+              "autores": ["Freyre, María Laura", "Decándido, Erika", "Sottile, Marco (FFyH–UNC; IAPCS–UNVM; FFyH–UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "titulo": "Discapacidad, accesibilidad y derechos humanos. Producción de saberes en territorio y experiencias educativas multiactorales en la coyuntura actual",
+      "coordinacion": [
+        "Muchiut, María Laura (FFyH-UNC)",
+        "Vilchez, Valentina (CONICET-CIFFyH-UNC)",
+        "Albornoz, Melina R. (INES-CONICET-UNER)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 2, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Modos de conocer y habitar la ciudad: reflexiones desde el proyecto Córdoba sin Barreras",
+              "autores": ["Muñoz, Julieta", "Osimani, César (UPC)"]
+            },
+            {
+              "titulo": "Tensionar las barreras actitudinales en la educación superior: la transversalización curricular y la producción colaborativa de saberes",
+              "autores": ["Rubiolo, Paula Andrea", "Giovanetti, Ana Belén", "Migueltorena, Gabriela (UNC)"]
+            },
+            {
+              "titulo": "El valor de los lazos interinstitucionales en contextos de emergencia",
+              "autores": ["Gianotti, Mariana", "Caballone Marcos, Débora (UNRC)"]
+            },
+            {
+              "titulo": "La cultura capacitista y sus implicancias en la educación superior",
+              "autores": ["Mareño Sempertegui, Mauricio (UNC)"]
+            },
+            {
+              "titulo": "Bioética, habilidades diversas y derechos humanos",
+              "autores": ["Materon Palacios, Solangel (IBERO, Colombia)"]
+            },
+            {
+              "titulo": "Discapacidad y corporalidad",
+              "autores": ["Moreno, Marcelo Alejandro (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Filosofía política, discapacidad y accesibilidad",
+              "autores": ["López, Virginia (UNQ)"]
+            },
+            {
+              "titulo": "Pensar la inclusión educativa desde las voces de los jóvenes: avances iniciales de una investigación etnográfica",
+              "autores": ["Albornoz, Melina Rocío (INES-CONICET-UNER)"]
+            },
+            {
+              "titulo": "Itinerarios y miradas de infancias en situación de discapacidad. Primeras aproximaciones desde el trabajo de campo",
+              "autores": ["Carignano, Marcela (UNC)"]
+            },
+            {
+              "titulo": "Cuerpos que desbordan: diversistencias y disputas frente a la normalización escolar",
+              "autores": ["Giménez, R. Belén (IESyH-UNaM-CONICET-UNLP)"]
+            },
+            {
+              "titulo": "Estrategias de Estudiantes Con Discapacidad (ECD) en su transitar por la escuela secundaria",
+              "autores": ["Vilchez, Valentina (CIFFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-18:00",
+          "lugar": "Aula 2, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Presentación de libros: \"Curvaturas, el dolor no tuerce el deseo\", de Julia Risso Villani, y \"Espasmos\", de Gianna Mastrolinardo. Actividad coordinada por Mariana Gandolfo, directora general de Promoción de los Derechos de las Personas con Discapacidad, Ministerio de Desarrollo Humano de la Provincia de Córdoba",
+              "autores": []
+            },
+            {
+              "titulo": "De futuros (im)perfectos: cuerpos discas y políticas de",
+              "autores": ["Schwamberger, Cintia", "Bonilla Muñoz, Marco Antonio", "Grinberg, Silvia (LICH- UNSAM-CONICET)"]
+            },
+            {
+              "titulo": "Curricularización de la extensión y discapacidad: prácticas de enseñanza de inglés inclusivo en el CECOE Huayra Punco",
+              "autores": ["Villanueva, Edith Luna", "Arias, María Celeste", "Limina Sutín, María Valeria", "Palavecino, Walter (UNCA)"]
+            },
+            {
+              "titulo": "Educación Sexual Integral y discapacidad: análisis crítico de los marcos capacitistas en la construcción de la autonomía sexual",
+              "autores": ["Tassi, Edgardo \"Egui\"", "Risso Villani, Julia (Colectivo ESI)"]
+            },
+            {
+              "titulo": "Cartografías del encuentro: diálogos entre literatura e ilustración en producciones artísticas de personas con discapacidad intelectual",
+              "autores": ["Levis López, María Fernanda", "Paganini, Mateo (UPC)"]
+            },
+            {
+              "titulo": "\"El problema son los otros\". Saberes colectivos frente a los muros del entorno y los desafíos de la accesibilidad en los museos",
+              "autores": ["Zambrano, Celina", "Srur, María Gabriela", "Esquivel, Paula B.", "Ovando, Natalia", "Fernández, Susana (FFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "titulo": "Saberes docentes y formación pedagógica: alteraciones culturales y apuestas para sostener lo común en educación",
+      "coordinacion": [
+        "Marcantonelli, Ivanna (FFyH-UPC)",
+        "Caverzacio, Luciana (FFyH-UPC)",
+        "Muiño, Laura (FFyH-IESS)",
+        "Partepilo, Vanesa (FFyH-ISEP)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 1, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Reflexiones pedagógicas sobre la formación docente en artes desde una experiencia compartida",
+              "autores": ["Avila, Florencia", "Brogin, María"]
+            },
+            {
+              "titulo": "¿Qué se enseña cuando se enseña Pedagogía?",
+              "autores": ["Villafañe, Julia", "Caminos, Ana Belén"]
+            },
+            {
+              "titulo": "Razones para enseñar Pedagogía en la formación docente inicial",
+              "autores": ["Muiño, Laura", "Partepilo, Vanesa"]
+            },
+            {
+              "titulo": "¿Qué saberes para qué Práctica Docente? Reflexiones sobre el ser y hacer docencia en el nivel superior de Córdoba",
+              "autores": ["Nieves, Gabriel Armando"]
+            },
+            {
+              "titulo": "El cambio de la posición del agente docente en el campo de la educación",
+              "autores": ["Calderón, Ómer"]
+            },
+            {
+              "titulo": "Escuchar, cuidar y construir lo común. Saberes pedagógicos de la orientación educativa frente a las transformaciones contemporáneas de la escuela",
+              "autores": ["Luque, Juan Gabriel"]
+            },
+            {
+              "titulo": "Una apuesta por el trabajo interinstitucional en escuelas primarias de la zona oeste de la ciudad de Córdoba. Tramas vinculares que habilitan el trabajo con otros",
+              "autores": ["Carignano, Marcela", "Rinaudo, Gustavo", "Yazyi, Marina"]
+            },
+            {
+              "titulo": "Interpelaciones entre las lógicas del aprendizaje escolar y las formas de participación y aprendizajes situados en proyectos sociocomunitarios de la educación secundaria",
+              "autores": ["González, Natalia", "Luna, María Elena", "Balmaceda, Juan Pablo"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 11,
+      "titulo": "Investigación y creación artísticas: prácticas y materiales para imaginar modos de re-existencia",
+      "coordinacion": [
+        "Brignone, Germán (FFyH-UNC / IAE-UBA)",
+        "Bruno, María Sol (CONICET / FAD-UPC / CIFyH-UNC)",
+        "Fobbio, Laura (FFyH-UNC / FAD-UPC / CONICET / IAE-UBA)",
+        "Pedrotti, Clarisa (FA-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 9, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Laboratorio de escucha satelital: imágenes operativas e infraestructuras tecnológicas desde una práctica de investigación-creación",
+              "autores": ["Belfasti, Andrés", "Ragessi, Federico (UPC; UPC-UNC)"]
+            },
+            {
+              "titulo": "Cruzar el límite. Exégesis del cuerpo en la (meta)poética de Angélica Liddell",
+              "autores": ["Brignone, Germán (FFyH-UNC; IAE-UBA)"]
+            },
+            {
+              "titulo": "Investigación y creación: el fragmento y la oportunidad de mundo posible",
+              "autores": ["De Santis, Guillermo (UNC / CONICET)"]
+            },
+            {
+              "titulo": "Apuntes de cátedra para abordar técnicas de actuación en el espacio público",
+              "autores": ["Martinelli, Elina (CIFFyH-UNC / FAD-UPC / IAE-UBA)"]
+            },
+            {
+              "titulo": "La representación de la IA en escena. ¿Insomnio o ansiedad? Cansancio. Nuevos modos de reXistencia para una sociedad cansada",
+              "autores": ["Sandulli, Florencia (UNA-DAD-IIIT-GIEP)"]
+            },
+            {
+              "titulo": "¿Qué hacen las categorías? Indeterminación, liminalidad y afecto como modos de habitar la investigación en las artes escénicas argentinas contemporáneas",
+              "autores": ["Wernicke, Pablo Sebastián (UBA-IIGG-UNA-CONICET)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 9, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Volver al siglo XIX: archivos teatrales, dramaturgia contemporánea e imaginación nacional",
+              "autores": ["Barbieri, Analía G. (GIEP-DAD-UNA)"]
+            },
+            {
+              "titulo": "Improvisación, identidad e intracción: interrogantes sobre un archivo sonoro del tap argentino",
+              "autores": ["Garione, Guadalupe (CIFFyH-UNC / IAE-UBA)"]
+            },
+            {
+              "titulo": "La potencia de los cuerpos populares en la pieza audiovisual \"Instrumento para estallar\", de Diana Szeinblum, y su vínculo con el archivo como material artístico",
+              "autores": ["Grinblat Seldes, Mora (IEEP-IIT-UNA)"]
+            },
+            {
+              "titulo": "Entre espectros y emblemas: cuerpos populares, representación y archivo en la Argentina de entreguerras",
+              "autores": ["Levin, Francisca (UNA / CONICET)"]
+            },
+            {
+              "titulo": "Dimensiones afectivas y materiales de las prácticas de investigación artística en archivos personales",
+              "autores": ["Pedrotti, Clarisa (FA-UNC)"]
+            },
+            {
+              "titulo": "Un archivo de gestos: necropolítica y performance en Latinoamérica",
+              "autores": ["Silva Cantoni, Marcelo (FFyH-UNC / IAE-UBA)"]
+            },
+            {
+              "titulo": "\"Quilomberas\". Un proyecto de mapa- libro sobre mujeres registradas como prostitutas en la provincia de Buenos Aires (1910-1930)",
+              "autores": ["Silva, Celia", "Bacchiga, Julia (FA-UNLP)"]
+            },
+            {
+              "titulo": "Constelaciones de lo no deseada: ficciones para imaginar una epistemología visual feminista descolonial desde el sur",
+              "autores": ["Vaccia, Carolina (IDEA-Universidad de Chile)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 9, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Carrusel de estrellas. Giros de una investigación fascinante sobre viajes de vedettes",
+              "autores": ["Garrido, Jimena (UNC)"]
+            },
+            {
+              "titulo": "ReXistencia en las artistas mujeres de Córdoba, 1916-1935. Metodologías para usar la imagen como fuente para una historia social",
+              "autores": ["Heredia, María Guillermina (FA-UNC)"]
+            },
+            {
+              "titulo": "Los materiales de la re-existencia: arte popular y disputa epistemológica en el campo artístico latinoamericano",
+              "autores": ["Herrero, Patricia (FA-UNC)"]
+            },
+            {
+              "titulo": "Entre el sacrificio y el mercado: un acercamiento histórico a la relación entre valor económico y simbólico en el Festival Nacional del Malambo",
+              "autores": ["Iglesias, Aldana (CONICET, UPC / GEDAL, IHAAL, UBA)"]
+            },
+            {
+              "titulo": "Migración y nomadismo de los significantes a partir del dispositivo teatral",
+              "autores": ["Palasi, Mario Alberto (UNSL-UNC)"]
+            },
+            {
+              "titulo": "Decir para reexistir. Lenguaje, cuerpo y producción de saberes en la escena porteña",
+              "autores": ["Pessolano, Carla (IEP-UNA / CONICET)"]
+            },
+            {
+              "titulo": "Conversaciones coreográficas con el pasado",
+              "autores": ["Salem de Olivera, Talma (UPC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 4,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 9, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "¿Qué públicos imagina la programación? La construcción de la audiencia en los conciertos de la Orquesta Filarmónica de Córdoba (2025-2026)",
+              "autores": ["Bistolfi, Carolina (FA-UNC)"]
+            },
+            {
+              "titulo": "Aproximaciones a lo común en la producción de sentido actoral",
+              "autores": ["Fernández, Rocío (GIEP-IIT-UNA)"]
+            },
+            {
+              "titulo": "La fantasía como \"posibilidad de rebelarse\". Puesta en abismo y (eco)referencialidad en la escena actual en Córdoba",
+              "autores": ["Fobbio, Laura (FFyH-UNC / FAD-UPC / CONICET / IAE-UBA)"]
+            },
+            {
+              "titulo": "Dramaturgias de desmitificación en la escena cuir latinoamericana",
+              "autores": ["Reyna, Rocío GIEP-IIT-DAD-UNA)"]
+            },
+            {
+              "titulo": "Procesos agenciales en las murgas cordobesas de estilo uruguayo: problemáticas metodológicas de una investigación posible",
+              "autores": ["Terráneo, Emiliano (FA-SECyT-UNC)"]
+            },
+            {
+              "titulo": "El folclore en perspectiva: ¿un imposible?",
+              "autores": ["Trumper, Ana (PAHC-IDACOR)"]
+            },
+            {
+              "titulo": "Una suerte de poética. Conferencia performática sobre las cosas que hago",
+              "autores": ["Cuesta, Rodrigo (CIFFyH-UNC / FA-UNC / FAD-UPC / IAE-UBA)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 12,
+      "titulo": "Ciencia en tiempos de crisis: políticas, instituciones y transformaciones en las condiciones de producción del conocimiento",
+      "coordinacion": [
+        "Mauro, Agustín (UNC)",
+        "Rivero, Patricia Jimena (CIECS-CONICET-UNC y UCC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula CIFFYH, Pab.Tosco",
+          "ponencias": [
+            {
+              "titulo": "La plurinserción como forma de construcción de la carrera científica: evidencias a partir de jóvenes doctores/as en Argentina",
+              "autores": ["Rivero, Patricia Jimena", "Fischer, Melina (CONICET-UNC y UCC; UNSAM y CONICET)"]
+            },
+            {
+              "titulo": "InnovAcción: una experiencia situada de vinculación e innovación tecnológica 4.0 en el acceso a la justicia",
+              "autores": ["Magallanes Udovicich, Mariana Loreta (UNC y CONICET)"]
+            },
+            {
+              "titulo": "Condiciones institucionales para la inter y la transdisciplina. Un diagnóstico de los posgrados de la UNTREF",
+              "autores": ["Niedojadlo, Esteban (UNTREF)"]
+            },
+            {
+              "titulo": "¿Régimen disciplinar o investigación posdisciplinar? Tensiones en la neurociencia contemporánea",
+              "autores": ["Mauro, Agustín (UNC)"]
+            },
+            {
+              "titulo": "Los sentidos de utilidad social de los conocimientos en los debates públicos sobre agroquímicos",
+              "autores": ["Ludueña, Agostina (UNQ y CONICET)"]
+            },
+            {
+              "titulo": "Biología y conflictos ambientales: los silencios (activos) en el conflicto con la empresa Porta Hnos.",
+              "autores": ["Arriaga, Julián (UNC y CONICET)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 13,
+      "titulo": "Presente y pasado de los pueblos y comunidades indígenas en la Argentina: historia, luchas, desafíos y propuestas.",
+      "coordinacion": [
+        "Álvarez Ávila, Carolina (Depto. de Antropología, FFyH; IDACOR, UNC-CONICET)",
+        "Castro Olañeta, Isabel (Escuelas de Historia y Bibliotecología, FFyH; Área de Historia, CIFFyH-UNC)",
+        "Palladino, Lucas (Depto. de Geografía, FFyH; Museo de Antropología, FFyH)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula Magna, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "Tras los rastros de trabajadores indígenas de la Gobernación del Tucumán en la Villa de La Plata, Charcas (siglos XVI y XVII)",
+              "autores": ["Zárate, Suyay Valentina (FFyH y FCE-UNC; CIFFyH-CONICET)"]
+            },
+            {
+              "titulo": "Las sociedades indígenas del oeste catamarqueño a principios del siglo XVII a partir de la Relación de vecinos de 1608",
+              "autores": ["Páez, Paula (CIFFyH-CONICET)"]
+            },
+            {
+              "titulo": "Financiación de la guerra, desnaturalización y conflictos de intereses en la frontera oriental del Tucumán (siglo XVII)",
+              "autores": ["Zelada, Virginia (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Las doctrinas de indios de la jurisdicción de Salta (segunda mitad del siglo XVII)",
+              "autores": ["Chaile, Telma", "Liendro, Serena", "Rueda, Facundo (ICSOH-UNSa-CONICET)"]
+            },
+            {
+              "titulo": "Pueblos de indios por fuera de los \"Pueblos de Indios\" en el curato de San Javier, Traslasierra, Córdoba. Principios del siglo XIX",
+              "autores": ["Melana, Alma (CIICA y MA, FFyH-UNC)"]
+            },
+            {
+              "titulo": "En su calidad de comuneros: productores y campos comunes en tensión en San Alberto, Traslasierra, fines del XIX",
+              "autores": ["Schibli, Magdalena (IDH, FFyH-UNC / CONICET)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula Magna, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "Habitar la modernidad, disputar el progreso: una primera aproximación a la trayectoria indígena de Vicente Avelino Ortíz en el ámbito político y social de Cosquín (1895-1943)",
+              "autores": ["Leal, María Laura", "Aguilar, Mabel", "Figueroa, Catalina", "López, Paola Andrea", "Epullán, Belén", "Reyna, Pablo S. (CIICA; CIICA y Lof Mapuche Tehuelche \"Kuifile Kimun\"; CIICA y Comunidad Henen Timoteo Reyna, pueblo camiare)"]
+            },
+            {
+              "titulo": "Entre memoria hegemónica y memoria indígena: disputas por la memoria indígena y desafíos del trabajo antropológico en torno a la Masacre de San Antonio",
+              "autores": ["Pezz, Florencia (IDACOR-CONICET)"]
+            },
+            {
+              "titulo": "El potencial político de la memoria en procesos de organización de mujeres indígenas",
+              "autores": ["Villagra, Emilia (IECET-CONICET)"]
+            },
+            {
+              "titulo": "Co-construcción jurídica y lucha indígena: demandas territoriales, derechos y herramientas colaborativas para la protección del Sitio Arqueológico-Sagrado Kanchira (Villa Cerro Azul, Córdoba)",
+              "autores": ["Amuedo, Claudia", "Luna, Fada", "Palomeque, Camila Celeste", "Martinez, Pilar", "Frutos, Gastón Emiliano", "Helmann, Juan Ignacio (IDACOR-CONICET y FFyH-UNC; CIICA; FFyH-UNC)"]
+            },
+            {
+              "titulo": "Intervenciones antropológicas en la justicia cordobesa. Aportes y desafíos de un campo en construcción",
+              "autores": ["Álvarez Ávila, Carolina", "Bompadre, José María", "Heredia, Fabiola (FFyH, IDACOR- CONICET; FFyH-UNC, ICA; FFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula Magna, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "\"Visibilización hasta ahí\": devolución de un ancestro indígena a la comunidad Ctalamuchita, del pueblo comechingón en Villa Nueva (Córdoba)",
+              "autores": ["Zabala, Mariela Eleonora", "Tulian, Héctor", "Puga, Alicia Zulema", "Bustos, Cristian Raúl", "Ceballos, Julia Martha", "Fabra, Mariana (IDACOR-CONICET-UNC; Comunidad Ctalamuchita del Pueblo Comechingón; Comunidad Ckatacuna; Comunidad Sanavirón Mampasacat; CPI-INA1; IDACOR-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Experiencias glotopolíticas en lenguas indígenas: los conceptos de \"comunidad de prácticas\" y \"registro\" en Educación Superior",
+              "autores": ["Morano, Matías (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "\"El territorio es del parque y el parque decide\": ejercer la presencia en el Sendero de Interpretación Simbólico Guaraní del Parque Nacional Calilegua",
+              "autores": ["Lemme, Carolina (IDACOR-CONICET-APN)"]
+            },
+            {
+              "titulo": "Memorias territoriales y cartografía colaborativa en la comunidad comechingona de La Toma: reconstrucción colectiva de una historia indígena invisibilizada",
+              "autores": ["Palladino, Lucas", "Ferrer Acevedo, Jorge (FFyH-UNC; Comunidad Comechingona Pueblo de La Toma)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 14,
+      "titulo": "Pensar lo común: discursos y debates epistémicos, ecológicos y políticos sobre territorios y actores territoriales",
+      "coordinacion": [
+        "Gramaglia, Paola Fabiana (CIFFyH-UNC)",
+        "Marchesino, César Diego (FFyH-FA-UNC)",
+        "Bompadre, José María (FFyH y FCC-UNC, ICA)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 3, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Uywaña, crianza mutua. Otros sentidos del tejido de la vida y el cuidado de lo común",
+              "autores": ["Britos Castro, Ana (CIFFyH-UNC-UPC)"]
+            },
+            {
+              "titulo": "Formación de comunicadores y comunicadoras para lo común en la universidad pública colombiana",
+              "autores": ["López Silva, María Rosa Helena del Pilar (Universidad del Tolima, Colombia)"]
+            },
+            {
+              "titulo": "Cuidar para coalicionar: ética relacional, feminismo decolonial y horizontes de lo común",
+              "autores": ["Pereira Crespo, Julieta Trinidad (CIFFyH-CONICET)"]
+            },
+            {
+              "titulo": "Ciudadanía: otra forma de seguir tensionando las relaciones de cuidado en este mundo dañado",
+              "autores": ["Zurbriggen, Sofía (CIFFyH-CEA-UNC)"]
+            },
+            {
+              "titulo": "Una mirada alcanza: reemergencia pluriétnica, voces de mujeres sobre los procesos y conflictos por el Sitio Sagrado Kanchira",
+              "autores": ["Picapietra, Vanina Anahí", "Mansilla, Roxana", "Chávez Rena, Yanina Josefa (Comunidad Plurietnica del Chavascate, Villa Cerro Azul (ICA); FFyH-UNC (CIICA))"]
+            },
+            {
+              "titulo": "\"Lo que se evidencia en este caso es una colisión de derechos\". Reflexividades etnográficas sobre una intervención antropológica en el sistema judicial de Córdoba, Argentina",
+              "autores": ["Bompadre, José María (FFyH y FCC-UNC, ICA)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 3, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "De lo común a lo (in)común: habitar el Antropoceno, entre el emplazamiento y el desplazamiento",
+              "autores": ["Borrastero, Matías Alejandro (CIECS-CONICET-UNC)"]
+            },
+            {
+              "titulo": "De las promesas incumplidas de la revolución verde al nuevo deber ser del agro: nudos críticos de la digitalización en curso",
+              "autores": ["Forlani, Nicolás (CONICET-UNRC)"]
+            },
+            {
+              "titulo": "Descentrar el antropocentrismo: cosmopolítica y pluriverso, otros modos de entender lo político desde América Latina",
+              "autores": ["Gramaglia, Paola (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Bolivia: crisis del capitalismo y una nueva rebelión contra la civilización burguesa occidental",
+              "autores": ["Herrera, Ulises (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Reflexiones en torno a la trayectoria del Comité de Solidaridad con los Pueblos Latinoamericanos",
+              "autores": ["Carranza, Virginia", "Iparraguirre, Pablo (Mesa de Trabajo DDHH; FFyH)"]
+            },
+            {
+              "titulo": "Claves éticas para habilitar dignidad en las prácticas epistémicas y políticas de la academia: una lectura de Gayatri Spivak",
+              "autores": ["Paolini, Delfina Sol (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Ecología Política Latinoamericana, marxismos y modernidad. Notas para un debate",
+              "autores": ["Patriglia, Juan Pablo (CIECS-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Infraestructuras digitales y conflicto territorial. Ecología política de las resistencias a los centros de datos en el mundo hispanohablante",
+              "autores": ["Salguero, Pedro (Universidad Autónoma de Madrid)"]
+            },
+            {
+              "titulo": "Defender lo común ante el avance de la colonización algorítmica y el extractivismo de datos",
+              "autores": ["Marchesino, César (FFyH-FA-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 3, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "El trabajo como experiencia territorial y lo común como horizonte emancipatorio",
+              "autores": ["Cuella, Silvina", "Peralta, María Inés", "Sueldo, Javier (FCS-UNC; IPSIS-FCS-UNC)"]
+            },
+            {
+              "titulo": "Mujeres, trabajo y reciclado: un acercamiento a la promoción ambiental desde la experiencia extensionista en la Cooperativa Las Violetas",
+              "autores": ["Daniele, Antonella", "Tobal, Malena (Escuela de Filosofía / Depto. de Antropología- FFyH-UNC)"]
+            },
+            {
+              "titulo": "La territorialización extractivista en la Puna de Jujuy durante la pandemia (2020-2022)",
+              "autores": ["Duran, Valeria (CIFFyH-CEA-UNC)"]
+            },
+            {
+              "titulo": "\"Aquí estamos\". La antropología visual y la performatividad de la memoria colectiva en pueblos originarios",
+              "autores": ["Fernández, Norma (FFyH, Museo de Antropología)"]
+            },
+            {
+              "titulo": "Comunitarismo barroco en el Antropoceno: cooperativas de reciclaje y su posibilidad de futuro en tiempos liminales",
+              "autores": ["Rattini, Augusto Remo (CIFFyH-CEA-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 15,
+      "titulo": "Juventudes y Tecno-digitalización de la Vida. Sociabilidades, Identidades y Subjetivación",
+      "coordinacion": [
+        "Tomasini, Marina (IDH, CONICET-UNC)",
+        "Monsó, Camila (CIFFyH-UNC)",
+        "García Bastán, Guido (IIPSI, CONICET-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 8, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Pedagogías de la sexualidad y vínculos sexoafectivos. Entornos virtuales y construcción de saberes en jóvenes cordobeses",
+              "autores": ["Tomasini, Marina (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Subjetividades juveniles y convivencia escolar: videojuegos para la enseñanza de la ciudadanía",
+              "autores": ["Farina, Victoria", "Cavagnero, Ana", "Acuña, Victoria Soledad (IAPCH-UNVM)"]
+            },
+            {
+              "titulo": "Juventudes y escuela frente a la viralización de femicidios. ¿Es posible la construcción de contranarrativas?",
+              "autores": ["Gontero, Natalia (IDH-CONICET / FemGes-CIFFyH / FCC-UNC)"]
+            },
+            {
+              "titulo": "¡Ganando! La manósfera como restitución simbólica ante la crisis de la masculinidad",
+              "autores": ["Romero, Guillermo (UBA-CONICET)"]
+            },
+            {
+              "titulo": "Entre pantallas, algoritmos y aulas: subjetividades juveniles en contextos de digitalización de la vida cotidiana",
+              "autores": ["Neme, Mariel Ayelén", "Ortiz, Pamela", "Arias, Luisa Marta (FCEJS-UNSL)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 8, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Vidas juveniles serranas, movimientos difusos entre los vínculos online/offline. ¿Qué encuentros intergeneracionales se están no/dando?",
+              "autores": ["Vacchieri, Erika Soledad", "Esteve, María", "Morales, María Gabriela (FemGes-CIFFyH y FP, UNC; IDH-CONICET)"]
+            },
+            {
+              "titulo": "Renovaciones del orden interactivo escolar. Regulaciones y posicionamientos en tiempos de digitalización de la vida cotidiana",
+              "autores": ["Ruda, Franco", "Abasolo, Valentina Zoe", "Pinto, María Eugenia (Facultad de Psicología, UNC; IIPSI-CONICET-UNC)"]
+            },
+            {
+              "titulo": "De la guerra por el sentido a las ecologías de orientación: juventudes cordobesas, interfaces DAP e inteligencia artificial conversacional",
+              "autores": ["Basualdo, Gaspar (IIPSI, UNC-CONICET)"]
+            },
+            {
+              "titulo": "Presentación y cuidado de sí en redes sociales: prácticas juveniles en territorios algorítmicos y la paradoja de la privacidad digital",
+              "autores": ["García Bastán, Guido", "D'Aloisio, Florencia (IIPSI, UNC-CONICET; UNC)"]
+            },
+            {
+              "titulo": "De tirarse notas a compartir la contraseña: opacidad e intimidad en las relaciones juveniles mediadas por tecnologías",
+              "autores": ["Monsó, Camila (CIFFyH-FFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 16,
+      "titulo": "Problemáticas y desafíos de la producción de conocimientos en el campo de la/s didáctica/s: trabajo de enseñar-evaluar en educación secundaria y universitaria",
+      "coordinacion": [
+        "Falconi, Octavio (CIFFyH)",
+        "Arese, Laura (CIFFyH)",
+        "Toibero, Desirée (CIFFyH)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 5, Pab. España",
+          "ponencias": [
+            {
+              "titulo": "Tarea prescripta y actividad efectiva en la enseñanza de la matemática: tensiones entre propuestas didácticas y condiciones del trabajo docente",
+              "autores": ["Llanos, Viviana Carolina (UNICEN)"]
+            },
+            {
+              "titulo": "Alfabetizaciones didácticas y didácticas como experiencia: un posicionamiento situado desde el territorio",
+              "autores": ["Báez, Marisel", "Loyola, Silvia (UCC)"]
+            },
+            {
+              "titulo": "Enseñar Ciencias Jurídicas: el desafío de integrar forma y contenido en el proceso formativo",
+              "autores": ["Barberis, Eliana", "Ruiz Juri, María (FD-UNC)"]
+            },
+            {
+              "titulo": "La evaluación colaborativa en territorio: dispositivo pedagógico y político",
+              "autores": ["Lasso, Silvana María (UCC)"]
+            },
+            {
+              "titulo": "Avances en la reconstrucción del dispositivo didáctico de evaluación de una escuela secundaria universitaria. La construcción de sentidos sobre la evaluación y el establecimiento de sus disposiciones reglamentarias",
+              "autores": ["Schargorodsky, Paula Mariana (CIFFyH, ESCMB, UNC)"]
+            },
+            {
+              "titulo": "Toda enseñanza es política: desigualdad socioeducativa, condiciones institucionales y contenido escolar",
+              "autores": ["Falconi, Octavio (ECE-CIFFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 5, Pab. España",
+          "ponencias": [
+            {
+              "titulo": "Demostrar sin límites: una propuesta didáctica para la construcción de demostraciones en lógica formal",
+              "autores": ["Dassie Wilke, Milnea (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Enseñar lógica informal en la escuela secundaria: tensiones didácticas, trabajo colectivo y formación ciudadana en la Escuela Superior de Comercio Manuel Belgrano",
+              "autores": ["Herrera, Rocío", "Müller, Florencia (ESCMB-UNC)"]
+            },
+            {
+              "titulo": "El potencial de la filosofía epistolar en la enseñanza de la filosofía moderna",
+              "autores": ["Castro, Agustina Belén (FFyH-UNC)"]
+            },
+            {
+              "titulo": "La palabra y el aula: algunos desafíos de la enseñanza de la filosofía en el secundario",
+              "autores": ["Greco, Giuseppe (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Enseñanza del pasado reciente en tiempos de negacionismo: reflexiones desde una experiencia con docentes de escuelas secundarias",
+              "autores": ["Arese, Laura (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Los vínculos afectivos en la experiencia de formación docente en Historia",
+              "autores": ["Aquino, Nancy", "Ferreyra, Susana (CIFFyH)"]
+            },
+            {
+              "titulo": "Enseñar la temporalidad y el tiempo histórico con jóvenes y adultos. Renovadas miradas para comprender el presente",
+              "autores": ["Alvarez, Lucrecia Milagro (UNL y CIFFyH)"]
+            },
+            {
+              "titulo": "Las salidas didácticas como estrategia de enseñanza para la historia. Análisis desde la dimensión afectiva y temporal",
+              "autores": ["Baldoni, Alejandra", "Sayago, Rocío (CIFFyH)"]
+            },
+            {
+              "titulo": "Entre la prescripción y el aula: análisis del nuevo Marco Curricular Común de Ciencias Sociales y las tácticas docentes en la escuela secundaria cordobesa",
+              "autores": ["Jara, Enzo Matías (FFyH-UNC)"]
+            },
+            {
+              "titulo": "De las presencias que hablan de la ausencia. Una conversación sobre el vínculo pedagógico y los afectos en las coordenadas actuales de época desde las aulas de Córdoba",
+              "autores": ["Toibero, Desirée M.", "Olivero, Ezequiel N. (FP-CIFFyH)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 17,
+      "titulo": "Educación y formación para el trabajo como bien común: políticas, instituciones y dispositivos",
+      "coordinacion": [
+        "Maturo, Yanina (GIEPED / CIFFyH–FFyH–UNC)",
+        "Bowman, M. Alejandra (CONICET–UNdeC)",
+        "Bado, Fernando (CIFFyH–FFyH–UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 5, Pab. Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Políticas públicas, educación técnico–profesional y formación profesional",
+              "autores": []
+            },
+            {
+              "titulo": "La educación y el trabajo a 50 años del golpe cívico-militar. Discusiones y encrucijadas",
+              "autores": ["Levy, Esther (UBA)"]
+            },
+            {
+              "titulo": "Políticas y programas de Formación Docente Continua en Educación Técnico Profesional en los últimos diez años",
+              "autores": ["Briasco, Irma", "Naya, Ramiro", "Ghilini, Anabela", "Ibañez, Susana (UNIPE / IdIHCS- CONICET)"]
+            },
+            {
+              "titulo": "Desafíos para la articulación entre educación y trabajo: demandas ocupacionales de las PYMES y políticas de formación en la Provincia de Buenos Aires",
+              "autores": ["Novick, Marta", "Filmus, Daniel", "Merbilhaa, Jimena", "Gabriel, Noelia Luciana", "Rivero, Emilse", "Filmus, Maite", "Cavallo, Laura (CONICET / UBA / UNSAM)"]
+            },
+            {
+              "titulo": "La articulación normativa como garante del derecho a la Educación Técnico Profesional",
+              "autores": ["Cavallini, Delia Edith (Ministerio de Educación de Córdoba / UNRC)"]
+            },
+            {
+              "titulo": "Formación de trabajadores, prácticas formativas y enseñanza",
+              "autores": []
+            },
+            {
+              "titulo": "El potencial de educación y formación de trabajadoras y trabajadores del Gran Buenos Aires",
+              "autores": ["Riquelme, Graciela Clotilde", "Herger, Natalia (CONICET / UBA)"]
+            },
+            {
+              "titulo": "Entre el oficio y la enseñanza: la formación de instructores de Formación Profesional en una política reciente de la provincia de Córdoba",
+              "autores": ["Aparicio, Graciela", "Bado, Fernando Daniel (Ministerio de Desarrollo Social y Promoción del Empleo / CIFFyH–UNC)"]
+            },
+            {
+              "titulo": "Las prácticas de evaluación en la Escuela de Oficios de la Universidad Nacional de Córdoba",
+              "autores": ["Figueroa, María José", "Guzmán, Agustina (FFyH–UNC)"]
+            },
+            {
+              "titulo": "Experiencias formativas de jóvenes y adultos en talleres de formación profesional en la ciudad de Chilecito, La Rioja",
+              "autores": ["Fernández Arena, Nazarena", "Bowman, María Alejandra (UNdeC / CONICET)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-17:00",
+          "lugar": "Aula 5, Pab. Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Trayectorias educativas, juventudes, perfiles y prácticas profesionales",
+              "autores": []
+            },
+            {
+              "titulo": "Más allá del esfuerzo individual: trayectorias educativas de jóvenes trabajadores universitarios",
+              "autores": ["Dinapoli, Giuliana (IICE-UBA)"]
+            },
+            {
+              "titulo": "Diálogo con estudiantes de escuelas secundarias públicas cordobesas",
+              "autores": ["López, Eliana", "Rotondi, Eugenia", "Tomasini, Valentina (UNC / UNRC)"]
+            },
+            {
+              "titulo": "\"Ayuda, pero...\": políticas sociales y sostenimiento escolar de jóvenes en Río Cuarto",
+              "autores": ["Magnoli, Pamela", "Rauch, Nery Facundo (CONICET / UNRC)"]
+            },
+            {
+              "titulo": "Identificación de perfiles socioeducativos en estudiantes prontos a egresar de profesiones del cuidado en la FES-UPC a fines de 2023",
+              "autores": ["Contreras Garbe, Sebastián (UPC)"]
+            },
+            {
+              "titulo": "La simulación clínica como modelización pedagógica: un análisis preliminar en carreras de salud de dos universidades argentinas",
+              "autores": ["Maturo, Yanina", "Vaja, Arabela Beatriz (CONICET / UNRC / UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 18,
+      "titulo": "Plataformas e interfaces. Infraestructuras, mediaciones técnicas y disputas por lo(s) público(s)",
+      "coordinacion": [
+        "Jairala, Ignacio (CEA, FCS -UNC)",
+        "Piumetto, Agustina (IDH, CONICET-UNC)",
+        "Davies, Ignacio (IDH, CONICET-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula CIFFyH, Pab. Tosco",
+          "ponencias": [
+            {
+              "titulo": "Cómo analizar series de plataformas VOD: una propuesta metodológica",
+              "autores": ["Aguirre, Constanza (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "La pila audiovisual: el análisis del ecosistema audiovisual en la era de las plataformas",
+              "autores": ["Berti, Agustín (FA-UNC / IdH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Arqueología de YouTube: un análisis de sus interfaces",
+              "autores": ["Cassinelli, Eugenia", "Gamba, Camila Lucía (FA-UNC; FFyH-UNC)"]
+            },
+            {
+              "titulo": "El sampleo como práctica compositiva en la música popular digital: plataformas de archivo sonoro y economía del loop",
+              "autores": ["Davies, Ignacio", "Guzmán, Mateo (IDH-UNC; FA-UNC)"]
+            },
+            {
+              "titulo": "Lo vintage funciona. Nostalgia, aplanamiento y la posibilidad de una cultura post-plataformizada",
+              "autores": ["Pignata, Agustín (FAUD-UNC / IIVH-CONICET)"]
+            },
+            {
+              "titulo": "Imágenes técnicas en plataformas VOD. Algunas consideraciones sobre la interfaz de YouTube en dispositivos móviles",
+              "autores": ["Piumetto, Agustina (CONICET-IDH-UNC)"]
+            },
+            {
+              "titulo": "¿Cómo se ven las cinematografías sudamericanas en la era de las plataformas?",
+              "autores": ["Savy, Ailén", "García, Facundo (FA-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 19,
+      "titulo": "Artesanías, Diseño, Artes visuales y audiovisuales entre culturas, economías y políticas locales e internacionales (1966-2025)",
+      "coordinacion": [
+        "Estarellas, Natalia (CEPIA-FA / CIFFyH / UNC / CONICET)",
+        "Martínez, Soledad (FA-UNC)",
+        "Silva Mallea, Agostina (CIFFyH-UNC / UNSJ-FFHA / CONICET)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 6, Pab. España",
+          "ponencias": [
+            {
+              "titulo": "Raíces y transculturalidad: el Arete Guasú en Alberdi, Córdoba",
+              "autores": ["Jerez Villegas, Valentina (FA-UNC)"]
+            },
+            {
+              "titulo": "Arte multiespecies. Dificultades en la cartografía de los agenciamientos estéticos-comunitarios en el Valle de Paravachasca (Córdoba, Argentina)",
+              "autores": ["Bertea, Francisco Miguel Fernando (IES SB / UPC)"]
+            },
+            {
+              "titulo": "Desafíos, disputas y consolidación de las ferias artesanales de Barrio Güemes en Córdoba en las primeras décadas del XXI",
+              "autores": ["Estarellas, Natalia (CEPIA-FA-UNC / CONICET, CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Escuchar, traducir, volver a escuchar. Leda Valladares y la circulación cultural de los cantos vallistos",
+              "autores": ["Lippera, Ivana (CIFFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 6, Pab. España",
+          "ponencias": [
+            {
+              "titulo": "El diseño curatorial como dispositivo estetizante en las bienales de arte y diseño internacionales",
+              "autores": ["Martínez, Amalia Soledad (FA-UNC)"]
+            },
+            {
+              "titulo": "Representantes de tres provincias en el Primer Concurso Nacional de Escultura en Madera (Resistencia, Chaco, 1988)",
+              "autores": ["González, Alejandra Soledad", "Silva Mallea, Agostina", "Cruz, Maribel (CIFFyH-UNC; IDH, CONICET-UNC; CONICET-UNSJ)"]
+            },
+            {
+              "titulo": "Producción audiovisual en la extensión universitaria",
+              "autores": ["Pereyra, Florencia (UNSL)"]
+            },
+            {
+              "titulo": "Hacer mundos con restos: genealogías inmersivas en la obra del Grupo Espilus",
+              "autores": ["Jacobo, Mónica Eugenia (FA-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "\"La Huella marcando lo invisible. Vigilia\" (2008). Obra artivista en la lectura de la sentencia de un juicio de lesa humanidad, en Córdoba",
+              "autores": ["Alessio, Guillermo Antonio (FA-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 20,
+      "titulo": "“Las políticas de las pasiones”: pensar los afectos desde las Ciencias Sociales y Humanas",
+      "coordinacion": [
+        "Triquell, Ximena (FFyH y FA-UNC)",
+        "De Olmos, María Candelaria (FFyH-UNC)",
+        "Uzin, María Magdalena (Programa de Género, FFyH-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 5, Pab. Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La universidad pública entre la esperanza y la desesperación",
+              "autores": ["Agüero, Andrea Luciana", "Moine, Amalia (UNSJ-CONICET; FCH-UNRC)"]
+            },
+            {
+              "titulo": "Los afectos en disputa: nuevos actores y sentidos en el campo educativo en Corrientes y Chaco",
+              "autores": ["Díaz, Alejandra Jéssica", "Almirón, Victoria Soledad", "Kasprzyk, César Mauricio (UNNE; CONICET-UNNE)"]
+            },
+            {
+              "titulo": "De las calles al aula: ¿qué sentimos cuando defendemos la educación pública?",
+              "autores": ["Mendiburo, Lucía", "Moralez, Emiliano (UNC)"]
+            },
+            {
+              "titulo": "El discurso que refrenda el desfinanciamiento universitario. Pasiones que activa",
+              "autores": ["Quinteros, Jorge (UNC)"]
+            },
+            {
+              "titulo": "El humor en los microrrelatos de Luisa Valenzuela. El afecto político de la violencia en relación con las subjetividades femeninas",
+              "autores": ["Moreno, Marcelo (UNC)"]
+            },
+            {
+              "titulo": "Afectos y alteridad: dimensiones pasionales en la figura de la prostituta travesti en \"Las malas\", de Camila Sosa Villada",
+              "autores": ["Varela, Carolina (UNC)"]
+            },
+            {
+              "titulo": "Salvar o controlar. ética del cuidado, giro afectivo y feminismo digital en \"Las vulnerabilidades\", de Elvira Sastre",
+              "autores": ["Molina Barrios, María Elisa (UNC)"]
+            },
+            {
+              "titulo": "Entre el colapso y la esperanza. Eutopía, distopía y futuros posibles en novelas argentinas contemporáneas (\"Mundo Orco\", \"Trilogía del Agua\" y \"Cometierra\").",
+              "autores": ["Uzín, Magdalena (UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 5, Pab. Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La cólera como entrada a la acción: el caso de \"Puerta\", de Juana Rozas",
+              "autores": ["Benegas Palis, Sofía Alim (UNC)"]
+            },
+            {
+              "titulo": "\"Los aerostatos\", de Amélie Nothomb, y la cólera",
+              "autores": ["Rodríguez Saad, Mateo (UNC)"]
+            },
+            {
+              "titulo": "Miedo y anestesia afectiva: insensibilidad como dispositivo de control en \"Cadáver exquisito\"",
+              "autores": ["Martínez Espeche, Sofía (UNC)"]
+            },
+            {
+              "titulo": "Miedo y desesperación: configuraciones pasionales femeninas en \"Cuando acecha la maldad\"",
+              "autores": ["Farías, Candela (UNC)"]
+            },
+            {
+              "titulo": "La auto-negación de la alegría/identidad queer: el miedo como pasión paralizante en \"I Saw the TV Glow\" (2024), de Jane Schoenbrun",
+              "autores": ["Maurelli, Camila (UNC)"]
+            },
+            {
+              "titulo": "Pensar la abyección como estado pasional",
+              "autores": ["Cardozo, Cristian (UNC)"]
+            },
+            {
+              "titulo": "Las dimensiones afectivas de la participación política juvenil en políticas gubernamentales",
+              "autores": ["Ciordia, Carolina (ICA-UBA / CONICET)"]
+            },
+            {
+              "titulo": "Todo tiempo por pasado fue mejor: nostalgia en la industria cultural",
+              "autores": ["Mercado Palazzi, Lourdes (UNC)"]
+            },
+            {
+              "titulo": "Modos de decir la dictadura: formas discursivas y estados pasionales. Un mapa posible",
+              "autores": ["De Olmos, Candelaria (UNC)"]
+            },
+            {
+              "titulo": "El resentimiento popular y el robo como programa alternativo de rebelión: una lectura desde la semiótica y el giro afectivo de \"El niño resentido\", de César González",
+              "autores": ["Debárbora Fernández, Damiana Sofía (UNC)"]
+            },
+            {
+              "titulo": "Mirar a lxs otrxs: ficción social, afectos y formas audiovisuales de la marginalidad",
+              "autores": ["Ferrini, Ayelen (UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 5, Pab. Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Pensar la interpelación del enunciatario desde el concepto de habitus emocional",
+              "autores": ["Enrici, Agustina Mileva (UNC)"]
+            },
+            {
+              "titulo": "Desde la filosofía del lenguaje hacia una antropología de las emociones, y de regreso",
+              "autores": ["Rivas, Lucas Ezequiel (UNC)"]
+            },
+            {
+              "titulo": "No-lugar y obstinación. Experiencias sensibles en el cine contemporáneo",
+              "autores": ["López Seco, Celina (UNC)"]
+            },
+            {
+              "titulo": "Trauma y desensitización de las emociones en el cine",
+              "autores": ["Gómez Demaio, Joaquín (UNC)"]
+            },
+            {
+              "titulo": "Géneros cinematográficos y dispositivos pasionales: una propuesta de análisis",
+              "autores": ["Triquell, Ximena (UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 21,
+      "titulo": "Historia Pública: Propuestas colaborativas, intervenciones y debates teórico-metodológicos",
+      "coordinacion": [
+        "Gay, Eugenia (Escuela de Historia FFyH-CIFyH-Red Transhistórica)",
+        "Molar, Rocío María (Escuela de Historia FFyH; ArqAnd-Universidad Nacional de Tucumán)",
+        "Chabrando, Victoria (Escuela de Historia FFyH; Archivo Provincial de la Memoria)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 2, Pab. Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Historia pública y los desafíos epistemológicos a la historia",
+              "autores": ["Salguero, Elías (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Historia pública como epistemología de lo subalterno",
+              "autores": ["Gay, Eugenia (Escuela de Historia–FFyH–CIFyH–Red Transhistórica)"]
+            },
+            {
+              "titulo": "Prácticas y epistemologías detrás de la divulgación histórica en redes",
+              "autores": ["Abbona Castaño, Lorenzo (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Activadores patrimoniales: personas mayores, museos universitarios y construcción de lo común desde una experiencia colaborativa",
+              "autores": ["Vargas Ibarra, Gisela", "Pedernera, Gabriela", "Vigliano, Verónica", "Triquell, Lucía", "Macchi, Vanina", "Ortiz Suarez, Abril (Museo de Antropología–FFyH–UNC)"]
+            },
+            {
+              "titulo": "Proyectando una historia pública desde Córdoba: objetivos, discusiones y perspectivas a futuro",
+              "autores": ["Molar, Rocío (FFyH-UNC, ArqAnd-UNT)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 2, Pab. Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Museo a la calle: experiencias, afectos y territorio",
+              "autores": ["Rabboni, Nicolás (FFyH-UNC / Museo Histórico Provincial Marqués de Sobre Monte)"]
+            },
+            {
+              "titulo": "Archivos, burocracia y políticas públicas de reparación. Una conjugación entre ceses laborales durante la última dictadura militar y la política pública de reparación de memorias",
+              "autores": ["Paez, Janet (CIFyH-UNC)"]
+            },
+            {
+              "titulo": "Museo en territorio: reflexión, formación e intercambio museológico",
+              "autores": ["Fernández, Marcela (Museo Histórico Provincial Marqués de Sobre Monte)"]
+            },
+            {
+              "titulo": "Un museo en una casa. Notas sobre un proyecto interdisciplinario y colaborativo",
+              "autores": ["Tedesco, Graciela", "Moreyra, Cecilia", "Angaroni, Iara", "Nocioni, María Belén (IDACOR-CONICET-FFyH-UNC; CIECS-CONICET-FFyH-UNC; Museo de Antropologías-FFyH- UNC; IDACOR-CONICET)"]
+            },
+            {
+              "titulo": "Cuando la historia se hace pública: el trabajo territorial, deberes y perspectivas de la divulgación histórica",
+              "autores": ["Villagra, Candela Magalí (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Narrar el pasado en tiempos de scroll: experiencias y desafíos de la divulgación histórica en TikTok e Instagram",
+              "autores": ["Ávila Cignetti, María de los Milagros (FFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 22,
+      "titulo": "El mundo del trabajo en disputa: sindicatos, acción colectiva, conflictos y agendas feministas en la Argentina contemporánea",
+      "coordinacion": [
+        "Medina, Leticia (CIFFyH-FCS)",
+        "Sapp, Camila (IDH-CONICET-CIFFyH)",
+        "Franco, María José (IPSIS-FSC-UNC)"
+      ],
+      "trabajos": []
+    },
+    {
+      "numero": 23,
+      "titulo": "Imaginar pese a todo. Indagaciones sobre la crisis y el porvenir de las humanidades",
+      "coordinacion": [
+        "La Rocca, Paula María (IDH-CONICET-UPC)",
+        "Neuburger, Ana (IDH-CONICET-UNC)",
+        "López, Nicolás (IDH-CONICET-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-10:30",
+          "lugar": "Aula CIFFyH, Pab.Tosco",
+          "ponencias": [
+            {
+              "titulo": "De la exploración de temporalidades heterogéneas a la imaginación de tiempos posibles: cuerpo y archivo en las artes escénicas",
+              "autores": ["Paz Sena, Leticia (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Crear para conocer, archivar para resistir, recordar para estar juntas",
+              "autores": ["Marin, Fwala-lo (CIFFyH-UNC / CONICET)"]
+            },
+            {
+              "titulo": "Un árbol de imágenes en torno al Aspidosperma quebracho-blanco",
+              "autores": ["Cerbellera, Mauricio Antonio (CePIA-UNC)"]
+            },
+            {
+              "titulo": "La imaginación en crisis: derivaciones del arte contemporáneo",
+              "autores": ["Brum de Alcantara, Taís", "Marques de Souza Silva, Julia (PUC-Rio)"]
+            },
+            {
+              "titulo": "Montaigne y la imaginación de la virtud",
+              "autores": ["Laguens, Amadeo (CIFFyH-UNC / SECyT)"]
+            },
+            {
+              "titulo": "Recomenzar el levantamiento como gesto romántico de la imaginación",
+              "autores": ["Nieto, Lucas (CIFFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula CIFFyH, Pab.Tosco",
+          "ponencias": [
+            {
+              "titulo": "Imaginar, un lugar común. Notas para una crítica de la imaginación crítica",
+              "autores": ["López, Nicolás (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Desde el polvo. Apuntes sobre una imaginación supersticiosa",
+              "autores": ["Maccioni, Franca (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "La instauración de mundos alternativos. El tiempo rebelde y la imaginación política de Hannah, Rosa y Úrsula",
+              "autores": ["Arce Torre, Camila (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Suspender la línea. Hacia una imaginación geométrica",
+              "autores": ["González, María Milagros (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Aportes para una reorientación de los saberes: imaginación, voz, escucha",
+              "autores": ["Milone, Gabriela (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Escombros de un tiempo por venir. Crisis, imaginación y otros derrumbes",
+              "autores": ["Neuburger, Ana (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Las (im)posibilidades de la escritura. Notas sobre \"A resistencia\", de Julián Fuks",
+              "autores": ["Cornet, Gabriela (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Ficciones de lo real en tiempos de disrupción técnica",
+              "autores": ["Muñiz, Ignacio (IDH-CONICET-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 24,
+      "titulo": "Lo común en tiempos de capitalismo caníbal: una perspectiva desde los cuidados",
+      "coordinacion": [
+        "Bonafe, Laura (CIFFyH/CONICET)",
+        "Fernández, María Victoria (CIFFyH/SeCyT)"
+      ],
+      "trabajos": []
+    },
+    {
+      "numero": 25,
+      "titulo": "Educación de jóvenes y adultos y educación popular: desafíos político-pedagógicos en los nuevos escenarios.",
+      "coordinacion": [
+        "Tosolini, Mariana (CIFFyH – FFyH - UNC)",
+        "Delprato, María Fernanda (CIFFyH – FFyH - UNC)",
+        "Paiva, Jane (UERJ-Brasil)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 12, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Una experiencia de educación popular en la educación de jóvenes y adultos desde la perspectiva de mujeres organizadas",
+              "autores": ["Cotta Carrizo, Carla Betsabé (CIFFyH-FFyH-UNC)"]
+            },
+            {
+              "titulo": "Educação Jovens e Adultos na perspectiva da Educação Não Formal na América Latina",
+              "autores": ["Gomides Hermenegildo, Nicolas", "Rodrigues Silva, Fernanda Aparecida de Oliveira (UFOP)"]
+            },
+            {
+              "titulo": "Educación a lo largo de la vida y educación popular: desafíos y estrategias en espacios educativos en territorios populares",
+              "autores": ["Llosa, Sandra", "Stein, Alejandra", "Castañeda Agüero, Juan Pablo", "Sánchez, Cynthia", "Spinelli, Melina", "Abello, Valentina (IICE-UBA)"]
+            },
+            {
+              "titulo": "Presenças femininas fundantes: memória, afeto e suporte de vida na trajetória de egressos da EJA",
+              "autores": ["de Anchieta, Marcia Pereira (UERJ)"]
+            },
+            {
+              "titulo": "Saberes transdisciplinarios y la praxis andragógica de docentes de Centros de Educación Básica Alternativa de la Selva Central de Perú",
+              "autores": ["Zavala Romero, Gustavo Dante (UGEL-Satipo)"]
+            },
+            {
+              "titulo": "La experiencia escolar como interrupción del encierro. La Revista \"Tumbando rejas\"",
+              "autores": ["Gomez, Sandra María", "Van Cauteren, Analía", "Prado, Mariela", "Lopez, María Eugenia (FFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 12, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Usos sociales del conocimiento escolar. Un análisis desde las prácticas cotidianas de los sujetos",
+              "autores": ["Arrieta, Rocío (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Implicancias y desafíos de investigar prácticas letradas y construcción de identidades en la EDJA",
+              "autores": ["Galante, María Luz (UNdeC)"]
+            },
+            {
+              "titulo": "Trayectorias socioeducativas de jóvenes que cursan el nivel primario en la Educación Permanente de Jóvenes y Adultos (EPJA)",
+              "autores": ["Montenegro, Marcela (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Acercamiento a las prácticas de enseñanza en el nivel secundario de adultos en el marco de la vigencia de la nueva propuesta curricular: primeras indagaciones",
+              "autores": ["Cabrera, María Eugenia", "Vila, Diana", "Bargas, Noelia (UNLu)"]
+            },
+            {
+              "titulo": "La nocturnidad como condición material- institucional de la experiencia docente en CENMA de Sierras Chicas (Córdoba, Argentina)",
+              "autores": ["Ramírez, Mercedes (UNC, UCC)"]
+            },
+            {
+              "titulo": "Escuela primaria para adultos y universidad: conexiones que transforman. Sentidos atribuidos a la orientación vocacional-ocupacional por docentes y directivos en el marco de su vinculación con la UNRC",
+              "autores": ["Elizalde, Elisa", "González, Agostina (UNRC)"]
+            },
+            {
+              "titulo": "La formación docente en arte como experiencia poética",
+              "autores": ["Carpio, Sara (FA-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 26,
+      "titulo": "Política, cultura y educación en perspectiva histórica: escalas y contextos",
+      "coordinacion": [
+        "Moyano, Javier (CIFFyH-UNC)",
+        "Servetto, Silvia (CIFFyH-UNC)",
+        "Lamelas, Gabriela (CIFFyH-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 13, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Historias conectadas: la circulación del modelo normalista entre Europa y América (siglo XIX)",
+              "autores": ["Barbeito, Ignacio Germán (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Ser fuerte. Género, Educación Física y cultura corporal en las obras de Juana Alzú y Antonio De Luca (1918-1920)",
+              "autores": ["Cena, Marcela María", "Bologna Liprandi, Carina", "Bazán, Marcos (UPC / Fundación Experiencia Praxis)"]
+            },
+            {
+              "titulo": "Infancia, políticas públicas y construcción de lo común: una aproximación histórica a la constitución del Nivel Inicial en Argentina",
+              "autores": ["Ilario, Carlota (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Cuerpo, agua y educación en Córdoba (1920-1946). Los Baños Populares, las Escuelas de Natación y la Escuela Normal Superior como nodos de una política estatal sobre el cuerpo",
+              "autores": ["Larrechea Calderón, Rocío (UPC / FFyH, UNC / Fundación Experiencia Praxis)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 13, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Obligatoria y gratuita: una larga historia de dos principios de la educación en Córdoba (siglos XVIII-XIX)",
+              "autores": ["Lamelas, Gabriela", "Llanos, Camila (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "¿Quiénes habitaban la Escuela Normal Provincial \"Gobernador José Vicente de Olmos\"? Maestros, alumnos y su política de inclusión",
+              "autores": ["Maldonado, Jesica Mariel (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Cinco momentos en la historia del liberalismo y el laicismo en Córdoba, 1870-1945",
+              "autores": ["Moyano, Javier (CIFFyH-FFyH, UNC)"]
+            },
+            {
+              "titulo": "De experiencias escolares, prácticas situadas y configuraciones sociales en la provincia de Córdoba durante la segunda mitad del siglo XX",
+              "autores": ["Servetto, Silvia", "Bosio, Adriana", "Tessio Conca, Adriana", "Torriglia, Agostina (FFyH- FCS-UNC)"]
+            },
+            {
+              "titulo": "La cultura material como patrimonio educativo: una trama colectiva de memorias escolares",
+              "autores": ["Machado Portas, Violeta", "Gimenez, Leandro (CIFFyH, FFyH, UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 27,
+      "titulo": "80. Historia y memorias de la Facultad de Filosofía y Humanidades (1934-2026)",
+      "coordinacion": [
+        "Argañaraz, Magalí (IDH-CONICET / CIFFyH)",
+        "Hunziker, Paula (CIFFyH)",
+        "Mattoni, Francisca (CIFFyH / CONICET)",
+        "Requena, Pablo (CIFFyH)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Auditorio H.Chávez, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Los años fundacionales",
+              "autores": []
+            },
+            {
+              "titulo": "Profesionales desinteresados o desinteresados obligados a ser profesionales. El proceso de profesionalización de las Humanidades en la Universidad Nacional de Córdoba (1940-1950)",
+              "autores": ["Mattoni, Francisca (CIFFyH / CONICET)"]
+            },
+            {
+              "titulo": "Hernández Arregui en la FFyH: recorrido por sus años de estudio en Córdoba (1941-1944)",
+              "autores": ["Sánchez, Micaela (CIFFyH / CONICET)"]
+            },
+            {
+              "titulo": "Hernández Arregui y el pensamiento nacional: un aporte de la FFyH al revisionismo histórico",
+              "autores": ["Dipp, Jorge Brahim", "Mondelo, Agustín Tomás", "Torres, Martín (FCS)"]
+            },
+            {
+              "titulo": "Filo en dictadura",
+              "autores": []
+            },
+            {
+              "titulo": "La Escuela de Filosofía y una filosofía para \"reorganizar\" la Universidad",
+              "autores": ["Argañaraz, Magalí (IDH-CONICET / CIFFyH)"]
+            },
+            {
+              "titulo": "Docentes cesanteados y transformaciones teóricas en el campo filosófico cordobés. El caso de Elma Kohlmeyer de Estrabou",
+              "autores": ["Villoria Palavecino, Malena Chavelí (IDH-CONICET)"]
+            },
+            {
+              "titulo": "Principales hitos de la carrera de Psicología en la FFyH- UNC. Reflexiones sobre la psicología en la última dictadura militar",
+              "autores": ["Scherman, Patricia (FP)"]
+            },
+            {
+              "titulo": "Redemocratización",
+              "autores": []
+            },
+            {
+              "titulo": "Excavando la memoria: historia, dictadura y trayectorias del Proyecto Arqueológico Ambato (1973-2026)",
+              "autores": ["Quintero Bonnin, María Clara", "Romero, Pilar Agustina", "Ludueña, Iara (IDACOR- CONICET / Museo de Antropologías)"]
+            },
+            {
+              "titulo": "Los Institutos. Algunas notas sobre la investigación en humanidades en la primera mitad de los años ochenta",
+              "autores": ["Requena, Pablo (CIFFyH)"]
+            },
+            {
+              "titulo": "La Universidad habitada desde los archivos y las políticas públicas de memoria",
+              "autores": ["Chabrando, Victoria (CIFFyH / APM)"]
+            },
+            {
+              "titulo": "María Saleme. Maestra socrática",
+              "autores": ["Hunziker, Paula (CIFFyH)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 28,
+      "titulo": "Los desafíos de la formación y la práctica docente para la educación secundaria",
+      "coordinacion": [
+        "Beltramino, Lucía (CIFFyH)",
+        "Kasprzyk, Mauricio (CONICET, CIFFyH)",
+        "Moreiras, Diego (FCC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 13, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La paradoja de incluir en tiempos de exclusión: desafíos del trabajo escolar desde la mirada de las coordinadoras de curso",
+              "autores": ["Arceluz, Cecilia (CEA-FCS / CIFFyH)"]
+            },
+            {
+              "titulo": "Aprender a mirar: inclusión y escuela secundaria",
+              "autores": ["Beltramino, Lucía (FFyH-CIFFyH)"]
+            },
+            {
+              "titulo": "Entre la militancia y la enseñanza de la ESI: una experiencia de producción de materiales pedagógicos para la educación secundaria",
+              "autores": ["Di Marco, Natalia (Equipo de ESI, ESCMB-UNC)"]
+            },
+            {
+              "titulo": "Arder en la cornisa. Entre la planificación y el temblor, la escucha pedagógica",
+              "autores": ["Rey García, Verónica", "Bianchi, Chaska (CEA-UNC; IPEM N.º 387 \"Sotero Eugenio Bartolomé\")"]
+            },
+            {
+              "titulo": "Entre la precariedad y el compromiso: experiencias de resistencia educativa en una escuela secundaria hondureña",
+              "autores": ["Díaz Rodas, Samuel (CONICET-IDH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 13, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Tensiones y desencuentros entre políticas curriculares y trabajo docente en Córdoba",
+              "autores": ["Pérez Rojas, Micaela", "Assusa, Gonzalo (ICIE-UEPC; IDH-CONICET-UNC, FA-FCS-UNC)"]
+            },
+            {
+              "titulo": "Políticas curriculares en la educación secundaria de Córdoba (2010-2025): hiperproducción documental, fragmentación y el desplazamiento del saber a enseñar",
+              "autores": ["Gutiérrez, Gonzalo (ECE, FFyH-UNC)"]
+            },
+            {
+              "titulo": "Enseñanza con y sobre tecnologías. Análisis de documentos en la formación docente en la provincia de Córdoba",
+              "autores": ["Moreiras, Diego Agustín (FCC-UNC; ISPT Aquiles Gay)"]
+            },
+            {
+              "titulo": "Una mirada sobre los formatos curriculares: la organización de la enseñanza en la formación docente para la educación secundaria en Córdoba",
+              "autores": ["Wuerich, Melina Belén (ECE, FFyH-UNC)"]
+            },
+            {
+              "titulo": "Docentes/escritores en el campo de la comunicación: lineamientos de transformación tecnológica en la política educativa de la provincia de Córdoba",
+              "autores": ["Castagno, Fabiana", "Galante, María Luz", "Figueroa, Pedro", "Dasso, Silvana", "Bazán, Beatriz de los Ángeles (FCC-UNC)"]
+            },
+            {
+              "titulo": "Escrituras docentes digitales en contextos laborales",
+              "autores": ["Carrizo Stauffer, Carla", "Salgueiro, María Alejandra", "Gaiteri, Jorge Alfredo", "Castro Carranza, Laura Melisa", "Giménez, Laura Josefina (FCC-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 29,
+      "titulo": "La geografía y la enseñanza de los problemas socialmente relevantes: reflexiones y desafíos actuales",
+      "coordinacion": [
+        "Maldonado, María Rita (CIFFyH-UNC / CONICET)",
+        "Monzón, Rocío (CIFFyH-FFyH-UNC / ESCMB)",
+        "Matteucci, Lucía (CIG-UNCPBA / CIG-UNLP)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 6, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Conceptos y problemas para la enseñanza de la geografía desde un posicionamiento crítico. Estado de la cuestión e implicaciones en la formación docente",
+              "autores": ["Maldonado, María Rita (CIFFyH-UNC-CONICET)"]
+            },
+            {
+              "titulo": "Repensando la enseñanza de la Geografía en la Escuela Superior de Comercio Manuel Belgrano (UNC): reflexiones a partir de la experiencia de reorganización curricular",
+              "autores": ["Astegiano, Natalia", "Cisterna, Carolina", "Irazoqui, Cecilia", "Monzón, Rocío", "Pilatti, Camila", "Suarez, Melisa (ESCMB-Dpto. de Geografía FFyH-UNC)"]
+            },
+            {
+              "titulo": "Extractivismo y colonialismo en la enseñanza: de Potosí a las nuevas fronteras extractivas",
+              "autores": ["González, Gabriela Rebeca (ISFD \"Mariano Moreno\", Ministerio de Educación de Córdoba)"]
+            },
+            {
+              "titulo": "\"Los de afuera\". Deconstruyendo prejuicios sobre la migración en la escuela",
+              "autores": ["Ensabella, Beatriz", "Bertea, Jorgelina Beatriz (Dpto. de Geografía FFyH-UNC; Ministerio de Educación de Córdoba)"]
+            },
+            {
+              "titulo": "Geografías del silencio y la memoria en \"Cosas pequeñas como esas\", de Claire Keegan",
+              "autores": ["Nin, María Cristina (Instituto de Geografía FCH-UNLPam)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 6, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "El cuerpo en el espacio: experiencias lúdicas y creativas para pensar los sistemas políticos desde la vida cotidiana",
+              "autores": ["Siskindovich, Julieta Valentina (Dpto. de Geografía FFyH-UNC)"]
+            },
+            {
+              "titulo": "Aprender jugando: una experiencia educativa para problematizar la deuda en territorios dependientes",
+              "autores": ["Dagnino Contini, Alida", "Matteucci, Lucía (UNCo; UNICEN-UNLP)"]
+            },
+            {
+              "titulo": "Territorio, memoria y pervivencia: aportes del trabajo de campo al estudio de prácticas agrícolas andinas prehispánicas en El Pichao, Tucumán",
+              "autores": ["Galindez, Exequiel Alejandro (IRES-CONICET / IES Gobernador José Cubas)"]
+            },
+            {
+              "titulo": "La salida de campo como experiencia didáctica, sensorial y espacial para abordar la Geografía",
+              "autores": ["Haidar Martínez, José Julián (Dpto. de Geografía FFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 30,
+      "titulo": "Izquierdas y memorias sociales de los setenta argentinos. Reflexiones a 50 años del inicio de la última dictadura cívico- militar",
+      "coordinacion": [
+        "Inchauseppe, Leandro (CIFFyH, FFyH, FCS / UNC)",
+        "González, Juan Ignacio (CIFFyH, CEA-FCS-UNC)",
+        "Oneto, Luciano Omar (CEA-FCS, FFyH-UNC, CeDInCI-CONICET)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula Magna, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "Palabras incendiarias: notas sobre la revista Reconstruir (1959–1976)",
+              "autores": ["Lepka, Vanesa (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Tiempo y política en una etnografía sobre insilios",
+              "autores": ["Clerico, M. Constanza (FFyH, UNC)"]
+            },
+            {
+              "titulo": "La revista Liberación por la Patria Socialista, del \"triunfo del pueblo\" a \"otra vez la resistencia\"",
+              "autores": ["Servetto, Alicia (FCC / CEA-FCS, UNC)"]
+            },
+            {
+              "titulo": "Libros anarquistas en el mundo bipolar. Un recorrido por las colecciones de la editorial \"Proyección\" (1961-1976)",
+              "autores": ["Oneto, Luciano Omar (CEA-FCS, FFyH-UNC, CeDInCI-CONICET)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula magna, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "A 50 años del golpe, ¿cómo se conservaron la memoria y la materialidad anarquista en Córdoba desde 1976? Notas sobre la Biblioteca Anarquista Hipólito Ripa",
+              "autores": ["Colectivo Biblioteca Anarquista de Córdoba \"Hipólito Ripa\""]
+            },
+            {
+              "titulo": "Las izquierdas y el Movimiento de Derechos Humanos: una aproximación a sus articulaciones en la postdictadura en Córdoba (1985-1990)",
+              "autores": ["González Amaya, M. Rocío (SeCyT / CIFFyH, UNC)"]
+            },
+            {
+              "titulo": "Mujeres, participación política y represión en los sesenta y setenta. Lecturas en clave transnacional",
+              "autores": ["Noguera, Ana Laura (CEA-FCS / FCC, UNC)"]
+            },
+            {
+              "titulo": "\"Por cada extranjero que pise el país para gozar del fútbol, existe un argentino desaparecido\". El PRT en el exilio y el Mundial 78",
+              "autores": ["Inchauseppe, Leandro (CIFFyH / FCS, UNC)"]
+            },
+            {
+              "titulo": "Los cristianos revolucionarios en dos publicaciones cordobesas (1969-1971)",
+              "autores": ["González, Juan Ignacio (CIFFyH / CEA-FCS, UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 31,
+      "titulo": "Praxis educativas y procesos de formación: reflexiones y experiencias territoriales para pensar las prácticas y relaciones que traman el mundo en común",
+      "coordinacion": [
+        "Monge, Julia (CIFFyH, UNC)",
+        "Romero, Flavia (CIFFyH, UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 10, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Habitar la tensión: alfabetización, vínculos y extensión universitaria en contextos de desigualdad",
+              "autores": ["Canosa, Manuel", "Falco, Gabriela", "Ravassolo, Ana Paula", "Roattino, Valentina", "Voloj, David (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Narrar desde el territorio: tiempo, experiencia y autoría en la extensión universitaria crítica",
+              "autores": ["Céspedes, Rocío Estefanía", "Machado, Cinthia Yanina", "Martos, Facundo", "Suárez Vieyra, Carolina Emilse (FFyH, UNC; FA, UNC)"]
+            },
+            {
+              "titulo": "El danzar en las infancias. Un estudio en escuelas primarias de Córdoba capital",
+              "autores": ["Echaniz, Karen Andrea (FA, UNC)"]
+            },
+            {
+              "titulo": "Organizar lo posible: prácticas docentes y construcción de lo común en contextos educativos tensionados",
+              "autores": ["Elía, María Belén (CEA, UNC; UCC)"]
+            },
+            {
+              "titulo": "Sostener la escucha: reflexiones sobre una experiencia extensionista en la escuela secundaria en Córdoba, Argentina",
+              "autores": ["Pino Villar, Manuela (CONICET / CIFFyH–UNC)"]
+            },
+            {
+              "titulo": "\"¿Quién acompaña a quién?\" Una indagación etnográfica sobre el \"venir a la universidad\" desde la semilibertad en el Programa Universitario en la Cárcel (PUC–FFyH–UNC)",
+              "autores": ["Bergel, Camila (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Praxis educativas y formación crítica en clave extensionista. Reflexiones y experiencias sobre la construcción de la racionalidad práctica en la cárcel",
+              "autores": ["Monge, Julia (CIFFyH, UNC)"]
+            },
+            {
+              "titulo": "El Taller de Cartas como dispositivo de narración en sentido arendtiano",
+              "autores": ["Rusca, Carolina (FCS, UNC)"]
+            },
+            {
+              "titulo": "Indagaciones y reflexiones en torno a la formación docente y la práctica filosófica en la escuela secundaria. Filosofía crítica vs. TikTok",
+              "autores": ["Gorosito, Amiel Marcelo (CIFFyH, UNC)"]
+            },
+            {
+              "titulo": "¿Enseñar filosofía es enseñar a vivir? Acotaciones sobre un tópico problemático",
+              "autores": ["Greco, Giuseppe (CIFFyH, UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 10, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Extensión universitaria y formación crítica: sentidos construidos por lxs estudiantes",
+              "autores": ["Altamiranda, Tomás (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Entre el aula y el territorio: la curricularización de la extensión como proceso formativo situado en la Escuela de Archivología (FFyH- UNC)",
+              "autores": ["Brunero, Sofía (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Praxis educativa y curricularización de la extensión: reflexiones desde las experiencias de la FFyH y la FA",
+              "autores": ["Gallici, Luca (FFyH, UNC)"]
+            },
+            {
+              "titulo": "La curricularización de la extensión en Odontopediatría A: una praxis para la formación ética y el compromiso con lo común",
+              "autores": ["Quintana, Sandra Viviana (FO, UNC)"]
+            },
+            {
+              "titulo": "La extensión universitaria en la formación de pedagogxs: construcción de saberes en el encuentro entre universidad y territorio",
+              "autores": ["Rodríguez Castro, Agustina", "Sosa Molina, Juana (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Sujetos, saberes y territorios: procesos formativos en extensión universitaria desde una perspectiva socioantropológica",
+              "autores": ["Romero, Flavia (CIFFyH, UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Viernes 24",
+          "horario": "16:00-18:00",
+          "lugar": "Aula 10, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Poder-saber la educación ambiental",
+              "autores": ["Arnaudо, Florencia (CONICET- CIT Rafaela)"]
+            },
+            {
+              "titulo": "Futuros posibles: desafíos y posibilidades de la educación intercultural y la transdisciplina",
+              "autores": ["Becerra-Lubies, Rukmini", "Ortiz Rocío (UC de Chile)"]
+            },
+            {
+              "titulo": "Educación Ambiental Integral. Estrategias de implementación y experiencias situadas en la provincia de Santa Fe",
+              "autores": ["Bufarini, Mariel (UNRaf CONICET)", "De Ponti, Eugenia (UNRaf CONICET)", "Vicentini, Antonella (UNRaf)"]
+            },
+            {
+              "titulo": "Educación técnico profesional y sustentabilidad. Los objetivos de desarrollo sostenible de la agenda 2030 y la educación ambiental en la trama de la transformación curricular de la provincia de Córdoba",
+              "autores": ["Carballo, Lucero María (UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 32,
+      "titulo": "Lo actual, lo público y lo singular del sexo: conversaciones en torno a las sexualidades y los erotismos",
+      "coordinacion": [
+        "Bianciotti, María Celeste (Depto. de Antropología; CIFFyH, FFyH, UNC)",
+        "Mattio, Eduardo (CIFFyH, FFyH, UNC)",
+        "Méndez Tapia, Manuel (CAS, FFyL, BUAP)",
+        "Scarpino, Pascual (IPSIS, FCS, UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 11, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Hablar de sexo con activistas: apuestas y desafíos",
+              "autores": ["Puche, Ivana Soledad (FemGeS, CIFFyH, FFyH / Facultad de Psicología)"]
+            },
+            {
+              "titulo": "Arqueología de placeres y relatos etnográficos sobre coreografías del deseo homoerótico",
+              "autores": ["Méndez Tapia, Manuel (CAS, FFyL, BUAP)"]
+            },
+            {
+              "titulo": "Trabajo sexual, mercado sexual y subjetivación: una etnografía en la ciudad de Córdoba",
+              "autores": ["Caminos, Ana Eugenia (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Ser corajuda. Reflexiones sobre estrategias, habilidades y redes de sociabilidad en el mercado erótico virtual desde Córdoba capital",
+              "autores": ["Argüello Irusta, Regina Lorea (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Mercado, feminismos, placer y nuevos mandatos para las feminidades heterocisexuales",
+              "autores": ["Bianciotti, María Celeste (Depto. de Antropología y CIFFyH, FFyH, UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 11, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Pedagogías para el placer y la optimización del sí: feminismos, erotismos y mercado sexual",
+              "autores": ["Cejas, María Emilia (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Vicisitudes de las sexualidades y sus vínculos con el conocimiento en prácticas de la enseñanza",
+              "autores": ["Bellone Cecchin, María Eugenia", "Ortúzar, Silvia", "Zamboni, Micaela (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Cómo ser marica. Manifiesto para una subjetivación sexodisidente",
+              "autores": ["Mattio, Eduardo", "Scarpino, Pascual (FemGeS, CIFFyH, FFyH, UNC; IPSIS, FCS, UNC)"]
+            },
+            {
+              "titulo": "El placer de la escritura. Interrupciones eróticas al momento de escribir sobre el sexo",
+              "autores": ["Márquez Zárate, Emilio Eduardo (CAS, FFyL, BUAP)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 33,
+      "titulo": "Territorios pedagógicos y subjetividades. Dimensiones epistémico-políticas críticas: descoloniales, feministas, interseccionales, queer/cuir, ambientalistas, de los sures",
+      "coordinacion": [
+        "Britos Castro, Ana (CIFFyH-UNC; FES-UPC)",
+        "Enrico, Juliana (CONICET-CEA FCS UNC-FFyH UNC)",
+        "Schejter, Mariano (FCS-UNC, FES-UPC)",
+        "de la Vega Viale, Mariana (FFyH-UNC)",
+        "Lario, Sandra (FFyH-UNC; Colectivo de Educadores desde el Sur)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 6, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Racismo estructural, amefricanidad, feminismo descolonial y pedagogía cimarrona: aportes para la Pedagogía Social y la Educación Social Latinoamericana",
+              "autores": ["De Andrade, Adriana Kelly (FES-UPC)"]
+            },
+            {
+              "titulo": "Producir lo común para reproducir la vida: un compromiso para la Pedagogía Social Latinoamericana",
+              "autores": ["Aires Ficarra, Noelia Valentina (UPC)"]
+            },
+            {
+              "titulo": "Cuerpos entre cuerpos, pieles entre pieles. Conversaciones en torno a una pedagogía social latinoamericana",
+              "autores": ["Britos Castro, Ana (FES-UPC / CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Territorios comunes entre lenguas sin fronteras: epistemologías feministas, políticas, pedagogías y poéticas queer- cuir de los sures del mundo",
+              "autores": ["Enrico, Juliana (CONICET-CEA FCS-FFyH UNC)"]
+            },
+            {
+              "titulo": "Espacios de frontera. La dimensión crítica y epistémico-política de la escritura",
+              "autores": ["Abril, Francisco Manuel (FES-UPC; FCS-UNC)"]
+            },
+            {
+              "titulo": "Leer y escribir para decir el mundo: reflexiones críticas sobre la alfabetización",
+              "autores": ["Arbelo, Belén (UPC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 6, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Son pájaros de la noche que oímos cantar y nunca vemos. El trabajo socio-comunitario y la organización de la economía popular como posibles territorios pedagógicos",
+              "autores": ["Schejter, Mariano Román (FES-UPC / FCS-UNC)"]
+            },
+            {
+              "titulo": "La Red Compañera y las pedagogías feministas del cuidado en el acompañamiento al aborto",
+              "autores": ["Drovetta, Raquel Irene (CONFINES-CONICET-UNVM)"]
+            },
+            {
+              "titulo": "Cuerpo-monte, devastación y afectividad ambiental: ¿qué tienen en común en nuestros territorios de los sures un árbol, un bosque, una zona roja, una trava, nuestras lenguas, el sexo, el brillo en los ojos?",
+              "autores": ["Enrico, Juliana (CONICET-CEA FCS-FFyH UNC)"]
+            },
+            {
+              "titulo": "Pedagogías de invención: aprender a defendernos de la crueldad",
+              "autores": ["de la Vega Viale, Mariana (FFyH-UNC)"]
+            },
+            {
+              "titulo": "El arte popular como territorio pedagógico descolonial: subjetividades otras frente a la distinción de clase y la colonialidad estética moderna",
+              "autores": ["Herrero, Patricia (Facultad de Artes, UNC)"]
+            },
+            {
+              "titulo": "Subjetividades en el encierro, una mirada interseccional",
+              "autores": ["Bassa, Daniela (UNLPam)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 6, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Pedagogía Social Latinoamericana, geopedagogías y formación profesional: aportes para pensar territorios pedagógicos desde los sures",
+              "autores": ["Di Pietro, Mariana (UPC)"]
+            },
+            {
+              "titulo": "Formación y trabajo docente frente al neoextractivismo: sentidos en torno a las nociones de cuerpo-territorio, educación, condiciones de enseñanza y aprendizaje",
+              "autores": ["Lario, Sandra Valeria (FFyH-CEA FCS UNC)"]
+            },
+            {
+              "titulo": "Entre el agotamiento contemporáneo y la potencia de lo inagotable: apuntes docentes desde feminismos y pedagogías de los sures",
+              "autores": ["Flores Mutigilengo, Jennifer Melisa (ECE, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Cartografías de la memoria y geopedagogías en y desde los sures: aportes para una Pedagogía Social en clave latinoamericana",
+              "autores": ["Muñoz, Julieta (FES-UPC)"]
+            },
+            {
+              "titulo": "Pedagogía Social situada, geopedagogías y prácticas de cuidado: experiencias de trabajo con Residencias Convivenciales de Córdoba",
+              "autores": ["Medinilla, María Eugenia (FES-UPC)"]
+            },
+            {
+              "titulo": "Mapear los territorios desde la pedagogía social y la construcción de saberes comunitarios",
+              "autores": ["Zabala, Verónica Karina (FES-UPC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 34,
+      "titulo": "Archivo, afectos y temporalidad: una aproximación feminista",
+      "coordinacion": [
+        "Marguch, Francisco (FFyH, UNC)",
+        "Moretti Basso, Ianina (FFyH y FCS, UNC)",
+        "Dahbar, María Victoria (FCC y FFyH, UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 10, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "¿Qué es una emoción?_Enter",
+              "autores": ["Gelber, Federico (UNTREF)"]
+            },
+            {
+              "titulo": "Ansiedad epistemológica y existencia emocional",
+              "autores": ["Song, Emma (FFyH)"]
+            },
+            {
+              "titulo": "El archivo posthumano simbiogenético en Ana Mendieta: la performance como instauración de una ecología con otros- que-humanos",
+              "autores": ["Siac, Tomás (CIFyH y LAIIAC, CUNY)"]
+            },
+            {
+              "titulo": "Con-fabulaciones poéticas del archivo: entre genealogías especulativas de la lengua y escuchas oníricas afrofuturistas",
+              "autores": ["Estévez Ballestero, Melania Ayelén (CIFyH-CONICET)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 10, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Archivos de malestar. redes sociales, desastre, desafecto",
+              "autores": ["Prati, Renata (UBA-CONICET)"]
+            },
+            {
+              "titulo": "Cisheteronormatividad y salud: temporalidades trans frente al orden biomédico",
+              "autores": ["Reyes Soriano, Ana Carla (BUAP)"]
+            },
+            {
+              "titulo": "Polifonías sexo-amorosas: teorías, prácticas y revoluciones posibles en las modalidades vinculares",
+              "autores": ["Fernández Zelarayán, Lucía (CEA, FCS, UNC)"]
+            },
+            {
+              "titulo": "A través de los ojos de Marjane: notas sobre la temporalidad del exilio en \"Persépolis\"",
+              "autores": ["Hilas, Sasha (IDH-CONICET, FFyH)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 10 Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Frecuencias azules: apuntes sobre una correspondencia epistolar",
+              "autores": ["Boero, Soledad", "Vaggione, Alicia (FFyH, UNC)"]
+            },
+            {
+              "titulo": "\"Boi neon\": afectos y texturas de lo real",
+              "autores": ["Marguch, Francisco (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Comunidades de cuidado y poéticas de la atención: sobre \"La maravillosa transformación de las orugas\", de Sibylla Merian",
+              "autores": ["Caleta, Lucía (UNGS, UNA)"]
+            },
+            {
+              "titulo": "\"Mi hijo el dotor\": migración y promesa de futuro en América Latina. Una lectura comparativa entre \"Martín Rivas\", de Alberto Blest Gana, y \"Sistema nervioso\", de Lina Meruane",
+              "autores": ["Molina, Constanza (Brown University)"]
+            },
+            {
+              "titulo": "Una búsqueda por los márgenes en blanco: un acercamiento a \"Lanalwe\", de Ángeles Donoso Macaya",
+              "autores": ["Devesa, Catalina (FFyH)"]
+            },
+            {
+              "titulo": "Enfrentar la pandemia del sida siendo gay a finales del siglo XX en México",
+              "autores": ["Liszt, Mauricio (BUAP)"]
+            },
+            {
+              "titulo": "Todo revuelto. Imaginación material en un archivo a la espera",
+              "autores": ["Moretti Basso, Ianina (FFyH y FCS)"]
+            },
+            {
+              "titulo": "El eco de los espectros: archivo y temporalidades queer en Lemebel y Monsiváis",
+              "autores": ["Suárez, Maximiliano (BUAP)"]
+            },
+            {
+              "titulo": "El cuerpo como archivo: afectos y materialidades en la obra de Claudia Rodríguez",
+              "autores": ["Guggia, Agustina (CONICET, UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 35,
+      "titulo": "Formas estético-políticas de lo/s común/es como modos de hacer memorias feministas y transfeministas",
+      "coordinacion": [
+        "Vega, María Angélica (CIFFyH–FFyH–UNC)",
+        "Del Prato, María Paula (CIFFyH–FFyH–UNC)",
+        "Rauber, Romina Victoria (CIFFyH–FFyH–UNC)",
+        "Menoyo, Sofía (CIFFyH–FA–UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 11, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "\"Lo que no nos faltan son sueños...\". Una lectura sobre las producciones estético-políticas en el contexto de las marchas en Argentina. Laguna, Palmeiro y la Mafia Marika: archivos, corpus y fantasía como espacios de construcción epistemológica",
+              "autores": ["Zaballo Dapuez, Guadalupe (FFyH–SECyT–UNC)"]
+            },
+            {
+              "titulo": "Cuerpos mutantes y desobedientes: una figuración transfeminista del sur para leer \"Ciencia ficción travesti\", de Claudia Rodríguez",
+              "autores": ["Goldraij, Valentina (FFyH–SECyT–Becaria FemGeS)"]
+            },
+            {
+              "titulo": "\"Primavera Latinoamericana\" y artivismos feministas en la gráfica subversiva de Chile (2019–2020)",
+              "autores": ["de la Precilla, Fabiola C. (FA–UNC)"]
+            },
+            {
+              "titulo": "Cuerpos insurgentes y archivos de la carne: el body horror en \"La sustancia\" y \"La hermanastra fea\"",
+              "autores": ["Herrero Pagura, Brenda Isabel (FFyH–SECyT–UNC)"]
+            },
+            {
+              "titulo": "Trayectorias escolares: transversalizando ESI y ensayando accesibilidad",
+              "autores": ["Alarcón, Alicia Susana (FFyH–SECyT–UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 11, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Hacia un registro sensible de las redes afectivas, memorias y estrategias de reparación de la disidencia sexo-genérica en las calles de Córdoba",
+              "autores": ["Bit Chakoch, Ana Lucía (FFyH–SECyT–UNC)"]
+            },
+            {
+              "titulo": "La problemática del sentimentalismo como forma estético-política de lo común",
+              "autores": ["Rauber, Romina Victoria (FFyH–SECyT–UNC)"]
+            },
+            {
+              "titulo": "Patriarcado, travestismo y maternidad. El caso de \"El lugar sin límites\", de José Donoso",
+              "autores": ["Mariotta, Jesica Soledad (UNVM-IAPCH)"]
+            },
+            {
+              "titulo": "Tecnologías, violencias e imaginaciones: ciencia ficción latinoamericana contemporánea desde una perspectiva feminista situada",
+              "autores": ["Farias Kunz, María Cielo (FFyH–SECyT–UNC)"]
+            },
+            {
+              "titulo": "Contra-públicos en la era de la publicidad: materiales estéticos y críticos del sur problematizados desde sus condiciones de recepción",
+              "autores": ["Del Prato, María Paula (FFyH–FAD–UNC–UPC–CIFFyH)"]
+            },
+            {
+              "titulo": "El ensayo transfeminista como modo de hacer teoría impura",
+              "autores": ["Vega, María Angélica (FFyH-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Repertorios afectivos y visualidades como estrategias estético-políticas en la intervención \"Fugadas\" del 24 de marzo de 2026",
+              "autores": ["Menoyo, Sofía Gabriela (CEPIA-FA-FemGeS-CIFFyH-FFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 36,
+      "titulo": "¿Qué hacen las imágenes? Discusiones metodológicas y epistemológicas sobre su abordaje en las Ciencias Sociales y Humanas",
+      "coordinacion": [
+        "Girardi Callafa, Vicente (CONICET, IECET, CIFFyH, UBA)",
+        "Ricci, Carolina (CIFFyH, FFyH, UNC / IG–FFyL–UBA)",
+        "Ortiz Narvaja, Macarena (CONICET, UNC, IECET, FCC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 13, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "El estatus epistemológico de la imagen en el conocimiento",
+              "autores": ["Hernández, Emilce", "Quijano, Héctor (FH-UNCA)"]
+            },
+            {
+              "titulo": "La vigilia del archivo. Reflexiones teórico–metodológicas sobre el trabajo con fotografías",
+              "autores": ["Ricci, Carolina", "Boito, Eugenia", "Maizón, Sofia (CIFFyH, FFyH, UNC / IG–FFyL–UBA; IECET, CONICET y UNC; Depto. de Cine y Artes Audiovisuales, FA–UNC / AHMC)"]
+            },
+            {
+              "titulo": "Imágenes para construir una posible crítica al realismo capitalista",
+              "autores": ["Salguero Myers, Katrina", "Delgado, Florencia (IECET-CONICET / FCE, FCS, FCC-UNC; IECET-CONICET y UNC / IAPCS-UNVM)"]
+            },
+            {
+              "titulo": "¿Cómo representar la extensión territorial en los planos cartográficos del Instituto Geográfico Militar?",
+              "autores": ["Mazzitelli Mastricchio, Malena (CONICET-HiTePAC-UNLP / IGeo-UBA)"]
+            },
+            {
+              "titulo": "Una perspectiva temporal en el análisis de la cultura visual urbana a partir de la Inteligencia Artificial Generativa",
+              "autores": ["Corzo, Leonardo (IECET-CONICET-UNC)"]
+            },
+            {
+              "titulo": "La plataformización de la experiencia educativa: imagen técnica, interfaces y procesos de individuación",
+              "autores": ["Mema, Ana Paula (UNCA)"]
+            },
+            {
+              "titulo": "Imágenes e imaginación. Reconstrucción de iconografía en la tumba de Amenmose",
+              "autores": ["Romero, Victoria", "Yomaha, Silvana (IDACOR, FFyH, UNC; CIFFyH, FFyH, UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 13, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Imágenes y producción del espacio: un abordaje crítico sobre la \"revalorización\" de un sector céntrico de Córdoba",
+              "autores": ["Ortiz Narvaja, Macarena (IECET-CONICET-UNC)"]
+            },
+            {
+              "titulo": "La ciudad renderizada",
+              "autores": ["Girardi Callafa, Pedro Vicente (IECET-CONICET-UNC)"]
+            },
+            {
+              "titulo": "La memoria visual del Cordobazo. Imágenes y sentido",
+              "autores": ["García, Diego (PHAC-IDACOR / FFyH-FCS-UNC)"]
+            },
+            {
+              "titulo": "Pensar las imágenes como grafías del afuera. Cuando la felicidad no es sino un suave deslizar de remos en el agua",
+              "autores": ["Núñez, Andrés (Instituto de Geografía, PUC Chile / CONICET)"]
+            },
+            {
+              "titulo": "Imaginarios geográficos y prácticas de construcción del territorio provincial de Córdoba (1870-1920): el uso de imágenes en la enseñanza de la geografía",
+              "autores": ["Cabana, Noelia", "González Tejeda, Paula (Depto. de Geografía, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Imágenes operativas, imágenes estéticas: la constitución de paisajes de fronteras a través del diálogo entre lenguajes visuales",
+              "autores": ["Hollman, Verónica", "Zusman, Perla (IGeo-FFyL-UBA-CONICET)"]
+            },
+            {
+              "titulo": "¿Cuál es la imagen de la democracia? Estudio de caso de la obra \"IMAGINACIÓN: escrituras visuales, afectos y participación en el espacio-digital y el espacio-territorio\"",
+              "autores": ["Pérez, Carlos", "Russo, Victoria (UPC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 37,
+      "titulo": "¿Dónde y cómo se enseña antropología? Experiencias situadas en contextos diversos",
+      "coordinacion": [
+        "Liarte Tiloca, Agustín (FP, FFyH, CIFFyH, UNC)",
+        "Bracaccini Acevedo, María (Museo de Antropología–IS Zarela Moyano de Toledo)",
+        "Romero, Santiago Manuel (CIFFyH–IES S. Bolívar)",
+        "Brollo, María Daniela (CIFFyH–IS C. Leguizamón / IES S. Bolívar)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 1, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Ser docente y antropóloga en una escuela secundaria técnica: aportes de la mirada antropológica a la formación ciudadana y ocupacional",
+              "autores": ["Cejas, María Emilia (CIFFyH–FFyH–UNC)"]
+            },
+            {
+              "titulo": "La Antropología en nuestras aulas, ¿enseñanza y desafío?",
+              "autores": ["Garro Paviolo, Tayül (FFyH–UNC)"]
+            },
+            {
+              "titulo": "¿Qué antropología se enseña en la formación docente inicial y primaria de la provincia de Córdoba?",
+              "autores": ["Reches Peressotti, Ana Laura (CIFFyH–UNC)"]
+            },
+            {
+              "titulo": "Cuerpos puestos en texto: experiencia situada de antropología y teatro para una intervención reflexiva en el profesorado de Lengua y Literatura",
+              "autores": ["Vocos, Ignacio (IES S. Bolívar)"]
+            },
+            {
+              "titulo": "Desnaturalizar el sentido común: desafíos pedagógicos de la enseñanza de la antropología en la escuela secundaria",
+              "autores": ["Gelerstein, Juliana (CIECS-CONICET-UNC)"]
+            },
+            {
+              "titulo": "¿Qué hace un muchacho como yo, frente a una materia como esta?",
+              "autores": ["Moyano, Fernando (IES S. Bolívar)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 1, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La transmisión de la antropología en la formación docente: herramientas conceptuales y etnográficas en el seminario \"Problemáticas socioantropológicas en educación\"",
+              "autores": ["Bracaccini Acevedo, María", "Brollo, María Daniela", "Romero, Santiago Manuel (IS Zarela Moyano de Toledo; IS C. Leguizamón; IES S. Bolívar)"]
+            },
+            {
+              "titulo": "Antropología: si te he visto, no me acuerdo",
+              "autores": ["Chervin, Mariela (UPC)"]
+            },
+            {
+              "titulo": "Enseñar antropología en la Facultad de Psicología: desafíos, estrategias y apuestas",
+              "autores": ["Buffa, Silvina", "Rinaudo, Gustavo", "Previtali, María Elena", "Liarte Tiloca, Agustín", "Generoso, Karina", "Castro, Marcela", "Arnao, Magdalena", "Luna, Marcos", "Reusa, Victoria (FP-UNC)"]
+            },
+            {
+              "titulo": "Karaokio y \"pedagogías Sistema Nervioso\" en la enseñanza de teorías antropológicas",
+              "autores": ["Blázquez, Gustavo (CIFFyH-CONICET)"]
+            },
+            {
+              "titulo": "Usos de la Inteligencia Artificial Generativa en la",
+              "autores": ["Bussi, Mariano", "Molinero Rosa, Rafael", "Bravo, Ignacio", "Eciolaza, Lucía", "Allasia, Valentina (FFyH–UNC)"]
+            },
+            {
+              "titulo": "Antropología y arte",
+              "autores": ["Villafañe, Jazmín (IES S. Bolívar)"]
+            },
+            {
+              "titulo": "¿Mirar dónde, filmar qué cosa? Pliegues, novedad y tensiones de la Antropología Audiovisual",
+              "autores": ["López, María Florencia (FA-UNC)"]
+            },
+            {
+              "titulo": "Etnografía en las esquinas de la ciudad de Córdoba. Mujeres trans y educación secundaria",
+              "autores": ["Gutierrez, Oscar (IES S. Bolívar)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 1, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "¿Para qué enseñar antropología en el siglo XXI?",
+              "autores": ["Bajo, Juan Manuel (FCEFyN-UNC)"]
+            },
+            {
+              "titulo": "La entrevista etnográfica como herramienta en la formación de comunicadores. Reflexiones desde la cátedra de Antropología Socio-cultural de la FCC-UNC",
+              "autores": ["Cejas, Noelia", "Perissinotti, María Victoria (FCC-UNC)"]
+            },
+            {
+              "titulo": "Reflexiones en torno al aporte antropológico en la práctica docente: una experiencia situada",
+              "autores": ["Zapico, María Alejandra (UPC)"]
+            },
+            {
+              "titulo": "¿Por qué comemos lo que comemos? La enseñanza de la antropología alimentaria en la carrera de Licenciatura en Nutrición",
+              "autores": ["Mamondi, Verónica", "Ferrero, Victoria", "Frontalini, Ayelén", "Lucero, Nadia", "Magnotti, Natali", "Montenegro, Laura", "Monaldi, Lourdes (FCM-UNC)"]
+            },
+            {
+              "titulo": "La intervención arqueológica como espacio de aprendizaje situado: producción de conocimiento desde el trabajo de campo, Cruz del Eje, Argentina",
+              "autores": ["Rodríguez Oviedo, Melisa", "Brizuela, Camila", "Tulián, Juan Carlos", "Pereyra, Celeste", "Manzano García, Jessica", "Miranda, María Cristina", "Galván, Nicolás", "Da Peña, Gabriela", "Escudero Pacheco, Pilar", "Croce D'Errico, Dolores"]
+            },
+            {
+              "titulo": "Diálogos e intersecciones múltiples en el oficio de enseñar antropología en Trabajo Social",
+              "autores": ["Villegas Guzmán, Sabrina María", "Castro, Marcela", "Ríos, Lucía (FCS-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 38,
+      "titulo": "Tensiones y desafíos en la producción de conocimientos interdisciplinarios desde y en los territorios rurales",
+      "coordinacion": [
+        "Deon Favre, Joaquín Ulises (CIECS-CONICET-FFyH / UNC)",
+        "Galván, Gabriel Horacio (FCA-UNC-CONICET-IDH)",
+        "Funes, Mercedes Catalina (CIFFyH-FFyH-UNC)",
+        "Aichino, Gina Lucía (CIFFyH-FFyH-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 2, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Trabajo universitario en las ruralidades, experiencias formativas y construcción de políticas públicas",
+              "autores": ["Cragnolino, Elisa (CIFFyH-FFyH-SECyT-UNC)"]
+            },
+            {
+              "titulo": "\"La vida campesina, otra forma de aprender\". Experiencias de investigación, extensión y formación creativas y transformadoras desde el MoCaSE-VC",
+              "autores": ["Mamma, Lucio", "Sanguinetti, Consuelo (FFyH-UNC)"]
+            },
+            {
+              "titulo": "Escuelas rurales y crisis socioambiental: aprendizajes desde procesos de fotointervención en el sur de Chile",
+              "autores": ["Reyes, María Isabel", "Becerra-Lubies, Rukmini", "Ruete, Gabriel", "Quiroga, Javiera (PUC de Valparaíso y PUC de Chile, Campus Villarrica)"]
+            },
+            {
+              "titulo": "Trabajo de campo desde, con y en los territorios: reflexiones a partir de la construcción colectiva de mapas",
+              "autores": ["Aichino, Gina Lucía (CIFFyH-FFyH-SECyT-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 2, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Procesos de participación en políticas de conservación ambiental en el arco noroeste de la provincia de Córdoba: un análisis interdisciplinario",
+              "autores": ["Quinteros, Diana Marina", "Funes, Mercedes Catalina (CIFFyH-UNC; CIFFyH-FFyH-UNC)"]
+            },
+            {
+              "titulo": "Estrategias comunitarias para la protección de la Reserva Natural, Hídrica, Cultural y Recreativa de Villa Allende: la experiencia del Observatorio Transdisciplinario Ambiental Supaj Ñuñu",
+              "autores": ["Sozzi, Cecilia", "Cacciaguerra, Agostina Inés (Observatorio Transdisciplinario Ambiental Supaj Ñuñu-FCC-UNC)"]
+            },
+            {
+              "titulo": "Procesos de des-reterritorialización en La Rancherita y Las Cascadas, Córdoba (2024)",
+              "autores": ["Bustos Mantovani, Melina", "Díaz Nocera, Anker", "Letzen, Sara Mariel", "Tatián, Cristóbal (CIFFyH-FFyH-SECyT-UNC)"]
+            },
+            {
+              "titulo": "\"Ya nadie quiere sembrar, ahora todos quieren trabajar\". Estado, políticas públicas y turismo en pueblos del norte de Belén, Catamarca",
+              "autores": ["Pernasetti, Cecilia (FFyH-UNC / UNCA)"]
+            },
+            {
+              "titulo": "Irrigación y desarrollo: convergencias y diferencias entre la teoría y las perspectivas locales en la Provincia de Córdoba, Argentina",
+              "autores": ["Zacariaz, Iván (FCS-UNC)"]
+            },
+            {
+              "titulo": "Territorio en disputa: Santa Cruz ante el gran capital transnacional",
+              "autores": ["Andrade, Larry (UNPA-CONICET / CIT-SC)"]
+            },
+            {
+              "titulo": "Conservar las cuencas y la salud con agrotóxicos: éticas del cuidado, luchas por el agua y el monte en el extractivismo de las Sierras de Córdoba",
+              "autores": ["Balmaceda, Nadia Alexandra", "Deon Favre, Joaquín Ulises (FCM-UNC; CIECS- CONICET-FFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 39,
+      "titulo": "Didáctica de la Lengua y la Literatura: debates, problemáticas y nuevos desafíos en el marco de la consolidación del campo. Investigación, formación docente y producción didáctica",
+      "coordinacion": [
+        "Ortiz, María Florencia (CIFFyH–FFyH–UNC)",
+        "Alterman, Nora (CIFFyH–FFyH–UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 8, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La didáctica de géneros: para aprender a leer, a escribir y a realizar presentaciones orales en portugués en el ingreso a la universidad",
+              "autores": ["Ahumada, Zoraida (DIFA SAA-UNC)"]
+            },
+            {
+              "titulo": "El libro álbum en instituciones de salud mental como espacio de resistencia y subjetivación",
+              "autores": ["Ruatta, Verónica"]
+            },
+            {
+              "titulo": "Leer, un verbo en transición: de lectores a profesores",
+              "autores": ["Subtil, Carolina", "Reinaldi, Agostina (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "El aula como texto: análisis de la práctica como instancia de formación",
+              "autores": ["Vélez Maizon, Fiorela"]
+            },
+            {
+              "titulo": "Una propuesta didáctica con perspectiva de género para abordar la enseñanza de la lengua y la literatura: \"Ni calladitas ni bonitas\"",
+              "autores": ["Borgogno, Valeria"]
+            },
+            {
+              "titulo": "La nueva propuesta curricular provincial para Lengua y Literatura: un ejercicio de lectura en retrospectiva",
+              "autores": ["Alterman, Nora", "Ortiz, Florencia", "Giménez, Gustavo (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Literatura, sexualidad y escuela. Escándalos mediáticos, canon literario y Educación Sexual Integral en la escuela secundaria argentina (2013-2024)",
+              "autores": ["Boccardi, Facundo (CONICET-UPC / CEA-FCS-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 8, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La enseñanza de la gramática en la escuela como ágora",
+              "autores": ["Cacchiavillani, Clara", "Senia, Keila", "Supisiche, Patricia (FFyH, UNC)"]
+            },
+            {
+              "titulo": "El derecho a comprender",
+              "autores": ["Colautti, Gabriela"]
+            },
+            {
+              "titulo": "Contacto lingüístico y reinterpretación semántica: usos no normativos del gerundio en Santiago del Estero",
+              "autores": ["Ledesma Harón, Fadia (UNSE)"]
+            },
+            {
+              "titulo": "La enseñanza de la argumentación en la escuela secundaria: una propuesta de acompañamiento para docentes de lengua",
+              "autores": ["Stancatto, Candelaria (FCC-UNC)"]
+            },
+            {
+              "titulo": "Escritura de invención y narrativas transmedia: una propuesta didáctica situada para el Ciclo Orientado",
+              "autores": ["Herrera, M. Montserrat (FL, UNC)"]
+            },
+            {
+              "titulo": "Habitar la lectura y la escritura desde las prácticas del lenguaje: un recurso didáctico para el aula",
+              "autores": ["Lunad Rocha, M. Eugenia"]
+            },
+            {
+              "titulo": "¿Una posible didáctica de la lectura digital?",
+              "autores": ["Maina, Melisa (UNC-CONICET)"]
+            },
+            {
+              "titulo": "Teorías y práctica, formación continua y trabajo, incertidumbres y certezas: el complejo desafío de ser docentes autores/as del currículum mientras vamos andando",
+              "autores": ["Gazulla, Liliana"]
+            },
+            {
+              "titulo": "La invención literaria en primer ciclo de la escuela primaria: una propuesta de abordaje para el aula a través de talleres para la capacitación docente",
+              "autores": ["Carranza, María"]
+            },
+            {
+              "titulo": "Constelaciones liminales: la biblioteca escolar como espacio de resistencia y construcción comunitaria",
+              "autores": ["Taborda, Emilia"]
+            },
+            {
+              "titulo": "Leer para transformar: propuesta de talleres para potenciar la lectura en voz alta de Literatura en docentes de escuelas de nivel primario",
+              "autores": ["Correa, Verónica"]
+            },
+            {
+              "titulo": "Articulación entre Biblioteca Popular / Radio Comunitaria y Escuela. Revalorización de la propia oralidad: la palabra-voz de los jóvenes como promotores de cultura",
+              "autores": ["Costa Teves, Camila del Pilar"]
+            },
+            {
+              "titulo": "La enseñanza de la escritura como proceso en el marco de trayectorias heterogéneas en el secundario presencial de jóvenes y adultos",
+              "autores": ["Colafigli, Leticia (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "La era de la indiferencia: enseñar Español y Literatura desde las culturas juveniles y sus desafíos actuales",
+              "autores": ["Rodríguez Posadas, Beatriz"]
+            },
+            {
+              "titulo": "Trayectorias no lineales, escrituras posibles: una propuesta de enseñanza para el ingreso universitario de adultos con secundario incompleto",
+              "autores": ["Monzón, Macarena (UNSL)"]
+            },
+            {
+              "titulo": "Las representaciones de lo femenino en libros álbumes de Benjamin Lacombe y Cécile Roumiguière",
+              "autores": ["Carsillo, Laura (UNCa)"]
+            },
+            {
+              "titulo": "El lugar del saber ordinario en lengua y literatura en la escuela primaria",
+              "autores": ["Daveloza, Valeria (UNLP)"]
+            },
+            {
+              "titulo": "La formación docente como oficio reflexivo: entre los saberes teóricos, la práctica, la experiencia y los encuentros",
+              "autores": ["Sifón, Verónica", "González, Vanesa (UNLP)"]
+            },
+            {
+              "titulo": "Primeros pasos en el camino: una propuesta de articulación entre escuela y biblioteca",
+              "autores": ["Forgiarini, María Alejandra (CIFFyH, FFyH, UNC)"]
+            },
+            {
+              "titulo": "Progresiones de aprendizaje en las prácticas escolares de oralidad, lectura y escritura a lo largo del sistema educativo obligatorio",
+              "autores": ["Barone, Daiana", "Ocampo, Mariana (ISEP)"]
+            },
+            {
+              "titulo": "Azul la cordillera: formas de materializar las poéticas migrantes y originarias del territorio ancestral mapuche (Wallmapu) en el canon literario escolar de las escuelas primarias de la estepa neuquina",
+              "autores": ["Alaniz, Cecilia (FFyH–UNC, IFDI3–NS de Zapala, Neuquén)"]
+            },
+            {
+              "titulo": "Poética de los sentimientos. Hacia una escritura gozosa",
+              "autores": ["Czaky, Graciela (UNVM)"]
+            },
+            {
+              "titulo": "Espejismos desde Córdoba: talleres de escritura como dispositivos didácticos",
+              "autores": ["Rossi, Florencia"]
+            },
+            {
+              "titulo": "Poesía porque sí: diálogos, saberes y experiencias entre comunidades. Una apuesta a la interculturalidad",
+              "autores": ["Bartolomé, Olga", "Filippi, Elisa"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 40,
+      "titulo": "Economías, mundo del trabajo y reconversiones socio- productivas. Cambios y continuidades a 50 años de la última dictadura cívico-militar",
+      "coordinacion": [
+        "Almada, Julieta Ayelén (CIFFYH, FFyH y FCE-UNC)",
+        "Paz, Magali Luciana (CONICET-FTA-UPC / FFyH-UNC)",
+        "Reche, Federico Hernán (FFyH y FCS-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 3, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Control, implicación y calidad: la relación de la empresa ARCOR con su territorio",
+              "autores": ["Aranda, Nahuel Federico (IA, FCE, UNC)"]
+            },
+            {
+              "titulo": "Transformaciones territoriales productivas en el corredor logístico-industrial Córdoba-Pilar",
+              "autores": ["Arena Rosales, Florencia Rocío", "Sarti, Matías (LET-CIFFyH, UNC)"]
+            },
+            {
+              "titulo": "Tecnologías digitales, producción y territorio: una lectura desde la industria de Córdoba",
+              "autores": ["Buffalo, Luciana (LET-CIFFyH, UNC)"]
+            },
+            {
+              "titulo": "Industria 4.0 en Córdoba: reconfiguraciones productivas, del trabajo e implicancias territoriales pospandemia (2021–2026). Un estudio parcial sobre el entramado local",
+              "autores": ["Contestabile, Cecilia", "Paz, Rodrigo Javier (CIFFYH, UNC; LET y CIFFyH–FFyH, UNC)"]
+            },
+            {
+              "titulo": "Configuración territorial productiva de barrio Los Boulevares en la ciudad de Córdoba: una aproximación metodológica de análisis",
+              "autores": ["Arrotti, Camila", "Zapata, Manuel (LET-FFyH, UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 3, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "La inversión en el sector agropecuario. Primeras reflexiones en torno a la Agricultura de Precisión",
+              "autores": ["Buraschi, Santiago (IA-FCE, UNC)"]
+            },
+            {
+              "titulo": "La vitivinicultura en el Oeste cordobés. Ensayos, auge y regulación (1790–1944)",
+              "autores": ["Marietán, María del Carmen (UNCu, UNC)"]
+            },
+            {
+              "titulo": "O acordo da Teamlife com O'Globo durante a ditadura brasileira. Un abordaje desde los inicios de la conformación del grupo hacia la conformación de un gran multimedia",
+              "autores": ["Clementi, Juan (FFyH, UNC)"]
+            },
+            {
+              "titulo": "La desarticulación del ferrocarril en Cruz del Eje (Córdoba): su impacto en la producción local y el turismo (1958-1980)",
+              "autores": ["Paz, Magali Luciana (CONICET-FTA, UPC / FFyH, UNC)"]
+            },
+            {
+              "titulo": "Disciplinar para desindustrializar. transformaciones en el mercado de trabajo durante la última dictadura cívico-militar",
+              "autores": ["Veleizan, Enzo (FCS, UNC)"]
+            },
+            {
+              "titulo": "Comadres, una experiencia de organización del trabajo desde la economía popular",
+              "autores": ["Caballero, Julieta", "Urzagasti, Mónica (Escuela de Historia FFyH / FCS, UNC; Pankarita)"]
+            },
+            {
+              "titulo": "La sostenibilidad de la vida en disputa: un abordaje feminista e interseccional del trabajo docente y la crisis de cuidados en la Córdoba pospandemia",
+              "autores": ["Molina, Romina B. (CIFFyH–FFyH, UNC)"]
+            },
+            {
+              "titulo": "Nuevas tecnologías y metamorfosis capitalista. Un análisis de las incidencias de la tecnología de inteligencia artificial generativa",
+              "autores": ["Quattrini, Diego (FCS, UNC / IPCS, UNVM)"]
+            },
+            {
+              "titulo": "Construcción del oficio de trabajador en la seguridad privada de la ciudad de Córdoba. Un análisis antropológico",
+              "autores": ["Farriol, Débora Natividad (FFyH, UNC)"]
+            },
+            {
+              "titulo": "El Estado en cuestión: prácticas sindicales docentes y disputas por la construcción de lo público en Córdoba, Argentina",
+              "autores": ["Hrehorow, Gastón Emiliano (FFyH, UNC)"]
+            },
+            {
+              "titulo": "Construir lo común en tiempos de repliegues: las experiencias de las referentas socio-comunitarias del MTE Córdoba",
+              "autores": ["Piazzi Avila, Julia", "Torres, Florencia (FCS, UNC)"]
+            },
+            {
+              "titulo": "El funcionamiento del \"Potenciar Trabajo\" en comedores y merenderos de la ciudad de Córdoba en tiempos pandémicos (2020-2023)",
+              "autores": ["Falco, Gabriela", "Almada, Julieta (CIFFyH–FFyH, UNC; CIFFyH–FFyH y FCE, UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 41,
+      "titulo": "Creación, reproducción, repetición: arte y tecnología en la era algorítmica",
+      "coordinacion": [
+        "Pacella, Cecilia Angelina (FFyH-UNC)",
+        "Balzi, Carlos (FFyH-UNC)",
+        "Mattoni, Silvio (CONICET / FFyH-UNC)",
+        "Sandrone, Darío Rubén (FFyH-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Viernes 24",
+          "horario": "14:00-16:00",
+          "lugar": "Aula 5, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Entre el original y la copia: iteración y recursividad en prácticas artísticas contemporáneas",
+              "autores": ["Acha, Virginia (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "¿Son representaciones los reels?",
+              "autores": ["Garbino, Emilio (FFyH-UNC / UPC)"]
+            },
+            {
+              "titulo": "Ruedas aplastantes: William Blake contra la tiranía de la técnica",
+              "autores": ["Trucco, Marco Gabriel (FFyH-UNC)"]
+            },
+            {
+              "titulo": "La máquina de imágenes",
+              "autores": ["Mattoni, Silvio (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "Repetición y variación. La técnica del poema en \"Mamushkas\" (2024), de Roberta Iannamico",
+              "autores": ["Cagnolo, Virginia (CONICET / FFyH-UNC)"]
+            },
+            {
+              "titulo": "Fernanda Laguna y la tecnología doméstica. La contradicción como remanente revolucionario",
+              "autores": ["Robles, Mariana (UPC)"]
+            },
+            {
+              "titulo": "El arte de conversar",
+              "autores": ["Surghi, Carlos (IDH-CONICET-UNC)"]
+            },
+            {
+              "titulo": "El milagro del procedimiento. Creación, vida y novela en \"Las curas milagrosas del Doctor Aira\"",
+              "autores": ["Pacella, Cecilia (FFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 42,
+      "titulo": "Simposio 42",
+      "coordinacion": [],
+      "trabajos": []
+    },
+    {
+      "numero": 43,
+      "titulo": "Desigualdades urbanas y disputas por la apropiación del espacio",
+      "coordinacion": [
+        "Tanus Mafud, Emilio Carlos (CIFFyH, FFyH, UNC)",
+        "Romanutti, Virginia (IIFAP, FCS, UNC)",
+        "Pino Villar, Manuela (CONICET-CIFFyH, UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 9, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Ensambles sensoriales, temporalidades y prácticas en disputa: una etnografía sobre la materialidad del playón de Villa Forchieri (Uquillo, Córdoba)",
+              "autores": ["Isaguirres, Analía Guadalupe (CEA-Projecto Acotado PROA, CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "El color de la Docta. Desigualdades sociales, experiencias urbanas y procesos de racialización en la ciudad de Córdoba",
+              "autores": ["Druetta, Matías", "Pérez, María Sol (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Espacio urbano, desigualdad y juventudes: experiencias territoriales en el marco del Programa Parques Educativos Municipales de Córdoba",
+              "autores": ["Machuca, María Fernanda (Facultad de Psicología-UNC-IIPSI)"]
+            },
+            {
+              "titulo": "\"Hay que contagiarlo para otros lados de la ciudad, de la vida, del barrio\"",
+              "autores": ["Gaiero, Renata (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Procesos de \"barrialización\" de la situación de calle en Córdoba. Pensar más allá del centro",
+              "autores": ["Irusta, Franco David (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Reflexiones sobre \"Una crew es una familia\". El graffiti entre prácticas cotidianas y políticas públicas en Córdoba (Argentina)",
+              "autores": ["Mora Abichain, Lino (CIFFyH-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 5, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Promotores inmobiliarios y naturaleza neoliberales",
+              "autores": ["Blanc, Santiago Nicolás (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Cooperativa de vivienda, modelo de negocio y proyectos inmobiliarios. El caso de la Cooperativa Horizonte en la ciudad de Córdoba (Argentina)",
+              "autores": ["Capdevielle, Julieta", "Peralta, Gastón (CIFFyH-IDH/CONICET; Depto. de Geografía- FFyH)"]
+            },
+            {
+              "titulo": "Desigualdades socio- territoriales y mercado inmobiliario informal: una propuesta para el registro y monitoreo de las dinámicas de acceso a la vivienda en barrios populares de Córdoba",
+              "autores": ["Elorza, Ana Laura", "Monayar, Virginia (INVIHAB/CONICET)"]
+            },
+            {
+              "titulo": "Transformaciones institucionales de los convenios urbanísticos en la ciudad de Córdoba (2012-2025). Etapas y procedimientos",
+              "autores": ["Fernández, Leonardo (IDH/CONICET-UNC)"]
+            },
+            {
+              "titulo": "Productividades de los conflictos urbano-ambientales en la ciudad de Córdoba",
+              "autores": ["Echavarría, Corina", "Cinco, Daniela", "Cuel, Cecilia", "Romanutti, Virginia (IIFAP, FCS, FCC, IECET, Siglo 21)"]
+            },
+            {
+              "titulo": "Territorio e incidencia política: un análisis comparado de dos organizaciones socioambientales en Córdoba",
+              "autores": ["Mendoza, Luciana (FCS-UNC)"]
+            },
+            {
+              "titulo": "Zona de sacrificio y violencia lenta en el sudeste del periurbano cordobés",
+              "autores": ["Verde, Ismael (CIPeCo, SECyT FCC, UNC)"]
+            },
+            {
+              "titulo": "Cementerio de fetos humanos o las apropiaciones del espacio en una planta de gestión cloacal",
+              "autores": ["Attwood, Silvia (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Explorando la multiterritorialidad digital: una mirada geográfica a la identificación de señales débiles en la Ciudad Universitaria",
+              "autores": ["Seminara, Paola", "Martín, Fátima Anahí (Depto. de Geografía, UNC)"]
+            },
+            {
+              "titulo": "Resistencias migrantes en la Región de Tarapacá, Chile (2019-2026). Percepciones de lo fronterizo en el espacio público urbano del Área Metropolitana Iquique-Alto Hospicio",
+              "autores": ["Vidal Silva, Carlos (Universidad de Chile)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 44,
+      "titulo": "Ciencias sociales y humanas: crítica, saberes y emancipación",
+      "coordinacion": [
+        "Domínguez, Rosario (CIFFyH)",
+        "Argañaraz, Magalí (IDH)",
+        "Villoria Palavecino, Malena (IDH)",
+        "Faggiano, Nehuén (CIFFyH)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Miércoles 22",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 1, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "Crítica, incredulidad e inservidumbre voluntaria. Tres categorías para analizar las prácticas de la enseñanza de la Filosofía",
+              "autores": ["Andrade, Sergio", "Lerda, Verónica", "Santamarina, María Dolores (FFyH, UNC)"]
+            },
+            {
+              "titulo": "La utilidad de la enseñanza de la filosofía: Kant, Dewey y Arendt entre la democracia y el republicanismo",
+              "autores": ["Faggiano, Nehuén (CIFFyH)"]
+            },
+            {
+              "titulo": "Por una universidad que no eluda la crítica",
+              "autores": ["Araújo, Taís (FEUPS)"]
+            },
+            {
+              "titulo": "Filosofía, crítica y enseñanza frente al capitalismo académico contemporáneo",
+              "autores": ["Santillan, José", "Sgarlatta, Franco (FFyH)"]
+            },
+            {
+              "titulo": "El lugar de la crítica: enseñanza de la filosofía, democratización del pensamiento y defensa de la escuela pública",
+              "autores": ["San Pedro, Constanza", "Viano, Guillermo (CIFFyH, FFyH, UNC; CIFFyH)"]
+            },
+            {
+              "titulo": "Saberes de emancipación desde las ciencias humanas: presupuestos epistemológicos del pensamiento nacional",
+              "autores": ["Arrieta, Juan (CIFFyH)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Miércoles 22",
+          "horario": "15:00-19:00",
+          "lugar": "Aula 5, Pab.Venezuela",
+          "ponencias": [
+            {
+              "titulo": "El liderazgo de Claudia Sheinbaum frente a los movimientos populares: tensiones entre la gestión técnica, el extractivismo y la potencia de lo colectivo",
+              "autores": ["Tomassini, Juan José (FSOC, UBA)"]
+            },
+            {
+              "titulo": "Entre ancestrías y memorias: autopercepción de ancestría en lxs voluntarixs del nodo Centro, Programa de Referencia y Biobanco Genómico de la Población Argentina (PoblAr)",
+              "autores": ["Dapuez, Angela (FFyH, UNC)"]
+            },
+            {
+              "titulo": "La transversalidad disciplinar de las Humanidades ampliadas en la lectura topológica de archivos digitales de escritores",
+              "autores": ["Gómez, Susana María (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Ciencias sociales y Humanidades: investigaciones interdisciplinarias en torno a la digitalización de la justicia",
+              "autores": ["Sandrone, Darío", "Magallanes Udovicich, Mariana Loreta (FFyH-FCS; CONICET-FCS- CIECS)"]
+            },
+            {
+              "titulo": "Investigar la investigación: el rol de las tecnologías digitales en las investigaciones penales por denuncias de violencia de género",
+              "autores": ["Tassin Wallace, Catalina", "Bouvier, Hernán (CONICET-IDEJUS-UNC; CONICET-FFyH-FD- UNC)"]
+            },
+            {
+              "titulo": "Las humanidades bajo asedio, la nueva Enciclopedia y el fin de la teoría",
+              "autores": ["Balzi, Carlos (CIFFyH)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 45,
+      "titulo": "Sentidos y abordajes posibles con respecto al tema de la Muerte en las Humanidades y las Ciencia Sociales",
+      "coordinacion": [
+        "Picco Lambert, Ana Clara (UNRC-UNC-CIFFyH-SeCyT)",
+        "Collantes, Lucas Gabriel (FFyH-CIFFyH-UNC)",
+        "Moyano, Ana (FFyH-CIFFyH-UNC)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 6, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "¿La muerte tiene género, tiene nombre? Análisis del \"femicidio\" como fenómeno social argentino",
+              "autores": ["Jofre, Ana (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Intervenir la vida, gestionar la muerte: la obstinación terapéutica como expresión de una racionalidad tecnocientífica contemporánea",
+              "autores": ["Bustos, Silvia Graciela (CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "La muerte desde el campo pedagógico: una aproximación a sus recorridos como objeto de investigación",
+              "autores": ["Ecapil, Analís (FaHCE-UNLP-CONICET)"]
+            },
+            {
+              "titulo": "El destino póstumo de los huesos humanos",
+              "autores": ["Sánchez, Ana (Museo de Antropologías-UNC)"]
+            }
+          ]
+        },
+        {
+          "sesion": 2,
+          "dia": "Jueves 23",
+          "horario": "14:00-18:00",
+          "lugar": "Aula 6, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "La cultura material de la muerte: problemas teórico-metodológicos, nuevos enfoques y fuentes de investigación",
+              "autores": ["Picco Lambert, Ana Clara (CIFFyH-SeCyT-UNRC-UNC)"]
+            },
+            {
+              "titulo": "El control de la vida desde la escritura de la muerte: una lectura microhistórica de la visita canónica al Curato de El Alto (1783)",
+              "autores": ["Tua, Leandro (FHE-RAEMCyCS-UNCA-CEHLGR)"]
+            },
+            {
+              "titulo": "Morir en Villa María. Rituales funerarios según la creencia judía, desde fines del siglo XIX hasta 1970",
+              "autores": ["Carranza, Rosana (UNVM)"]
+            },
+            {
+              "titulo": "La construcción social de la muerte, la memoria y las emociones en el Cementerio Jesús Nazareno, 1880-1930 (Los Zorros, Córdoba)",
+              "autores": ["Nivello, Mariana (UNSAM-CEH)"]
+            },
+            {
+              "titulo": "Connotaciones sociales y simbólicas de la muerte en la élite cordobesa de la primera mitad del siglo XX: los panteones de Lucía Lanza Aliaga y la Familia Minetti",
+              "autores": ["Cano, Agustín Emmanuel", "Funes, Catalina Isabel (FFyH-UNC)"]
+            },
+            {
+              "titulo": "De lo innovador a lo tradicional: el cementerio de Los Chañaritos, Departamento Río Segundo, Córdoba",
+              "autores": ["Cerulli, Ricardo (Investigador independiente)"]
+            }
+          ]
+        },
+        {
+          "sesion": 3,
+          "dia": "Viernes 24",
+          "horario": "09:00-12:00",
+          "lugar": "Aula 6, Pab.España",
+          "ponencias": [
+            {
+              "titulo": "Escribir ante la muerte: últimas escrituras en los diarios de Katherine Mansfield y Alice James",
+              "autores": ["Moyano, Ana (FFyH-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "\"Hominis tota vita nihil aliud quam ad mortem iter est\": la desintegración del intelectual y el concepto de la muerte en la novela \"Una vita violenta\" (1959), de Pier Paolo Pasolini",
+              "autores": ["Collantes, Lucas Gabriel (FFyH-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Ecos de una detonación: el suicidio de Larra en \"Diario de un enfermo\" (1901), de José Martínez Ruiz (Azorín)",
+              "autores": ["Martínez, Francisco Bernardo (FFyH-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "La muerte como disparador de transformación en Henry David Thoreau: el paso del duelo a la armonía trascendental",
+              "autores": ["Paczko, Natalia (FFyH-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Memoria y duelo en Saer y Proust",
+              "autores": ["Toselli Slocum, Paola (FFyH-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Reírse de la muerte: Saramago y su estilo irónico en \"Las intermitencias de la muerte\"",
+              "autores": ["Gonzalez Canovas, Martina (FFyH-CIFFyH-UNC)"]
+            },
+            {
+              "titulo": "Duelo, archivo y relato de filiación en \"Nada se opone a la noche\", de Delphine de Vigan",
+              "autores": ["De Alessandro, Carla (FFyH-CIFFyH-UNC)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 46,
+      "titulo": "Simposio Interdisciplinario del Programa de Ambiente, Sociedades y Territorios de la FFyH: \"Naturaleza-Cultura, Educación y Ciencia pública como bienes comunes: aportes transdisciplinarios sobre problemáticas ambientales y conflictos socio-territoriales actuales en la provincia de Córdoba en la defensa de los territorios, la soberanía y la justicia ambiental\"",
+      "coordinacion": [
+        "Enrico, Juliana (Directora del Programa de Ambiente, Sociedades y Territorios, FFyH- UNC, CONICET-CEA FCS UNC, Argentina)"
+      ],
+      "trabajos": [
+        {
+          "sesion": 1,
+          "dia": "Jueves 23",
+          "horario": "14:30-17:30",
+          "lugar": "Auditorio H.Chávez, Pab.Venezuela",
+          "ponencias": []
+        }
+      ]
+    }
+  ]
+};
+
+        // Elementos del DOM
+        const searchInput = document.getElementById('search-input');
+        const btnNombre = document.getElementById('btn-nombre');
+        const btnPalabra = document.getElementById('btn-palabra');
+        const mainContent = document.querySelector('main');
+
+        function performSearch(type) {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) {
+                alert('Por favor, ingrese un término de búsqueda.');
+                return;
+            }
+
+            const results = [];
+            conferenceData.simposios.forEach(simposio => {
+                simposio.trabajos.forEach(trabajo => {
+                    trabajo.ponencias.forEach(ponencia => {
+                        const matchNombre = ponencia.autores.some(a => a.toLowerCase().includes(query));
+                        const matchPalabra = ponencia.titulo.toLowerCase().includes(query) || simposio.titulo.toLowerCase().includes(query);
+                        
+                        if ((type === 'nombre' && matchNombre) || (type === 'palabra' && matchPalabra)) {
+                            results.push({
+                                simposioNum: simposio.numero,
+                                dia: trabajo.dia,
+                                horario: trabajo.horario,
+                                lugar: trabajo.lugar,
+                                sesion: trabajo.sesion,
+                                titulo: ponencia.titulo,
+                                autores: ponencia.autores.join('; ')
+                            });
+                        }
+                    });
+                });
+            });
+
+            renderResults(query, results);
+        }
+
+        function renderResults(query, results) {
+            let resultsHtml = `
+                <section class="mb-stack-lg">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant pb-stack-md">
+                        <div>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Resultados para "<span class="text-primary italic">${query}</span>"</h2>
+                            <p class="text-on-surface-variant font-body-md mt-1">Se encontraron ${results.length} ponencias que coinciden con su búsqueda.</p>
+                        </div>
+                        <button onclick="location.reload()" class="px-4 py-2 border-2 border-primary text-primary font-label-caps text-label-caps rounded-lg hover:bg-primary-fixed transition-colors">Volver al Inicio</button>
+                    </div>
+                </section>
+                <div class="flex flex-col gap-stack-md">`;
+
+            if (results.length === 0) {
+                resultsHtml += `<p class="text-on-surface-variant font-body-lg">No se encontraron resultados. Pruebe con otro término.</p>`;
+            } else {
+                results.forEach(res => {
+                    resultsHtml += `
+                        <article class="group bg-surface-container-lowest border border-border-subtle rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col md:flex-row">
+                            <div class="md:w-16 bg-primary flex md:flex-col items-center justify-center p-4 text-on-primary">
+                                <span class="font-label-caps text-[10px] opacity-80 mb-1">Simp.</span>
+                                <span class="font-display-lg text-2xl font-extrabold">${res.simposioNum.toString().padStart(2, '0')}</span>
+                            </div>
+                            <div class="flex-1 p-stack-md">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="bg-surface-container-high px-3 py-1 rounded-lg text-primary font-label-caps text-[11px] flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">event</span> ${res.dia}</span>
+                                    <span class="bg-surface-container-high px-3 py-1 rounded-lg text-on-surface-variant font-label-caps text-[11px] flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> ${res.horario}</span>
+                                    <span class="bg-surface-container-high px-3 py-1 rounded-lg text-on-surface-variant font-label-caps text-[11px] flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> ${res.lugar}</span>
+                                    <span class="ml-auto text-tertiary font-label-caps text-[11px] border border-tertiary/20 px-2 rounded">Sesión ${res.sesion}</span>
+                                </div>
+                                <h3 class="font-title-md text-title-md text-academic-ink mb-2 group-hover:text-primary transition-colors leading-tight">${res.titulo}</h3>
+                                <div class="flex items-center gap-3 mt-4 pt-4 border-t border-surface-container">
+                                    <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">person</span></div>
+                                    <div class="flex flex-col">
+                                        <span class="font-body-md text-on-surface font-semibold">${res.autores}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>`;
+                });
+            }
+
+            resultsHtml += `</div>`;
+            mainContent.innerHTML = resultsHtml;
+            window.scrollTo(0, 0);
+        }
+
+        // Event listeners
+        btnNombre.addEventListener('click', () => performSearch('nombre'));
+        btnPalabra.addEventListener('click', () => performSearch('palabra'));
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch('palabra');
+        });
+
+        // Micro-interactions for cards (keep original behavior)
         document.querySelectorAll('.cursor-pointer').forEach(card => {
             card.addEventListener('mousedown', () => card.classList.add('scale-95'));
             card.addEventListener('mouseup', () => card.classList.remove('scale-95'));
             card.addEventListener('mouseleave', () => card.classList.remove('scale-95'));
         });
-
-        // Simple scroll spy for header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');</script><script>
-(function() {
-    const conferenceData = {{DATA:DOCUMENT:DOCUMENT_3}};
-    const searchInput = document.querySelector('input[placeholder*="Escriba autor"]');
-    const btnNombre = document.querySelectorAll('button').item(2); // 'Buscar por Nombre'
-    const btnPalabra = document.querySelectorAll('button').item(3); // 'Buscar por Palabra Clave'
-    const mainContent = document.querySelector('main');
-
-    function performSearch(type) {
-        const query = searchInput.value.toLowerCase().trim();
-        if (!query) return;
-
-        const results = [];
-        conferenceData.simposios.forEach(simposio => {
-            simposio.trabajos.forEach(trabajo => {
-                trabajo.ponencias.forEach(ponencia => {
-                    const matchNombre = ponencia.autores.some(a => a.toLowerCase().includes(query));
-                    const matchPalabra = ponencia.titulo.toLowerCase().includes(query) || simposio.titulo.toLowerCase().includes(query);
-                    
-                    if ((type === 'nombre' && matchNombre) || (type === 'palabra' && matchPalabra)) {
-                        results.push({
-                            simposioNum: simposio.numero,
-                            dia: trabajo.dia,
-                            horario: trabajo.horario,
-                            lugar: trabajo.lugar,
-                            sesion: trabajo.sesion,
-                            titulo: ponencia.titulo,
-                            autores: ponencia.autores.join('; ')
-                        });
-                    }
-                });
-            });
-        });
-
-        renderResults(query, results);
-    }
-
-    function renderResults(query, results) {
-        let resultsHtml = `
-            <section class="mb-stack-lg">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant pb-stack-md">
-                    <div>
-                        <h2 class="font-headline-sm text-headline-sm text-on-surface">Resultados para "<span class="text-primary italic">${query}</span>"</h2>
-                        <p class="text-on-surface-variant font-body-md mt-1">Se encontraron ${results.length} ponencias que coinciden con su búsqueda.</p>
-                    </div>
-                    <button onclick="location.reload()" class="px-4 py-2 border-2 border-primary text-primary font-label-caps text-label-caps rounded-lg hover:bg-primary-fixed transition-colors">Volver al Inicio</button>
-                </div>
-            </section>
-            <div class="flex flex-col gap-stack-md">`;
-
-        results.forEach(res => {
-            resultsHtml += `
-                <article class="group bg-surface-container-lowest border border-border-subtle rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col md:flex-row">
-                    <div class="md:w-16 bg-primary flex md:flex-col items-center justify-center p-4 text-on-primary">
-                        <span class="font-label-caps text-[10px] opacity-80 mb-1">Simp.</span>
-                        <span class="font-display-lg text-2xl font-extrabold">${res.simposioNum.toString().padStart(2, '0')}</span>
-                    </div>
-                    <div class="flex-1 p-stack-md">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="bg-surface-container-high px-3 py-1 rounded-lg text-primary font-label-caps text-[11px] flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">event</span> ${res.dia}</span>
-                            <span class="bg-surface-container-high px-3 py-1 rounded-lg text-on-surface-variant font-label-caps text-[11px] flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> ${res.horario}</span>
-                            <span class="bg-surface-container-high px-3 py-1 rounded-lg text-on-surface-variant font-label-caps text-[11px] flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> ${res.lugar}</span>
-                            <span class="ml-auto text-tertiary font-label-caps text-[11px] border border-tertiary/20 px-2 rounded">Sesión ${res.sesion}</span>
-                        </div>
-                        <h3 class="font-title-md text-title-md text-academic-ink mb-2 group-hover:text-primary transition-colors leading-tight">${res.titulo}</h3>
-                        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-surface-container">
-                            <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">person</span></div>
-                            <div class="flex flex-col">
-                                <span class="font-body-md text-on-surface font-semibold">${res.autores}</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>`;
-        });
-
-        resultsHtml += `</div>`;
-        mainContent.innerHTML = resultsHtml;
-        window.scrollTo(0, 0);
-    }
-
-    btnNombre.addEventListener('click', () => performSearch('nombre'));
-    btnPalabra.addEventListener('click', () => performSearch('palabra'));
-    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch('palabra'); });
-})();
-</script></body></html>
+    </script>
+</body></html>
