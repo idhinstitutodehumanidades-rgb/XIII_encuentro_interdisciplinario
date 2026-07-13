@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>XIII Encuentro - Detalle de Simposio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .academic-grid-pattern {
+            background-color: #fcf9f8;
+            background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .sticky-time-col {
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+        .accent-line-primary { border-left: 4px solid #00609b; }
+        .accent-line-secondary { border-left: 4px solid #755b00; }
+        .accent-line-tertiary { border-left: 4px solid #b51341; }
+        
+        @media (max-width: 768px) {
+            .mobile-table-card {
+                display: block;
+                width: 100%;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#f0c02e",
+                        "background": "#fcf9f8",
+                        "tertiary-fixed-dim": "#ffb2ba",
+                        "secondary": "#755b00",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-highest": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "on-primary": "#ffffff",
+                        "primary": "#00609b",
+                        "surface-container-high": "#eae7e7",
+                        "surface-container": "#f0eded",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-container": "#d83358",
+                        "secondary-container": "#fdcc3a",
+                        "surface-variant": "#e5e2e1",
+                        "surface-muted": "#F5F7F9",
+                        "on-tertiary-fixed-variant": "#910030",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-low": "#f6f3f2",
+                        "on-surface-variant": "#404750",
+                        "on-secondary-fixed-variant": "#594400",
+                        "on-primary-container": "#fdfcff",
+                        "academic-ink": "#2D3436",
+                        "outline-variant": "#c0c7d2",
+                        "on-tertiary-container": "#fffbff",
+                        "primary-fixed": "#cfe4ff",
+                        "surface-bright": "#fcf9f8",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001d34",
+                        "on-background": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#400010",
+                        "primary-fixed-dim": "#9acbff",
+                        "inverse-primary": "#9acbff",
+                        "surface": "#fcf9f8",
+                        "tertiary": "#b51341",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "outline": "#717881",
+                        "primary-container": "#2079bc",
+                        "on-primary-fixed-variant": "#004a79",
+                        "secondary-fixed": "#ffdf91",
+                        "border-subtle": "#E2E8F0",
+                        "on-secondary-container": "#705600",
+                        "tertiary-fixed": "#ffd9dc",
+                        "surface-tint": "#00629e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "title-md": ["\"Source Serif 4\""],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-sm": ["\"Source Serif 4\""],
+                        "label-caps": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container/30">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-[60] h-20 border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-4">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">XIII Encuentro</span>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-primary border-b-2 border-primary font-bold pb-1 font-body-md transition-opacity duration-150 active:opacity-80" href="#">Simposios</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Programa</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Autores</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Sedes</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex bg-surface-container px-4 py-2 rounded-lg items-center gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none outline-none text-body-md w-48" placeholder="Buscar ponencias..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary p-2 transition-colors">bookmark</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary p-2 transition-colors">account_circle</button>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max mx-auto min-h-screen">
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="hidden lg:flex flex-col p-stack-md h-[calc(100vh-80px)] sticky top-20 w-64 border-r border-outline-variant bg-surface-container-low">
+<div class="mb-stack-lg">
+<img class="w-full rounded-lg shadow-sm mb-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWAdNcLSOzhHq8O1PSCGzNoeZNZ9U_OBfVc_EdwZBxcCQJFnnfoKXvHqzs1zEkkTDxZbvvaXTv4pnCIMLxaYf9_nR8q6svAbFDcMaswWgj5I9GzyODTCFViw6pVwNnC8yUbyd1buTztDut-NXEvlDcvhOTrYJuIrZILdSsxjUpexJ-G_tWn0Ml5VHYXnoxkZZbIq_d82y5NfIhAgc1Av98F-Njttl2FCFOOiNSgGFvn3GQ_a0RdiMrSucmi42Hgvc16J7tFi8UK72i"/>
+<h3 class="font-headline-sm text-headline-sm text-primary">Ciencias Sociales</h3>
+<p class="text-label-caps font-label-caps tracking-widest text-on-surface-variant">XIII EDICIÓN • 2026</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">INICIO</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-caps text-label-caps">CRONOGRAMA</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-caps text-label-caps">MIS FAVORITOS</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-label-caps">PONENTES</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">info</span>
+<span class="font-label-caps text-label-caps">INFORMACIÓN</span>
+</a>
+</nav>
+<button class="mt-auto w-full py-3 bg-primary text-on-primary font-bold rounded-lg transition-opacity hover:opacity-90 active:scale-95">
+                Descargar PDF
+            </button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow academic-grid-pattern p-margin-mobile md:p-gutter">
+<!-- Hero Section / Symposium Header -->
+<section class="bg-surface border border-border-subtle rounded-xl p-stack-lg shadow-sm mb-stack-lg accent-line-primary overflow-hidden relative">
+<div class="absolute top-0 right-0 p-stack-md">
+<span class="bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-4 py-1 rounded-full border border-secondary">SIMPOSIO 01</span>
+</div>
+<div class="max-w-4xl">
+<h1 class="font-display-lg text-display-lg text-academic-ink mb-stack-md leading-tight">Estado, trabajadores y empresarios frente a las crisis</h1>
+<div class="flex flex-wrap gap-stack-md items-start mt-stack-lg">
+<div class="flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">person</span> COORDINACIÓN
+                            </span>
+<ul class="flex flex-col gap-1 text-body-md text-on-surface">
+<li class="font-semibold">Aiziczon, Fernando <span class="text-on-surface-variant font-normal">(IDH-CONICET / UNC)</span></li>
+<li class="font-semibold">Carini, Gabriel <span class="text-on-surface-variant font-normal">(ISTE-CONICET / UNRC / CIFFyH-UNC)</span></li>
+<li class="font-semibold">Gerbaldo, Juan <span class="text-on-surface-variant font-normal">(IDH-CONICET / UNC)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Schedule Sessions Timeline -->
+<div class="flex flex-col gap-stack-lg">
+<!-- Session 1 -->
+<div class="bg-surface border border-border-subtle rounded-xl overflow-hidden shadow-sm">
+<div class="bg-academic-ink text-white p-4 flex justify-between items-center">
+<h2 class="font-title-md text-title-md flex items-center gap-3">
+<span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">1</span>
+                            Sesión 01
+                        </h2>
+<div class="flex gap-4">
+<span class="font-label-caps text-label-caps flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">calendar_today</span> Jueves 23</span>
+<span class="font-label-caps text-label-caps flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">schedule</span> 09:00 - 12:00</span>
+<span class="font-label-caps text-label-caps flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">location_on</span> Aula 12 Pab. Venezuela</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse text-left">
+<thead class="bg-surface-muted border-b border-border-subtle">
+<tr>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-on-surface-variant w-2/3">Título de Ponencia</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-on-surface-variant w-1/3">Autores e Institución</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-on-surface-variant text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-gutter py-6">
+<h4 class="font-title-md text-title-md text-academic-ink leading-snug">Parentesco y agronegocios. Estrategias familiares e institucionales de CREA</h4>
+</td>
+<td class="px-gutter py-6">
+<p class="text-body-md text-on-surface font-semibold">Ambroggio, Joaquín Pedro</p>
+<p class="text-label-caps text-label-caps text-outline">(CONFINES-CONICET / IAPCS-UNVM)</p>
+</td>
+<td class="px-gutter py-6 text-center">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container text-primary transition-colors">bookmark</button>
+</td>
+</tr>
+<tr class="bg-surface-muted hover:bg-primary/5 transition-colors group">
+<td class="px-gutter py-6">
+<h4 class="font-title-md text-title-md text-academic-ink leading-snug">La asistencia social como forma de la dominación de clase a través del consenso</h4>
+</td>
+<td class="px-gutter py-6">
+<p class="text-body-md text-on-surface font-semibold">Zeballos, Juan Manuel</p>
+<p class="text-label-caps text-label-caps text-outline">(FFyH-UNC)</p>
+</td>
+<td class="px-gutter py-6 text-center">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container text-primary transition-colors">bookmark</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-gutter py-6">
+<h4 class="font-title-md text-title-md text-academic-ink leading-snug">Enseñar en riesgo: violencia, deslaboralización y reproducción de la precariedad docente en México</h4>
+</td>
+<td class="px-gutter py-6">
+<p class="text-body-md text-on-surface font-semibold">Ibarra Irra, Manuel Alejandro</p>
+<p class="text-label-caps text-label-caps text-outline">(Secretaría de Educación, Baja California)</p>
+</td>
+<td class="px-gutter py-6 text-center">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container text-primary transition-colors">bookmark</button>
+</td>
+</tr>
+<tr class="bg-surface-muted hover:bg-primary/5 transition-colors group">
+<td class="px-gutter py-6">
+<h4 class="font-title-md text-title-md text-academic-ink leading-snug">Entre el software y la cooperación: institucionalización, trabajo digital y acción colectiva en las cooperativas tecnológicas argentinas</h4>
+</td>
+<td class="px-gutter py-6">
+<p class="text-body-md text-on-surface font-semibold">Carini, Gabriel Fernando</p>
+<p class="text-label-caps text-label-caps text-outline">(UNRC / CONICET)</p>
+</td>
+<td class="px-gutter py-6 text-center">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container text-primary transition-colors">bookmark</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Session 2 - Timeline Visual Layout -->
+<div class="relative pl-8">
+<div class="absolute left-3 top-0 bottom-0 w-0.5 bg-outline-variant"></div>
+<div class="mb-stack-md flex items-center gap-4">
+<div class="absolute left-0 w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-white ring-8 ring-background">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">event</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-secondary">Sesión 02 <span class="text-on-surface-variant font-normal text-body-lg">· Jueves 23 de Julio</span></h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Bento Style Card 1 -->
+<div class="bg-surface border border-border-subtle rounded-xl p-stack-md hover:border-secondary transition-all cursor-pointer">
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">14:00 - 15:30</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-bold">AULA 12</span>
+</div>
+<h4 class="font-title-md text-title-md text-academic-ink mb-2">La pedagogía crítica del trabajo: experiencias de resistencia de lxs trabajadorxs del Subté</h4>
+<div class="flex items-center gap-2 mt-4">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-secondary text-xs">PU</div>
+<div class="flex flex-col">
+<span class="text-body-md font-semibold leading-none">Urricelqui, Patricio</span>
+<span class="text-[11px] text-on-surface-variant">UNLU</span>
+</div>
+</div>
+</div>
+<!-- Bento Style Card 2 -->
+<div class="bg-surface border border-border-subtle rounded-xl p-stack-md hover:border-secondary transition-all cursor-pointer">
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">15:30 - 16:30</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-bold">AULA 12</span>
+</div>
+<h4 class="font-title-md text-title-md text-academic-ink mb-2">Trayectorias militantes y liderazgo sindical femenino en Jujuy. Ramona Calzadilla y ATSA</h4>
+<div class="flex items-center gap-2 mt-4">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-secondary text-xs">GG</div>
+<div class="flex flex-col">
+<span class="text-body-md font-semibold leading-none">Gimenez, Geovana</span>
+<span class="text-[11px] text-on-surface-variant">FFyH-UNC</span>
+</div>
+</div>
+</div>
+<!-- Bento Style Card 3 -->
+<div class="bg-surface border border-border-subtle rounded-xl p-stack-md hover:border-secondary transition-all cursor-pointer">
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">16:30 - 17:30</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-bold">AULA 12</span>
+</div>
+<h4 class="font-title-md text-title-md text-academic-ink mb-2">Mediadores jurídicos del neoliberalismo: abogados laboralistas y reformas del trabajo</h4>
+<div class="flex items-center gap-2 mt-4">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-secondary text-xs">GG</div>
+<div class="flex flex-col">
+<span class="text-body-md font-semibold leading-none">Gerbaldo, Gabriel</span>
+<span class="text-[11px] text-on-surface-variant">IDH-CONICET</span>
+</div>
+</div>
+</div>
+<!-- Bento Style Card 4 -->
+<div class="bg-surface border border-border-subtle rounded-xl p-stack-md hover:border-secondary transition-all cursor-pointer">
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">17:30 - 18:00</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-bold">AULA 12</span>
+</div>
+<h4 class="font-title-md text-title-md text-academic-ink mb-2">Desmovilización. Reflexiones en torno al campo sindical argentino contemporáneo</h4>
+<div class="flex items-center gap-2 mt-4">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-secondary text-xs">FA</div>
+<div class="flex flex-col">
+<span class="text-body-md font-semibold leading-none">Aiziczon, Fernando</span>
+<span class="text-[11px] text-on-surface-variant">IDH-CONICET</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Footer (Academic Institutions) -->
+<footer class="mt-stack-lg pt-stack-lg border-t border-border-subtle text-center">
+<p class="text-label-caps font-label-caps text-outline mb-4">ORGANIZAN</p>
+<div class="flex flex-wrap justify-center gap-stack-lg opacity-60">
+<img class="h-12 object-contain" data-alt="Official logo of the Universidad Nacional de Córdoba, featuring its traditional crest with historical elements in a clean, minimalist vector style. The aesthetic is institutional and academic, fitting the prestigious social sciences conference theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA37SnbdBaWRzdIO92P4rxTXPrgXL8s_3ozlrzRBDJ-isU2Uh_GqmGKkAs_4DkA3mowp_mAqZy8aST4rxZleRzfoTrI71ib7iCnih-RfRL6ecrKbQ83Ny5jq5qbkT9xP4qcNrtKlqSYIbZYOIu6CrtvO15h4Mbv1RgZcoVOy7bqH0ze0gaxWEnfNTnpbcstsEmnDGSGkJk0pxb94NGf_rgQGIAnRUtKwVu2_xufmvWPlOfWkdabenqp7SX6Gkf-NhDDF1KIMSDY4SGC"/>
+<img class="h-12 object-contain" data-alt="Official logo of CONICET, Argentina's National Scientific and Technical Research Council, presented in its standard blue and white branding with precise typography. The design is modern and authoritative, symbolizing scientific rigor and institutional support." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_Lid_VHWJzXesEgSrDdyRy73NgJcvfZpwnMxAUDxqBiWqsTG_-Si_W45FJzn2XBneCowxGuMqz8ZPxcLZNEjtOt9ufU85Aix3k9e0hSug3g8OGlFyvzwCXEu2lecyS40bMXxUqCul3OpEdf_La10nDkdDp_OEAhXTiG0smnNi6D_R_BQPm11rSdrTB7YhDZOojIziz9lv_bxwgRsgigQZA25yIedoNgIV-H_f1tsXgDObVaFhn3JGVSGjwO1Q_noadbd7tzmn1Tyq"/>
+<img class="h-12 object-contain" data-alt="Logo for the CIFFyH institute, presented in a contemporary minimalist style with clean lines and academic sophistication. The branding uses a professional color palette of deep blues and slate greys, perfectly integrated into the high-end conference UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Ot882AMMKpLatxqjja6B7RQ4nAYOLWPxveUdC-fpvown0FDW7OS8o_GsTHDxU2yGKs86omZ_10_DCKHDj2Q0T-1a28oTf50ULRYTp8NR3u30bQZPyAxA_zCQVI9J1KE3YOiOdAcLFLJxrh9pRB2DSkn1HDE9G6YlENQtzJOO-rvWoWflwOaqlsyv8Pr_bKlnrURgygBgvtdsXvHEsFX64KgA9w2_VRBNeybg45eTmqsyjgG0QkocO9_ln2GZ54mzerqfQOSomwOr"/>
+</div>
+</footer>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface/90 backdrop-blur-md border-t border-outline-variant shadow-lg z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container px-4 py-1" href="#">
+<span class="material-symbols-outlined">today</span>
+<span class="font-label-caps text-label-caps">Hoy</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold bg-primary-fixed-dim/20 rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-caps text-label-caps">Buscador</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container px-4 py-1" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label-caps text-label-caps">Favoritos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container px-4 py-1" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-caps text-label-caps">Mapa</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for session card hovering
+        document.querySelectorAll('.hover\\:border-secondary').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('shadow-md');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('shadow-md');
+            });
+        });
+
+        // Simple scroll to active session logic if needed
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('Symposium UI Loaded');
+        });
+    </script>
+</body></html>
