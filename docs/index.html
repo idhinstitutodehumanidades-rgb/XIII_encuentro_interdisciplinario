@@ -92,29 +92,10 @@
         }
     }catch(_e){}</script></head><body class="bg-background text-on-surface font-body-md overflow-x-hidden">
 
-    <!-- Top Navigation Anchor -->
-    <header class="bg-surface dark:bg-surface-dim docked full-width top-0 z-50 border-b border-outline-variant dark:border-outline flat no shadows">
-        <div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
-            <div class="flex items-center gap-4">
-                <span class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">XIII Encuentro</span>
-            </div>
-            <nav class="hidden md:flex items-center gap-stack-lg">
-                <a href="#" class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary font-bold pb-1 font-body-md text-body-md">Programa</a>
-                <a href="#" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">Simposios</a>
-                <a href="#" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">Autores</a>
-                <a href="#" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">Sedes</a>
-            </nav>
-            <div class="flex items-center gap-4">
-                <button class="material-symbols-outlined p-2 hover:bg-surface-container-low transition-colors rounded-full" data-icon="bookmark">bookmark</button>
-                <button class="material-symbols-outlined p-2 hover:bg-surface-container-low transition-colors rounded-full" data-icon="account_circle">account_circle</button>
-            </div>
-        </div>
-    </header>
-
     <main class="max-w-container-max mx-auto px-gutter pb-32">
-        
-        <!-- Hero & Banner -->
-        <section class="mt-stack-lg">
+
+        <!-- Hero & Banner (click to reload) -->
+        <section class="mt-stack-lg cursor-pointer" onclick="location.reload()">
             <div class="academic-gradient w-full rounded-t-lg"></div>
             <div class="relative overflow-hidden rounded-b-lg border-x border-b border-outline-variant bg-surface-container-lowest">
                 <div class="p-8 md:p-12">
@@ -129,7 +110,7 @@
             </div>
         </section>
 
-        <!-- Dynamic Search Engine -->
+        <!-- Dynamic Search Engine (always visible) -->
         <section class="mt-stack-lg">
             <div class="bg-surface-container p-gutter rounded-xl shadow-sm border border-outline-variant">
                 <div class="flex flex-col md:flex-row gap-gutter items-end">
@@ -159,182 +140,12 @@
             </div>
         </section>
 
-        <!-- Symposia Bento Grid -->
-        <section class="mt-stack-lg">
-            <div class="flex justify-between items-baseline mb-stack-lg">
-                <h2 class="font-headline-sm text-headline-sm text-academic-ink uppercase tracking-tight">Simposios del Encuentro</h2>
-                <span class="font-label-caps text-label-caps text-on-surface-variant">46 Simposios Disponibles</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-                
-                <!-- Symposium Card 1 -->
-                <div class="group relative flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 tonal-layer-1 cursor-pointer">
-                    <div class="w-2 h-full absolute left-0 top-0 bg-primary"></div>
-                    <div class="p-6">
-                        <span class="font-label-caps text-label-caps text-primary tracking-[0.2em]">SIMPOSIO 1</span>
-                        <h3 class="font-title-md text-title-md mt-4 text-academic-ink group-hover:text-primary transition-colors">Estado, trabajadores y empresarios frente a las crisis</h3>
-                        <div class="mt-stack-md pt-stack-md border-t border-outline-variant">
-                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">COORDINACIÓN</p>
-                            <p class="font-body-md text-body-md text-on-surface">Aiziczon, Fernando; Carini, Gabriel; Gerbaldo, Juan.</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto p-4 bg-surface-muted flex justify-between items-center">
-                        <span class="flex items-center gap-1 font-label-caps text-label-caps text-on-surface-variant">
-                            <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
-                            11 Ponencias
-                        </span>
-                        <span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-                    </div>
-                </div>
-
-                <!-- Symposium Card 2 -->
-                <div class="group relative flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 tonal-layer-1 cursor-pointer">
-                    <div class="w-2 h-full absolute left-0 top-0 bg-secondary-container"></div>
-                    <div class="p-6">
-                        <span class="font-label-caps text-label-caps text-secondary tracking-[0.2em]">SIMPOSIO 2</span>
-                        <h3 class="font-title-md text-title-md mt-4 text-academic-ink group-hover:text-primary transition-colors">Soberanía digital y educación: lo público en disputa</h3>
-                        <div class="mt-stack-md pt-stack-md border-t border-outline-variant">
-                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">COORDINACIÓN</p>
-                            <p class="font-body-md text-body-md text-on-surface">Roldán, Paola; Ferrante, Patricia; Martínez, Cecilia.</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto p-4 bg-surface-muted flex justify-between items-center">
-                        <span class="flex items-center gap-1 font-label-caps text-label-caps text-on-surface-variant">
-                            <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
-                            8 Ponencias
-                        </span>
-                        <span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-                    </div>
-                </div>
-
-                <!-- Symposium Card 3 -->
-                <div class="group relative flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 tonal-layer-1 cursor-pointer">
-                    <div class="w-2 h-full absolute left-0 top-0 bg-tertiary"></div>
-                    <div class="p-6">
-                        <span class="font-label-caps text-label-caps text-tertiary tracking-[0.2em]">SIMPOSIO 3</span>
-                        <h3 class="font-title-md text-title-md mt-4 text-academic-ink group-hover:text-primary transition-colors">Migraciones y reproducción social: trayectorias migratorias</h3>
-                        <div class="mt-stack-md pt-stack-md border-t border-outline-variant">
-                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">COORDINACIÓN</p>
-                            <p class="font-body-md text-body-md text-on-surface">Jiménez, Cecilia; Maggi, María Florencia; Rodríguez, Eduardo.</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto p-4 bg-surface-muted flex justify-between items-center">
-                        <span class="flex items-center gap-1 font-label-caps text-label-caps text-on-surface-variant">
-                            <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
-                            11 Ponencias
-                        </span>
-                        <span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-                    </div>
-                </div>
-
-                <!-- Symposium Card 4 -->
-                <div class="group relative flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 tonal-layer-1 cursor-pointer">
-                    <div class="w-2 h-full absolute left-0 top-0 bg-on-surface"></div>
-                    <div class="p-6">
-                        <span class="font-label-caps text-label-caps text-on-surface tracking-[0.2em]">SIMPOSIO 4</span>
-                        <h3 class="font-title-md text-title-md mt-4 text-academic-ink group-hover:text-primary transition-colors">Deporte y Ciencias Sociales y Humanas en clave local</h3>
-                        <div class="mt-stack-md pt-stack-md border-t border-outline-variant">
-                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">COORDINACIÓN</p>
-                            <p class="font-body-md text-body-md text-on-surface">Majul, Débora; Balaguer, Franco; Reyna, Franco.</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto p-4 bg-surface-muted flex justify-between items-center">
-                        <span class="flex items-center gap-1 font-label-caps text-label-caps text-on-surface-variant">
-                            <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
-                            11 Ponencias
-                        </span>
-                        <span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-                    </div>
-                </div>
-
-                <!-- Symposium Card 5 -->
-                <div class="group relative flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 tonal-layer-1 cursor-pointer">
-                    <div class="w-2 h-full absolute left-0 top-0 bg-primary-container"></div>
-                    <div class="p-6">
-                        <span class="font-label-caps text-label-caps text-primary-container tracking-[0.2em]">SIMPOSIO 5</span>
-                        <h3 class="font-title-md text-title-md mt-4 text-academic-ink group-hover:text-primary transition-colors">Violencia de género en la universidad: tensiones y desafíos</h3>
-                        <div class="mt-stack-md pt-stack-md border-t border-outline-variant">
-                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">COORDINACIÓN</p>
-                            <p class="font-body-md text-body-md text-on-surface">López, Carlos; Aquino, Florencia; Espejo, Fernanda.</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto p-4 bg-surface-muted flex justify-between items-center">
-                        <span class="flex items-center gap-1 font-label-caps text-label-caps text-on-surface-variant">
-                            <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
-                            12 Ponencias
-                        </span>
-                        <span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-                    </div>
-                </div>
-
-                <!-- Featured Card / Information -->
-                <div class="md:col-span-1 lg:col-span-1 bg-primary text-white rounded-xl p-8 flex flex-col justify-between shadow-lg relative overflow-hidden">
-                    <div class="relative z-10">
-                        <span class="material-symbols-outlined text-secondary-container text-4xl mb-4" data-icon="info">info</span>
-                        <h3 class="font-headline-sm text-headline-sm mb-4">Información para Asistentes</h3>
-                        <p class="font-body-md text-body-md opacity-90">Acceda a los certificados de asistencia, mapas de los pabellones y cronogramas de almuerzos aquí.</p>
-                    </div>
-                    <div class="relative z-10 mt-8">
-                        <button class="w-full py-4 bg-white text-primary rounded-lg font-bold hover:bg-surface-container-high transition-all">Ver Hoja de Ruta</button>
-                    </div>
-                    <!---->
-                    <div class="absolute -right-10 -bottom-10 opacity-10 scale-150">
-                        <span class="material-symbols-outlined text-[200px]" data-icon="school">school</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Featured Session Section -->
-        <section class="mt-stack-lg">
-            <div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest shadow-md">
-                <div class="bg-academic-ink text-white p-6 flex justify-between items-center">
-                    <div>
-                        <h2 class="font-headline-sm text-headline-sm">Agenda del Día</h2>
-                        <p class="font-label-caps text-label-caps opacity-80">MIÉRCOLES 22 DE JULIO</p>
-                    </div>
-                    <button class="material-symbols-outlined text-white p-2 hover:bg-white/10 rounded-full" data-icon="calendar_today">calendar_today</button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-surface-muted border-b border-outline-variant">
-                                <th class="p-4 font-label-caps text-label-caps text-on-surface-variant sticky-column bg-surface-muted">HORARIO</th>
-                                <th class="p-4 font-label-caps text-label-caps text-on-surface-variant">TEMA PRINCIPAL</th>
-                                <th class="p-4 font-label-caps text-label-caps text-on-surface-variant">LUGAR</th>
-                                <th class="p-4 font-label-caps text-label-caps text-on-surface-variant">ESTADO</th>
-                            </tr>
-                        </thead>
-                        <tbody class="font-body-md">
-                            <tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
-                                <td class="p-4 font-bold whitespace-nowrap sticky-column bg-surface-container-lowest">09:00 - 12:00</td>
-                                <td class="p-4 font-title-md text-title-md">El lazo social ante el cambio epocal</td>
-                                <td class="p-4 text-on-surface-variant">Aula 4, Pab. Venezuela</td>
-                                <td class="p-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-label-caps text-[10px]">EN CURSO</span></td>
-                            </tr>
-                            <tr class="border-b border-outline-variant hover:bg-surface-container transition-colors bg-surface-muted/50">
-                                <td class="p-4 font-bold whitespace-nowrap sticky-column bg-white">15:00 - 19:00</td>
-                                <td class="p-4 font-title-md text-title-md">Discapacidad, accesibilidad y derechos</td>
-                                <td class="p-4 text-on-surface-variant">Aula 2, Pab. Venezuela</td>
-                                <td class="p-4"><span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-label-caps text-[10px]">PRÓXIMA</span></td>
-                            </tr>
-                            <tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
-                                <td class="p-4 font-bold whitespace-nowrap sticky-column bg-surface-container-lowest">09:00 - 12:00</td>
-                                <td class="p-4 font-title-md text-title-md">Investigación y extensión en la ruralidad</td>
-                                <td class="p-4 text-on-surface-variant">Aula 6, Pab. Venezuela</td>
-                                <td class="p-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-label-caps text-[10px]">EN CURSO</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+        <!-- Content Area: Cards / Detail / Search Results -->
+        <div id="content-area" class="mt-stack-lg"></div>
 
     </main>
 
-    <!-- Mobile Bottom Navigation Shell -->
+    <!-- Mobile Bottom Navigation Shell (kept per original) -->
     <nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant bg-surface/90 backdrop-blur-md shadow-lg z-50 rounded-t-xl">
         <a href="#" class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-bold bg-primary-fixed-dim/20 rounded-full px-4 py-1">
             <span class="material-symbols-outlined" data-icon="today">today</span>
@@ -354,7 +165,7 @@
         </a>
     </nav>
 
-    <!-- Contextual FAB -->
+    <!-- Contextual FAB (kept per original) -->
     <button class="fixed bottom-24 right-6 lg:bottom-12 lg:right-12 w-16 h-16 bg-tertiary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-40 group">
         <span class="material-symbols-outlined text-3xl" data-icon="file_download">file_download</span>
         <span class="absolute right-20 bg-academic-ink text-white px-4 py-2 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">Descargar Programa PDF</span>
@@ -388,7 +199,7 @@
     </footer>
 
     <script>
-        // Datos completos de la conferencia (JSON incrustado)
+
         const conferenceData = {
   "simposios": [
     {
@@ -3917,62 +3728,140 @@
   ]
 };
 
-        // Elementos del DOM
+        // ============================================================
+        // RENDERIZADO
+        // ============================================================
+        const contentArea = document.getElementById('content-area');
         const searchInput = document.getElementById('search-input');
         const btnNombre = document.getElementById('btn-nombre');
         const btnPalabra = document.getElementById('btn-palabra');
-        const mainContent = document.querySelector('main');
 
-        function performSearch(type) {
-            const query = searchInput.value.toLowerCase().trim();
-            if (!query) {
-                alert('Por favor, ingrese un término de búsqueda.');
-                return;
-            }
+        // Colores para las barras laterales de las tarjetas
+        const barColors = ['bg-primary', 'bg-secondary-container', 'bg-tertiary', 'bg-on-surface', 'bg-primary-container'];
 
-            const results = [];
-            conferenceData.simposios.forEach(simposio => {
-                simposio.trabajos.forEach(trabajo => {
-                    trabajo.ponencias.forEach(ponencia => {
-                        const matchNombre = ponencia.autores.some(a => a.toLowerCase().includes(query));
-                        const matchPalabra = ponencia.titulo.toLowerCase().includes(query) || simposio.titulo.toLowerCase().includes(query);
-                        
-                        if ((type === 'nombre' && matchNombre) || (type === 'palabra' && matchPalabra)) {
-                            results.push({
-                                simposioNum: simposio.numero,
-                                dia: trabajo.dia,
-                                horario: trabajo.horario,
-                                lugar: trabajo.lugar,
-                                sesion: trabajo.sesion,
-                                titulo: ponencia.titulo,
-                                autores: ponencia.autores.join('; ')
-                            });
-                        }
-                    });
-                });
+        // Renderiza la grilla de tarjetas (vista principal)
+        function renderCards() {
+            let html = `
+                <div class="flex justify-between items-baseline mb-stack-lg">
+                    <h2 class="font-headline-sm text-headline-sm text-academic-ink uppercase tracking-tight">Simposios del Encuentro</h2>
+                    <span class="font-label-caps text-label-caps text-on-surface-variant">${conferenceData.simposios.length} Simposios</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            `;
+
+            conferenceData.simposios.forEach((sim, idx) => {
+                const colorClass = barColors[idx % barColors.length];
+                const coordText = sim.coordinacion.join('; ');
+                html += `
+                    <div class="group relative flex flex-col bg-surface border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer" data-simposio="${sim.numero}">
+                        <div class="w-2 h-full absolute left-0 top-0 ${colorClass}"></div>
+                        <div class="p-6">
+                            <span class="font-label-caps text-label-caps text-on-surface-variant tracking-[0.2em]">SIMPOSIO ${sim.numero}</span>
+                            <h3 class="font-title-md text-title-md mt-4 text-academic-ink group-hover:text-primary transition-colors">${sim.titulo}</h3>
+                            <div class="mt-stack-md pt-stack-md border-t border-outline-variant">
+                                <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">COORDINADORES</p>
+                                <p class="font-body-md text-body-md text-on-surface">${coordText}</p>
+                            </div>
+                        </div>
+                        <div class="mt-auto p-4 bg-surface-muted flex justify-end items-center">
+                            <span class="flex items-center gap-1 font-label-caps text-label-caps text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[16px]" data-icon="description">description</span>
+                                ${sim.trabajos.reduce((acc, t) => acc + t.ponencias.length, 0)} Ponencias
+                            </span>
+                            <span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform ml-4" data-icon="arrow_forward">arrow_forward</span>
+                        </div>
+                    </div>
+                `;
             });
 
-            renderResults(query, results);
+            html += `</div>`;
+            contentArea.innerHTML = html;
+
+            // Asignar evento de clic a cada tarjeta
+            document.querySelectorAll('[data-simposio]').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    const num = parseInt(this.dataset.simposio);
+                    renderDetail(num);
+                });
+            });
         }
 
-        function renderResults(query, results) {
-            let resultsHtml = `
+        // Renderiza la vista detallada de un simposio
+        function renderDetail(numero) {
+            const sim = conferenceData.simposios.find(s => s.numero === numero);
+            if (!sim) return;
+
+            let html = `
+                <div class="mb-stack-lg">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant pb-stack-md">
+                        <div>
+                            <span class="font-label-caps text-label-caps text-primary tracking-[0.2em]">SIMPOSIO ${sim.numero}</span>
+                            <h2 class="font-headline-sm text-headline-sm text-academic-ink mt-1">${sim.titulo}</h2>
+                            <p class="text-on-surface-variant font-body-md mt-1"><span class="font-bold">Coordinadores:</span> ${sim.coordinacion.join('; ')}</p>
+                        </div>
+                        <button onclick="renderCards()" class="px-4 py-2 border-2 border-primary text-primary font-label-caps text-label-caps rounded-lg hover:bg-primary-fixed transition-colors whitespace-nowrap">
+                            ← Volver a todos los simposios
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-stack-lg">
+            `;
+
+            sim.trabajos.forEach((trabajo, idx) => {
+                html += `
+                    <div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm">
+                        <div class="bg-surface-container px-6 py-4 border-b border-outline-variant flex flex-wrap items-center gap-3">
+                            <span class="bg-primary text-white px-3 py-1 rounded-full font-label-caps text-[11px]">Sesión ${trabajo.sesion}</span>
+                            <span class="flex items-center gap-1 text-on-surface-variant font-label-caps text-[11px]"><span class="material-symbols-outlined text-[16px]">event</span> ${trabajo.dia}</span>
+                            <span class="flex items-center gap-1 text-on-surface-variant font-label-caps text-[11px]"><span class="material-symbols-outlined text-[16px]">schedule</span> ${trabajo.horario}</span>
+                            <span class="flex items-center gap-1 text-on-surface-variant font-label-caps text-[11px]"><span class="material-symbols-outlined text-[16px]">location_on</span> ${trabajo.lugar}</span>
+                        </div>
+                        <div class="divide-y divide-outline-variant">
+                `;
+
+                trabajo.ponencias.forEach((p, pi) => {
+                    html += `
+                        <div class="px-6 py-4 hover:bg-surface-container/30 transition-colors">
+                            <p class="font-title-md text-title-md text-academic-ink">${p.titulo}</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-on-surface-variant text-[16px]">person</span></div>
+                                <span class="font-body-md text-on-surface">${p.autores.join('; ')}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            contentArea.innerHTML = html;
+            window.scrollTo(0, 0);
+        }
+
+        // Renderiza resultados de búsqueda
+        function renderSearchResults(query, results) {
+            let html = `
                 <section class="mb-stack-lg">
                     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant pb-stack-md">
                         <div>
                             <h2 class="font-headline-sm text-headline-sm text-on-surface">Resultados para "<span class="text-primary italic">${query}</span>"</h2>
                             <p class="text-on-surface-variant font-body-md mt-1">Se encontraron ${results.length} ponencias que coinciden con su búsqueda.</p>
                         </div>
-                        <button onclick="location.reload()" class="px-4 py-2 border-2 border-primary text-primary font-label-caps text-label-caps rounded-lg hover:bg-primary-fixed transition-colors">Volver al Inicio</button>
+                        <button onclick="renderCards()" class="px-4 py-2 border-2 border-primary text-primary font-label-caps text-label-caps rounded-lg hover:bg-primary-fixed transition-colors">Volver al Inicio</button>
                     </div>
                 </section>
-                <div class="flex flex-col gap-stack-md">`;
+                <div class="flex flex-col gap-stack-md">
+            `;
 
             if (results.length === 0) {
-                resultsHtml += `<p class="text-on-surface-variant font-body-lg">No se encontraron resultados. Pruebe con otro término.</p>`;
+                html += `<p class="text-on-surface-variant font-body-lg">No se encontraron resultados. Pruebe con otro término.</p>`;
             } else {
                 results.forEach(res => {
-                    resultsHtml += `
+                    html += `
                         <article class="group bg-surface-container-lowest border border-border-subtle rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col md:flex-row">
                             <div class="md:w-16 bg-primary flex md:flex-col items-center justify-center p-4 text-on-primary">
                                 <span class="font-label-caps text-[10px] opacity-80 mb-1">Simp.</span>
@@ -3993,13 +3882,47 @@
                                     </div>
                                 </div>
                             </div>
-                        </article>`;
+                        </article>
+                    `;
                 });
             }
 
-            resultsHtml += `</div>`;
-            mainContent.innerHTML = resultsHtml;
+            html += `</div>`;
+            contentArea.innerHTML = html;
             window.scrollTo(0, 0);
+        }
+
+        // Lógica de búsqueda
+        function performSearch(type) {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) {
+                alert('Por favor, ingrese un término de búsqueda.');
+                return;
+            }
+
+            const results = [];
+            conferenceData.simposios.forEach(simposio => {
+                simposio.trabajos.forEach(trabajo => {
+                    trabajo.ponencias.forEach(ponencia => {
+                        const matchNombre = ponencia.autores.some(a => a.toLowerCase().includes(query));
+                        const matchPalabra = ponencia.titulo.toLowerCase().includes(query) || simposio.titulo.toLowerCase().includes(query);
+
+                        if ((type === 'nombre' && matchNombre) || (type === 'palabra' && matchPalabra)) {
+                            results.push({
+                                simposioNum: simposio.numero,
+                                dia: trabajo.dia,
+                                horario: trabajo.horario,
+                                lugar: trabajo.lugar,
+                                sesion: trabajo.sesion,
+                                titulo: ponencia.titulo,
+                                autores: ponencia.autores.join('; ')
+                            });
+                        }
+                    });
+                });
+            });
+
+            renderSearchResults(query, results);
         }
 
         // Event listeners
@@ -4009,11 +3932,22 @@
             if (e.key === 'Enter') performSearch('palabra');
         });
 
-        // Micro-interactions for cards (keep original behavior)
-        document.querySelectorAll('.cursor-pointer').forEach(card => {
-            card.addEventListener('mousedown', () => card.classList.add('scale-95'));
-            card.addEventListener('mouseup', () => card.classList.remove('scale-95'));
-            card.addEventListener('mouseleave', () => card.classList.remove('scale-95'));
+        // Carga inicial: mostrar tarjetas
+        renderCards();
+
+        // Micro-interacción para escalado en tarjetas (solo para los elementos con .cursor-pointer)
+        document.addEventListener('mousedown', function(e) {
+            const card = e.target.closest('.cursor-pointer');
+            if (card) card.classList.add('scale-95');
+        });
+        document.addEventListener('mouseup', function(e) {
+            const card = e.target.closest('.cursor-pointer');
+            if (card) card.classList.remove('scale-95');
+        });
+        document.addEventListener('mouseleave', function(e) {
+            const card = e.target.closest('.cursor-pointer');
+            if (card) card.classList.remove('scale-95');
         });
     </script>
+
 </body></html>
