@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="es" class="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Source+Serif+4:opsz,wght@8-60,400;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+<!DOCTYPE html><html lang="es" class="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Source+Serif+4:opsz,wght@8-60,400;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
         tailwind.config = {
           darkMode: "class",
           theme: {
@@ -199,6 +200,13 @@
     </footer>
 
     <script>
+
+        function normalize(str) {
+            return str
+                .normalize('NFD')                // descompone caracteres acentuados (é → e +  ́)
+                .replace(/[\u0300-\u036f]/g, '') // elimina los diacríticos
+                .toLowerCase();                  // convierte a minúsculas
+        }
 
         const conferenceData = {
   "simposios": [
@@ -3434,12 +3442,6 @@
       ]
     },
     {
-      "numero": 42,
-      "titulo": "Simposio 42",
-      "coordinacion": [],
-      "trabajos": []
-    },
-    {
       "numero": 43,
       "titulo": "Desigualdades urbanas y disputas por la apropiación del espacio",
       "coordinacion": [
@@ -3894,7 +3896,7 @@
 
         // Lógica de búsqueda
         function performSearch(type) {
-            const query = searchInput.value.toLowerCase().trim();
+            const query = normalize(searchInput.value.trim());
             if (!query) {
                 alert('Por favor, ingrese un término de búsqueda.');
                 return;
@@ -3904,8 +3906,8 @@
             conferenceData.simposios.forEach(simposio => {
                 simposio.trabajos.forEach(trabajo => {
                     trabajo.ponencias.forEach(ponencia => {
-                        const matchNombre = ponencia.autores.some(a => a.toLowerCase().includes(query));
-                        const matchPalabra = ponencia.titulo.toLowerCase().includes(query) || simposio.titulo.toLowerCase().includes(query);
+                        const matchNombre = ponencia.autores.some(a => normalize(a).includes(query));
+                        const matchPalabra = normalize(ponencia.titulo).includes(query) || normalize(simposio.titulo).includes(query);
 
                         if ((type === 'nombre' && matchNombre) || (type === 'palabra' && matchPalabra)) {
                             results.push({
@@ -3935,6 +3937,11 @@
         // Carga inicial: mostrar tarjetas
         renderCards();
 
+        document.getElementById('btn-volver').addEventListener('click', function() {
+            renderCards();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         // Micro-interacción para escalado en tarjetas (solo para los elementos con .cursor-pointer)
         document.addEventListener('mousedown', function(e) {
             const card = e.target.closest('.cursor-pointer');
@@ -3950,4 +3957,10 @@
         });
     </script>
 
+<!-- Botón flotante "Volver" (abajo a la izquierda) -->
+<button id="btn-volver" class="fixed bottom-24 left-6 lg:bottom-12 lg:left-12 w-16 h-16 bg-[#fdcc3a] text-academic-ink rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-40 group">
+    <span class="material-symbols-outlined text-3xl" data-icon="arrow_back">arrow_back</span>
+    <span class="absolute left-20 bg-academic-ink text-white px-4 py-2 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">Volver</span>
+</button>
+            
 </body></html>
