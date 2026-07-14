@@ -1,4 +1,3 @@
-
 <!DOCTYPE html><html lang="es" class="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Source+Serif+4:opsz,wght@8-60,400;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
         tailwind.config = {
@@ -94,6 +93,8 @@
         }
     }catch(_e){}</script></head><body class="bg-background text-on-surface font-body-md overflow-x-hidden">
 
+
+
     <main class="max-w-container-max mx-auto px-gutter pb-32">
 
         <!-- Hero & Banner (click to reload) -->
@@ -112,35 +113,39 @@
             </div>
         </section>
 
-        <!-- Dynamic Search Engine (always visible) -->
-        <section class="mt-stack-lg">
-            <div class="bg-surface-container p-gutter rounded-xl shadow-sm border border-outline-variant">
-                <div class="flex flex-col md:flex-row gap-gutter items-end">
-                    <div class="flex-grow w-full">
-                        <label class="font-label-caps text-label-caps mb-2 block uppercase text-on-surface-variant">Buscar en el Programa</label>
-                        <div class="relative group">
-                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary" data-icon="search">search</span>
-                            <input id="search-input" type="text" placeholder="Escriba autor, título o palabra clave..." class="w-full pl-12 pr-4 py-4 rounded-lg border-2 border-outline focus:border-secondary focus:ring-0 font-body-lg text-body-lg bg-surface transition-all">
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-1">
-                        <button id="btn-nombre" class="px-6 py-3 rounded-full bg-primary text-white font-label-caps text-label-caps hover:bg-primary-container transition-colors shadow-lg active:scale-95">
-                            Buscar por Nombre
-                        </button>
-                        <button id="btn-palabra" class="px-6 py-3 rounded-full bg-surface border-2 border-primary text-primary font-label-caps text-label-caps hover:bg-primary-fixed transition-colors active:scale-95">
-                            Buscar por Palabra Clave
-                        </button>
-                    </div>
-                </div>
-                <div class="mt-4 flex gap-4 overflow-x-auto pb-2 no-scrollbar">
-                    <span class="font-label-caps text-label-caps text-on-surface-variant py-2">Filtros Rápidos:</span>
-                    <button class="bg-primary text-white px-4 py-1 rounded-full font-label-caps text-label-caps whitespace-nowrap">Estado y Crisis</button>
-                    <button class="bg-surface-variant text-on-surface-variant px-4 py-1 rounded-full font-label-caps text-label-caps whitespace-nowrap border border-outline-variant">Soberanía Digital</button>
-                    <button class="bg-surface-variant text-on-surface-variant px-4 py-1 rounded-full font-label-caps text-label-caps whitespace-nowrap border border-outline-variant">Migraciones</button>
-                    <button class="bg-surface-variant text-on-surface-variant px-4 py-1 rounded-full font-label-caps text-label-caps whitespace-nowrap border border-outline-variant">Deporte y Sociedad</button>
+<!-- Dynamic Search Engine (always visible) -->
+<section class="mt-stack-lg">
+    <div class="bg-surface-container p-gutter rounded-xl shadow-sm border border-outline-variant">
+        <!-- Changed "items-end" to "items-center" for vertical alignment -->
+        <div class="flex flex-col md:flex-row gap-gutter items-center">
+            
+            <!-- Left Column (Search Input) -->
+            <div class="flex-grow w-full">
+                <label class="font-label-caps text-label-caps mb-2 block uppercase text-on-surface-variant">Buscar en el Programa</label>
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary" data-icon="search">search</span>
+                    <input id="search-input" type="text" placeholder="Escriba autor, título o palabra clave..." class="w-full pl-12 pr-4 py-4 rounded-lg border-2 border-outline focus:border-secondary focus:ring-0 font-body-lg text-body-lg bg-surface transition-all">
                 </div>
             </div>
-        </section>
+
+            <!-- Right Column (Stacked Buttons) -->
+            <!-- Added "w-full md:w-auto" to make sure buttons behave nicely on mobile and desktop -->
+            <div class="flex flex-col gap-2 mb-1 w-full md:w-auto">
+                <button id="btn-nombre" class="px-6 py-3 rounded-full bg-primary text-white font-label-caps text-label-caps hover:bg-primary-container transition-colors shadow-lg active:scale-95 whitespace-nowrap">
+                    Buscar por Nombre
+                </button>
+                <button id="btn-palabra" class="px-6 py-3 rounded-full bg-surface border-2 border-primary text-primary font-label-caps text-label-caps hover:bg-primary-fixed transition-colors active:scale-95 whitespace-nowrap">
+                    Buscar por Palabra Clave
+                </button>
+                <!-- New Coordinator Button -->
+                <button id="btn-coordinador" class="px-6 py-3 rounded-full bg-surface border-2 border-secondary text-secondary font-label-caps text-label-caps hover:bg-secondary-fixed transition-colors active:scale-95 whitespace-nowrap">
+                    Buscar por Coordinador
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
 
         <!-- Content Area: Cards / Detail / Search Results -->
         <div id="content-area" class="mt-stack-lg"></div>
@@ -202,6 +207,72 @@
     </footer>
 
     <script>
+
+document.getElementById('btn-coordinador').addEventListener('click', () => {
+    const rawInput = document.getElementById('search-input').value;
+    
+    // Prevent empty searches
+    if (!rawInput.trim()) return; 
+
+    // 1. Normalize the search term to ignore accents (e.g., ó -> o)[cite: 1]
+    const searchTerm = normalize(rawInput); 
+
+    // 2. Filter the JSON looking ONLY inside the "coordinacion" array[cite: 1]
+    const matchedSimposios = conferenceData.simposios.filter(sim => {
+        // .some() checks if at least one coordinator matches the search term
+        return sim.coordinacion.some(coordinador => {
+            return normalize(coordinador).includes(searchTerm);
+        });
+    });
+
+    const contentArea = document.getElementById('content-area');
+
+    // 3. Handle the results based on how many matches were found
+// 3. Handle the results based on how many matches were found
+
+// 3. Handle the results based on how many matches were found
+if (matchedSimposios && matchedSimposios.length === 1) {
+    // Exactly one result: show the detail directly
+    renderDetail(matchedSimposios[0].numero);
+} else if (matchedSimposios && matchedSimposios.length > 1) {
+    // Multiple results: clear content area and show clickable, simplified cards
+    contentArea.innerHTML = '';
+    
+    matchedSimposios.forEach(sim => {
+        // Create the card container element
+        const card = document.createElement('div');
+        
+        // Added 'cursor-pointer' and hover classes to make it visually clear it is clickable
+        card.className = "bg-surface-container-lowest p-6 rounded-lg border border-outline-variant mb-4 shadow-sm cursor-pointer hover:bg-surface-container-low transition-all duration-200";
+        
+        // Render only the requested HTML (No "trabajos" section)
+        card.innerHTML = `
+            <span class="text-xs font-bold uppercase tracking-wider text-primary">Simposio ${sim.numero}</span>
+            <h3 class="text-xl font-bold mt-2 text-academic-ink">${sim.titulo}</h3>
+            <p class="text-sm text-on-surface-variant mt-2"><strong>Coordinación:</strong> ${sim.coordinacion.join(', ')}</p>
+        `;
+        
+        // Event listener to open the specific symposium detail on click
+        card.addEventListener('click', () => {
+            renderDetail(sim.numero);
+        });
+        
+        contentArea.appendChild(card);
+    });
+} else {
+    // No results: Display a friendly message
+    contentArea.innerHTML = `
+        <div class="p-8 text-center text-on-surface-variant font-body-lg">
+            No se encontraron coordinadores que coincidan con "${rawInput}".
+        </div>
+    `;
+}
+
+
+
+});
+
+
 
         function normalize(str) {
             return str
@@ -3750,8 +3821,56 @@
         const barColors = ['bg-primary', 'bg-secondary-container', 'bg-tertiary', 'bg-on-surface', 'bg-primary-container'];
 
         // Renderiza la grilla de tarjetas (vista principal)
+
+
+
         function renderCards() {
             let html = `
+                <section class="mb-stack-lg">
+                    <div class="flex justify-between items-baseline mb-stack-lg">
+                        <h2 class="font-headline-sm text-headline-sm text-academic-ink uppercase tracking-tight">Conferencias destacadas</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+
+                        <div class="flex flex-col items-center text-center bg-surface border border-outline-variant rounded-xl p-4">
+                            <span class="inline-block bg-tertiary text-white px-2 py-0.5 rounded font-label-caps text-[10px] mb-2">CONFERENCIA</span>
+                            <p class="font-title-md text-title-md text-academic-ink leading-snug">Imaginar futuros en estado de sitio</p>
+                            <p class="font-body-md text-on-surface text-sm mt-1">Gustavo Blázquez (CIFFyH-UNC / IDH-CONICET)</p>
+                            <p class="font-body-md text-on-surface-variant text-xs italic mt-1">Mié 22/07, 12.30 hs · Aud. Hugo Chávez</p>
+                            <div class="w-40 h-40 rounded-full bg-surface-variant flex items-center justify-center mt-3">
+				<img src="https://raw.githubusercontent.com/idhinstitutodehumanidades-rgb/XIII_encuentro_interdisciplinario/85c6b39b481b3369825e53cbbfc9430fef950708/docs/blazquez.png" class="w-40 h-40 rounded-full object-cover" alt="Gustavo Blázquez">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-center text-center bg-surface border border-outline-variant rounded-xl p-4">
+                            <span class="inline-block bg-primary text-white px-2 py-0.5 rounded font-label-caps text-[10px] mb-2">CONFERENCIA</span>
+                            <p class="font-title-md text-title-md text-academic-ink leading-snug">Luces y sombras en el camino de las ciencias para el cuidado de lo común</p>
+                            <p class="font-body-md text-on-surface text-sm mt-1">Guillermo Folguera (UBA / CONICET)</p>
+                            <p class="font-body-md text-on-surface-variant text-xs italic mt-1">Jue 23/07, 12.30 hs · Aud. Hugo Chávez</p>
+			    <div class="w-40 h-40 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center mt-3">
+    				<img src="https://raw.githubusercontent.com/idhinstitutodehumanidades-rgb/XIII_encuentro_interdisciplinario/85c6b39b481b3369825e53cbbfc9430fef950708/docs/folguera.png" class="w-full h-full object-cover" alt="Guillermo Folguera">
+			    </div>
+                        </div>
+
+                        <div class="flex flex-col items-center text-center bg-surface border border-outline-variant rounded-xl p-4">
+                            <span class="inline-block bg-[#f5871f] text-white px-2 py-0.5 rounded font-label-caps text-[10px] mb-2">CONVERSATORIO</span>
+                            <p class="font-title-md text-title-md text-academic-ink leading-snug">Estudiar las desigualdades como apuesta por la soberanía científica. Desafíos desde las ciencias sociales y las humanidades</p>
+                            <p class="font-body-md text-on-surface text-sm mt-1">Alicia B. Gutiérrez (IDH-CONICET / UNC)</p>
+                            <p class="font-body-md text-on-surface text-sm">Juan Dukuen (IPEHCS-CONICET)</p>
+                            <p class="font-body-md text-on-surface-variant text-xs italic mt-1">Jue 23/07, 18.30 hs · Aud. Hugo Chávez</p>
+                            <div class="flex gap-3 mt-3">
+			        <div class="w-28 h-28 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center mt-3">
+				    <img src="https://raw.githubusercontent.com/idhinstitutodehumanidades-rgb/XIII_encuentro_interdisciplinario/85c6b39b481b3369825e53cbbfc9430fef950708/docs/alicia.png" class="w-23 h-23 rounded-full object-cover" alt="Alicia Gutierrez">
+                                </div>
+			        <div class="w-28 h-28 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center mt-3">
+				<img src="https://raw.githubusercontent.com/idhinstitutodehumanidades-rgb/XIII_encuentro_interdisciplinario/85c6b39b481b3369825e53cbbfc9430fef950708/docs/dukuen.png" class="w-25 h-25 rounded-full object-cover" alt="Juan Dukuen">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
                 <div class="flex justify-between items-baseline mb-stack-lg">
                     <h2 class="font-headline-sm text-headline-sm text-academic-ink uppercase tracking-tight">Simposios del Encuentro</h2>
                     <span class="font-label-caps text-label-caps text-on-surface-variant">${conferenceData.simposios.length} Simposios</span>
